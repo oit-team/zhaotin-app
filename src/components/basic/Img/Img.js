@@ -3,8 +3,6 @@ import { Image } from 'vant'
 export const VcImg = {
   name: 'vc-img',
 
-  // mixins: [Image],
-
   props: {
     ...Image.props,
   },
