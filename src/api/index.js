@@ -1,8 +1,15 @@
-import { ApiError } from '@oit/utils'
 import axios from 'axios'
+import { ApiError } from '@oit/utils'
 import API_SERVICE from './enum/API_SERVICE'
+import API_STATUS from './enum/API_STATUS'
 
-const axiosInstance = axios.create({})
+import { Toast } from 'vant'
+
+const BASE_URL = process.env.NODE_ENV === 'production' ? '/ztApi' : '/api'
+
+const axiosInstance = axios.create({
+  baseURL: BASE_URL,
+})
 
 // 添加请求拦截器
 axiosInstance.interceptors.request.use((config) => {
@@ -13,12 +20,19 @@ axiosInstance.interceptors.request.use((config) => {
 
 // 添加响应拦截器
 axiosInstance.interceptors.response.use((response) => {
+  if (response.data.head?.status !== API_STATUS.OK) {
+    return Promise.reject(new ApiError({
+      response,
+      message: response.data.head?.msg,
+      status: response.data.head.status,
+    }))
+  }
   return response
 }, function (error) {
   return Promise.reject(new ApiError({ error }))
 })
 
-export function post(url, params, config) {
+export function post(url, params, config = {}) {
   const userData = {}
 
   params = {
@@ -36,7 +50,9 @@ export function post(url, params, config) {
     con: params,
   }
 
-  return axiosInstance.post(url, params, config)
+  return axiosInstance
+    .post(url, params, config)
+    .then(res => res.data)
 }
 
 /**
@@ -47,3 +63,15 @@ Object.values(API_SERVICE).forEach(service => {
     return post(`/${service}${url}`, params, config)
   }
 })
+
+// 捕获Promise错误
+window.addEventListener('unhandledrejection', event => {
+  const { reason } = event
+  // 处理接口错误
+  if (reason instanceof ApiError) {
+    // 输出提示消息
+    Toast.fail(reason.message)
+    console.error(reason)
+    event.preventDefault()
+  }
+}, false)
