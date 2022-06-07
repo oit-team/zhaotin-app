@@ -1,0 +1,22 @@
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sticky-top {
+  position: sticky!important;
+  top: 0;
+}
+
+.sticky-bottom {
+  position: sticky!important;
+  bottom: 0;
+}
+
+.fixed-bottom {
+  position: fixed!important;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
