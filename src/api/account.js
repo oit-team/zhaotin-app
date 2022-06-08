@@ -17,3 +17,11 @@ export function login(params) {
 export function getLoginBackground() {
   return post[API_SERVICE.SYSTEM]('/user/getLoginBackground')
 }
+
+/**
+ * 修改密码
+ * @param params
+ */
+export function updatePassWord(params) {
+  return post[API_SERVICE.SYSTEM]('/user/updatePassWord', params)
+}

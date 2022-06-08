@@ -22,5 +22,6 @@ module.exports = {
         asyncArrow: 'always',
       },
     ],
+    'vue/html-self-closing': 'off',
   },
 }
