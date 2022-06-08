@@ -1,9 +1,9 @@
 import axios from 'axios'
+import store from '@/store'
+import { Toast } from 'vant'
 import { ApiError } from '@oit/utils'
 import API_SERVICE from './enum/API_SERVICE'
 import API_STATUS from './enum/API_STATUS'
-
-import { Toast } from 'vant'
 
 const BASE_URL = process.env.NODE_ENV === 'production' ? '/ztApi' : '/api'
 
@@ -13,6 +13,7 @@ const axiosInstance = axios.create({
 
 // 添加请求拦截器
 axiosInstance.interceptors.request.use((config) => {
+  config.headers.token = localStorage.getItem('token')
   return config
 }, function (error) {
   return Promise.reject(new ApiError({ error }))
@@ -33,7 +34,7 @@ axiosInstance.interceptors.response.use((response) => {
 })
 
 export function post(url, params, config = {}) {
-  const userData = {}
+  const { userData } = store.state
 
   params = {
     head: {

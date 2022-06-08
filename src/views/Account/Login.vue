@@ -73,7 +73,7 @@ export default {
           password: crypto.encrypt(this.form.pwd),
         }))
         this.$store.commit('setUserData', data.body.resultList)
-        this.$ls.set('token', data.body.accessToken)
+        localStorage.setItem('token', data.body.accessToken)
         this.$router.to('Account')
         this.$toast('登录成功')
       }

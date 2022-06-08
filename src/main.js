@@ -3,8 +3,6 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import storage from './store/local'
-
 import '@/components'
 import '@/utils'
 import '@/assets/icons'
@@ -15,7 +13,6 @@ import 'windi.css'
 Vue.config.productionTip = false
 
 new Vue({
-  localStorage: storage,
   router,
   store,
   render: h => h(App),
