@@ -1,7 +1,8 @@
 import { Image } from 'vant'
 
-export const VcImg = {
-  name: 'vc-img',
+// @vue/components
+export default {
+  name: 'VcImg',
 
   props: {
     ...Image.props,

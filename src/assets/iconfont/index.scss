@@ -1,0 +1,13 @@
+$source: '//at.alicdn.com/t/font_3249309_zoz9hwp2i1.ttf';
+
+@font-face {
+  font-family: zt-icon; /* Project id 3249309 */
+  src: url("https:" + $source) format("truetype");
+}
+
+.zt-icon {
+  font-family: zt-icon !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

@@ -1,5 +1,10 @@
 const { defineConfig } = require('@vue/cli-service')
 const modifyVars = require('./vant.config')
+const path = require('path')
+
+function resolve(dir) {
+  return path.join(__dirname, dir)
+}
 
 module.exports = defineConfig({
   transpileDependencies: true,
@@ -22,5 +27,26 @@ module.exports = defineConfig({
         modifyVars,
       },
     },
+  },
+  chainWebpack: config => {
+    config.module
+      .rule('svg')
+      .exclude.add(resolve('src/assets/icons/svg'))
+      .end()
+    config.module
+      .rule('icons')
+      .test(/\.svg$/)
+      .include.add(resolve('src/assets/icons/svg'))
+      .end()
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({
+        symbolId: 'icon-[name]',
+      })
+      .end()
+      .before('svg-sprite-loader')
+      .use('svgo-loader')
+      .loader('svgo-loader')
+      .end()
   },
 })

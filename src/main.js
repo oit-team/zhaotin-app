@@ -7,6 +7,7 @@ import storage from './store/local'
 
 import '@/components'
 import '@/utils'
+import '@/assets/icons'
 
 import '@/styles/index.scss'
 import 'windi.css'

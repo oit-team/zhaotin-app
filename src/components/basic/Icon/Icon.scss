@@ -1,0 +1,24 @@
+.vc-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: initial;
+  width: 1em;
+  height: 1em;
+
+  &::after {
+    content: "";
+    display: list-item;
+    opacity: 0;
+  }
+}
+
+.vc-icon__svg {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translateY(-50%);
+  fill: currentColor;
+}
