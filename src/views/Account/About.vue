@@ -6,10 +6,12 @@
       left-arrow
       @click-left="$router.back()"
     />
-    <div>
+
+    <div class="p-2">
+      <div>
       <vc-img
         class="rounded-lg overflow-hidden"
-        src="../../static/img/about/e3e499a713d40b0cc548d055b5245e92.png"
+        src="img/about/e3e499a713d40b0cc548d055b5245e92.png"
         height="140"
         width="100%"
         mode="scaleToFill"
@@ -17,7 +19,7 @@
     </div>
     <div>
       <div class="px-100px">
-        <van-divider class="text-primary">昭廷企业简介</van-divider>
+        <van-divider :style="{ color: '#CDA46C', borderColor: '#CDA46C', padding: '0 0' }">昭廷企业简介</van-divider>
       </div>
       <div class="bg-white rounded-lg text-sm p-3 space-y-2">
         <div>
@@ -35,7 +37,7 @@
       </div>
 
       <div class="px-100px">
-        <van-divider class="text-primary">昭廷企业简介</van-divider>
+        <van-divider :style="{ color: '#CDA46C', borderColor: '#CDA46C', padding: '0 0' }">昭廷企业简介</van-divider>
       </div>
       <div class="grid grid-cols-3 gap-3 text-center">
         <div
@@ -57,7 +59,7 @@
       </div>
 
       <div class="px-100px">
-        <van-divider class="text-primary">昭廷企业简介</van-divider>
+        <van-divider :style="{ color: '#CDA46C', borderColor: '#CDA46C', padding: '0 0' }">昭廷企业简介</van-divider>
       </div>
       <section class="text-sm bg-white p-2 rounded-lg">
         <p>
@@ -71,7 +73,7 @@
         </p>
       </section>
       <div class="flex my-2">
-        <vc-img src="../../static/img/about/a525c4b2f1ecf1e6028349df3b0da1e0.png" width="100%"></vc-img>
+        <vc-img src="img/about/a525c4b2f1ecf1e6028349df3b0da1e0.png" width="100%"></vc-img>
       </div>
     </div>
 
@@ -85,6 +87,7 @@
       </div>
     </div>
   </div>
+    </div>
 </template>
 
 <script>
@@ -92,7 +95,7 @@ export default {
   name: 'about',
   data() {
     return {
-      title: '账号设置',
+      title: '关于我们',
     }
   },
   created() {
