@@ -17,7 +17,7 @@
       </div>
       <div class="space-y-2">
         <van-cell-group class="bg-white">
-          <van-cell title="我的积分" :value="String($store.state.userData.customerIntegral)" is-link>
+          <van-cell title="我的积分" :value="String($store.state.userData.customerIntegral)">
             <!--          <template #icon>-->
             <!--            <vc-icon class="text-primary" name="icon-a-jifen" size="18"></vc-icon>-->
             <!--          </template>-->
