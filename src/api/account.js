@@ -1,4 +1,4 @@
-import { post } from './index'
+import { post } from '.'
 import API_SERVICE from './enum/API_SERVICE'
 
 /**

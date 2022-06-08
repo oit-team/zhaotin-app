@@ -1,18 +1,21 @@
 import Vue from 'vue'
 import * as basicComponents from './basic'
 import * as vantComponents from './vant'
-import { setComponentsProps } from '../utils'
+import { setComponentProps } from '../utils'
 
 const propsConfig = {
   Icon: {
     iconClass: 'zt-icon',
+  },
+  Img: {
+    fit: 'cover',
   },
 }
 
 Object
   .entries(propsConfig)
   .forEach(([key, value]) => {
-    setComponentsProps(basicComponents[key], value)
+    setComponentProps(basicComponents[key], value)
   })
 
 Object

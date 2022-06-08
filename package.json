@@ -47,6 +47,7 @@
     "vue-cli-plugin-windicss": "^1.1.4",
     "vue-template-compiler": "^2.6.14",
     "windicss": "^3.5.4",
+    "windicss-plugin-aspect-ratio": "^1.0.1",
     "yorkie": "^2.0.0"
   },
   "gitHooks": {

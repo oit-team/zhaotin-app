@@ -43,7 +43,7 @@ export function convertToUnit(str, unit = 'px') {
   }
 }
 
-export function setComponentsProps(components, props) {
+export function setComponentProps(components, props) {
   Object.entries(props)
     .forEach(([key, value]) => {
       if (isPlainObject(components.props[key])) {
