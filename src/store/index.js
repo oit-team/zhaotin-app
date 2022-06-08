@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import router from '@/router'
 
 Vue.use(Vuex)
 
@@ -11,8 +12,15 @@ export default new Vuex.Store({
   mutations: {
     setUserData(state, data) {
       state.userData = data
+      localStorage.setItem('userData', data)
     },
   },
-  actions: {},
+  actions: {
+    logout(ctx, toLogin = true) {
+      ctx.commit('setUserData', {})
+      localStorage.removeItem('token')
+      toLogin && router.to('Login')
+    },
+  },
   modules: {},
 })
