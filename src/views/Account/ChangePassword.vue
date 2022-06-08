@@ -1,13 +1,12 @@
 <template>
   <div>
     <van-nav-bar
-      title="账号设置"
+      title="修改密码"
       left-arrow
       @click-left="$router.back()"
     />
     <van-form
       ref="form"
-      class="px-2"
       v-model="form"
       label-position="top"
       label-width="auto"
@@ -101,9 +100,7 @@ export default {
             ...commonRule,
             message: '与新密码不一致',
             validator: (rule, value) => {
-              console.log(value)
-              console.log(this.form.newPassword)
-              if (value !== this.form.newPassword) return false
+              if (rule !== this.form.newPassword) return false
             },
           },
           lengthRule,
@@ -127,6 +124,20 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+::v-deep {
+  .van-field{
+    flex-direction: column;
+  }
 
+  .van-field__label{
+    margin-bottom: 5px;
+  }
+
+  .van-field__control{
+    border: 1px solid #dadbde;
+    border-radius: 3px;
+    padding: 5px;
+  }
+}
 </style>

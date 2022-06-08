@@ -4,8 +4,8 @@
       <div class="pt-status-bar bg-white"></div>
       <div class="flex py-5 px-3 items-center bg-white mb-2" @click="$router.to('Setting')">
         <vc-img
-          class="rounded-circle bg-gray p-10 overflow-hidden mr-2"
-          src="/static/img/account/183cb153b843906f367b2d27d530dac8.png"
+          class="rounded-circle bg-gray p-2 overflow-hidden mr-2"
+          src="img/account/183cb153b843906f367b2d27d530dac8.png"
           size="50"
         />
         <div class="flex-1">
