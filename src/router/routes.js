@@ -54,4 +54,9 @@ export default [
     path: '/order-info',
     component: () => import('../views/Order/OrderInfo'),
   },
+  {
+    path: '/product',
+    name: 'Product',
+    component: () => import('../views/Product/index'),
+  },
 ]
