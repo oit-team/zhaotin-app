@@ -10,7 +10,6 @@
       <van-swipe-cell v-for="item of list" :key="item.id" class="rounded-x1 space-y-3">
         <div
           class="rounded-x1 overflow-hidden"
-          :options="swipeOptions"
         >
           <div class="flex items-center p-2 bg-white" @click="$Router.to('productDetailNvue', {styleId: item.styleId})">
             <div class="mr-2">
