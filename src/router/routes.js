@@ -34,4 +34,9 @@ export default [
     name: 'About',
     component: () => import('../views/Account/About'),
   },
+  {
+    name: 'Collection',
+    path: '/collection',
+    component: () => import('../views/Product/Collection'),
+  },
 ]

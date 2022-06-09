@@ -6,7 +6,7 @@
       @click-left="$router.back()"
     />
 
-    <div class="p-2">
+    <div class="p-2 pd-0">
       <div class="mb-2" >
         <div>反馈内容</div>
         <van-field
