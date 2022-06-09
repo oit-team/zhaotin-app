@@ -44,6 +44,35 @@
       </div>
     </div>
 
+    <div v-if="notice[0]" class="py-2">
+      <van-notice-bar
+        left-icon="volume-o"
+        :text="notice[0]"
+        background="#ffffff"
+        color="#9B9B9B"
+      />
+    </div>
+
+    <div class="overflow-visible flex-1 bg-white rounded-t-lg">
+      <div class="text-center px-100px">
+        <van-divider :style="{ height: '3', color: '#333333', borderColor: '#c9a76e', padding: '0' }">{{ seasonStyle }}</van-divider>
+      </div>
+      <div class="grid grid-cols-3 gap-3 px-4 mb-3">
+        <div
+          v-for="item of productList"
+          :key="item.styleId"
+          class="flex overflow-hidden flex-col border border-line rounded-lg"
+          @click="$Router.to('productDetailNvue', { styleId: item.styleId })"
+        >
+          <vc-img
+            v-if="item.imgUrlList[0]"
+            class="rounded overflow-hidden aspect-[4/5]"
+            :src="item.imgUrlList[0].resUrl"
+          ></vc-img>
+        </div>
+      </div>
+      <!--      <vc-load-more ref="loadMore" :promise="loadData" first-load></vc-load-more>-->
+    </div>
     <Tabbar />
   </div>
 </template>
@@ -52,7 +81,7 @@
 import Tabbar from '@/components/business/Tabbar'
 import Search from '@/components/business/Product/Search'
 
-import { dictitemInfoAllMethod, getStyleCategory, getSystemConfig } from '@/api/product'
+import { getStyleList, dictitemInfoAllMethod, getStyleCategory, getSystemConfig } from '@/api/product'
 
 export default {
   name: 'Home',
@@ -72,6 +101,7 @@ export default {
   }),
 
   created() {
+    this.loadData()
     this.getSystemConfig()
     this.dictitemInfoAllMethod()
     this.getStyleCategory()
@@ -80,7 +110,7 @@ export default {
       {
         name: '企业简介',
         icon: '14146659cfb3360cd9a5b14e20f0ee4a.png',
-        to: 'about',
+        to: 'About',
         params: {
           info: true,
         },
@@ -110,6 +140,17 @@ export default {
   },
 
   methods: {
+    async loadData() {
+      const pageSize = 12
+      const res = await getStyleList({
+        styleCode: '1',
+        pageNum: 1,
+        pageSize,
+      })
+      this.productList = [...this.productList, ...res.body.resultList]
+      this.seasonStyle = res.body.seasonStyle
+      return pageSize
+    },
     async getSystemConfig() {
       const res = await getSystemConfig()
       this.notice = res.body.announceInfo
@@ -132,7 +173,9 @@ export default {
       this.styleTypeList = res.body.result
     },
     async getStyleCategory() {
-      const res = await getStyleCategory()
+      const res = await getStyleCategory({
+        dictCode: 'SYSTEM_CONFIG',
+      })
       this.styleCategoryList = res.body.styleCategory
     },
   },
@@ -140,5 +183,7 @@ export default {
 </script>
 
 <style scoped>
-
+::v-deep .van-notice-bar__left-icon{
+  color: #c9a76e;
+}
 </style>

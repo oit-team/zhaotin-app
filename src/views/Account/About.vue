@@ -99,7 +99,7 @@ export default {
     }
   },
   created() {
-    if (this.$route.query.info) {
+    if (this.$route.params.info) {
       this.title = '公司简介'
     }
   },
