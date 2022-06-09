@@ -39,4 +39,9 @@ export default [
     path: '/collection',
     component: () => import('../views/Product/Collection'),
   },
+  {
+    name: 'Order',
+    path: '/order',
+    component: () => import('../views/Order/index'),
+  },
 ]
