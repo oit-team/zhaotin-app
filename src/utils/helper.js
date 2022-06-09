@@ -56,3 +56,8 @@ export function setComponentProps(components, props) {
       }
     })
 }
+
+export function loadMoreData(list, newList, pageParams) {
+  if (pageParams.pageNum === 1) list.length = 0
+  list.push(...newList)
+}

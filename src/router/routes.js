@@ -35,13 +35,18 @@ export default [
     component: () => import('../views/Account/About'),
   },
   {
-    name: 'Collection',
     path: '/collection',
+    name: 'Collection',
     component: () => import('../views/Product/Collection'),
   },
   {
     name: 'Order',
     path: '/order',
     component: () => import('../views/Order/index'),
+  },
+  {
+    path: '/product',
+    name: 'Product',
+    component: () => import('../views/Product/index'),
   },
 ]

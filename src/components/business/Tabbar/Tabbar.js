@@ -1,19 +1,7 @@
 import { Tabbar, TabbarItem } from 'vant'
 
-let active = 0
-
 // @vue/component
 export default {
-  data: () => ({
-    active,
-  }),
-
-  watch: {
-    active() {
-      active = this.active
-    },
-  },
-
   render(h) {
     const navs = [
       {
@@ -24,7 +12,7 @@ export default {
       {
         name: '产品',
         icon: '',
-        to: '',
+        to: 'Product',
       },
       {
         name: '订单',
@@ -39,7 +27,7 @@ export default {
     ]
 
     return (
-      <Tabbar vModel={this.active} route>
+      <Tabbar route>
         {
           navs.map(item => <TabbarItem icon="home-o" to={{ name: item.to }}>{item.name}</TabbarItem>)
         }

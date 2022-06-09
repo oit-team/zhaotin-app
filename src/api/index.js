@@ -33,7 +33,7 @@ axiosInstance.interceptors.response.use((response) => {
   return Promise.reject(new ApiError({ error }))
 })
 
-export function post(url, params, config = {}) {
+export function post(url, params = {}, config = {}) {
   const { userData } = store.state
 
   params = {

@@ -19,5 +19,7 @@ export {
   Toast,
   Badge,
   Icon,
+  Tab,
+  Tabs,
   NoticeBar,
 } from 'vant'
