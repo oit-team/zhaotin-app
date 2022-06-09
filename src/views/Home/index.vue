@@ -55,7 +55,7 @@
 
     <div class="overflow-visible flex-1 bg-white rounded-t-lg">
       <div class="text-center px-100px">
-        <van-divider :style="{ height: '3', color: '#333333', borderColor: '#c9a76e', padding: '0' }">{{ seasonStyle }}</van-divider>
+        <van-divider :hairline="false" :style="{ height: '3', color: '#333333', borderColor: '#c9a76e', padding: '0' }">{{ seasonStyle }}</van-divider>
       </div>
       <div class="grid grid-cols-3 gap-3 px-4 mb-3">
         <div
