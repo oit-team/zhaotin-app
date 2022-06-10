@@ -1,5 +1,7 @@
 import { Tabbar, TabbarItem } from 'vant'
 
+import './Tabbar.scss'
+
 // @vue/component
 export default {
   render(h) {
@@ -27,11 +29,13 @@ export default {
     ]
 
     return (
-      <Tabbar route>
-        {
-          navs.map(item => <TabbarItem icon="home-o" to={{ name: item.to }}>{item.name}</TabbarItem>)
-        }
-      </Tabbar>
+      <div class="vc-tabbar">
+        <Tabbar route>
+          {
+            navs.map(item => <TabbarItem icon="home-o" to={{ name: item.to }}>{item.name}</TabbarItem>)
+          }
+        </Tabbar>
+      </div>
     )
   },
 }
