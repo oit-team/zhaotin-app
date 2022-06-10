@@ -18,11 +18,13 @@ Object
     setComponentProps(basicComponents[key], value)
   })
 
-Object
-  .values({
-    ...basicComponents,
-    ...vantComponents,
-  })
-  .forEach(component => {
-    Vue.component(component.name, component)
-  })
+function registryComponents(components) {
+  Object
+    .values(components)
+    .forEach(component => {
+      Vue.component(component.name, component)
+    })
+}
+
+registryComponents(basicComponents)
+registryComponents(vantComponents)

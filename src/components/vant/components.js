@@ -16,7 +16,6 @@ export {
   Popup,
   Dialog,
   NavBar,
-  Toast,
   Badge,
   Icon,
   Tab,
