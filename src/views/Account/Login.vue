@@ -1,7 +1,6 @@
 <template>
   <div class="overflow-hidden h-screen">
     <div class="absolute inset-0 flex">
-      <div class="absolute inset-0 z-10 bg-white bg-opacity-80"></div>
       <vc-img
         class="w-full h-full"
         fit="cover"
@@ -12,23 +11,23 @@
     <div class="relative z-50 w-full h-full flex-center">
       <div class="flex items-center flex-col absolute w-full top-[15%]">
         <vc-img src="/img/login/logo@3x.png" width="88" height="40" />
-        <text class="mt-2 text-sm">一站式集采服务平台</text>
+        <span class="mt-2 text-sm text-white">一站式集采服务平台</span>
       </div>
 
-      <div class="flex-1 px-18">
+      <div class="flex-1 mx-14 p-4 bg-white bg-opacity-70 backdrop-filter backdrop-blur-lg rounded-lg">
         <p class="text-xl">Welcome</p>
         <p class="text-xs text-secondary">登录您的账户</p>
 
         <div class="mt-3 space-y-3">
           <van-field
+            class="rounded"
             v-model.trim="form.name"
-            class="bg-white"
             placeholder="请输入账号"
             clearable
           />
           <van-field
+            class="rounded"
             v-model.trim="form.pwd"
-            class="bg-white"
             type="password"
             placeholder="请输入密码"
             clearable
@@ -75,13 +74,13 @@ export default {
         this.$store.commit('setUserData', data.body.resultList)
         localStorage.setItem('token', data.body.accessToken)
         this.$router.to('Account')
-        this.$toast('登录成功')
+        this.$toast.success('登录成功')
       }
     },
     verifyForm() {
       let msg
       if (this.form.name === '') {
-        msg = '用户名不能为空'
+        msg = '账号不能为空'
       } else if (this.form.pwd === '') {
         msg = '密码不能为空'
       }
@@ -114,9 +113,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.u-input {
-  height: 44px;
-  padding: 16px 12px;
-  border-radius: 4px;
-}
 </style>
