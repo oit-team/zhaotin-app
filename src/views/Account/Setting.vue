@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray">
+  <div class="bg-gray zt-page">
     <van-nav-bar
       title="账号设置"
       left-arrow
@@ -45,5 +45,7 @@ export default {
 </script>
 
 <style scoped>
-
+.zt-page{
+  min-height: 100vh;
+}
 </style>

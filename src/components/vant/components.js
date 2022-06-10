@@ -21,4 +21,6 @@ export {
   Tab,
   Tabs,
   NoticeBar,
+  PullRefresh,
+  List,
 } from 'vant'

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="bg-gray">
+  <div class="bg-gray zt-page">
+    <div>
       <div class="pt-status-bar bg-white"></div>
       <div class="flex py-5 px-3 items-center bg-white mb-2" @click="$router.to('Setting')">
         <vc-img
@@ -17,7 +17,7 @@
       </div>
       <div class="space-y-2">
         <van-cell-group class="bg-white">
-          <van-cell title="我的积分" :value="String($store.state.userData.customerIntegral)">
+          <van-cell title="我的积分" size="large" :value="String($store.state.userData.customerIntegral)">
             <!--          <template #icon>-->
             <!--            <vc-icon class="text-primary" name="icon-a-jifen" size="18"></vc-icon>-->
             <!--          </template>-->
@@ -26,11 +26,12 @@
           <van-cell
             title="购物车"
             is-link
+            size="large"
             @click="$Router.to('shoppingCartList')"
           >
             <!-- <vc-icon slot="icon" class="text-primary" name="icon-gouwuche" size="18"></vc-icon> -->
           </van-cell>
-          <van-cell title="我的收藏" is-link @click="$router.to('Collection')">
+          <van-cell title="我的收藏" size="large" is-link @click="$router.to('Collection')">
             <!-- <vc-icon slot="icon" class="text-primary" name="icon-tuijian-xing1" size="16"></vc-icon> -->
           </van-cell>
         </van-cell-group>
@@ -52,5 +53,8 @@ export default {
 <style scoped lang="scss">
 .van-cell::v-deep .van-cell__body {
   padding: 14px 16px;
+}
+.zt-page{
+  min-height: 100vh;
 }
 </style>

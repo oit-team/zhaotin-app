@@ -6,29 +6,35 @@
       @click-left="$router.back()"
     />
     <!-- <vc-scroll-view class="p-2 h-full"> -->
-    <div class="p-2 h-full">
-      <van-swipe-cell v-for="item of list" :key="item.id" class="rounded-x1 space-y-3">
-        <div
-          class="rounded-x1 overflow-hidden"
-        >
-          <div class="flex items-center p-2 bg-white" @click="$Router.to('productDetailNvue', {styleId: item.styleId})">
-            <div class="mr-2">
-              <vc-img fit="contain" :src="item.resUrl" size="60"></vc-img>
-            </div>
-            <div class="flex overflow-hidden flex-col flex-1 justify-around self-stretch">
-              <div class="truncate">{{ item.styleName }}</div>
-              <div class="text-xs text-secondary">收藏时间：{{ item.createTime }}</div>
-            </div>
-            <div>
-              <span class="color-red">￥{{ item.tradePrice }}</span>
+    <van-pull-refresh
+      v-model="isLoading"
+      success-text="刷新成功"
+      @refresh="onRefresh"
+    >
+      <div class="p-2 h-full zt-page">
+        <van-swipe-cell v-for="item of list" :key="item.id" class="rounded-x1 space-y-3">
+          <div
+            class="rounded-x1 overflow-hidden"
+          >
+            <div class="flex items-center p-2 bg-white" @click="$Router.to('productDetailNvue', {styleId: item.styleId})">
+              <div class="mr-2">
+                <vc-img fit="contain" :src="item.resUrl" size="60"></vc-img>
+              </div>
+              <div class="flex overflow-hidden flex-col flex-1 justify-around self-stretch">
+                <div class="truncate">{{ item.styleName }}</div>
+                <div class="text-xs text-secondary">收藏时间：{{ item.createTime }}</div>
+              </div>
+              <div>
+                <span class="color-red">￥{{ item.tradePrice }}</span>
+              </div>
             </div>
           </div>
-        </div>
-        <template #right>
-          <van-button square @click="remove(item)" class="dltBtn h-full bg-red-400 border-current" type="danger" text="删除" />
-        </template>
-      </van-swipe-cell>
-    </div>
+          <template #right>
+            <van-button square @click="remove(item)" class="dltBtn h-full bg-red-400 border-current" type="danger" text="删除" />
+          </template>
+        </van-swipe-cell>
+      </div>
+    </van-pull-refresh>
     <!-- <vc-load-more ref="loadMore" :promise="loadData" first-load></vc-load-more> -->
     <!-- </vc-scroll-view> -->
   </div>
@@ -52,6 +58,8 @@ export default {
     ],
     pageForm: {
     },
+    isLoading: false,
+    count: 0,
   }),
 
   created() {
@@ -70,15 +78,25 @@ export default {
       this.list = []
       // this.$refs.loadMore.reset().load()
     },
+    onRefresh() {
+      setTimeout(() => {
+        this.$toast('刷新成功')
+        this.isLoading = false
+        this.count++
+      }, 1000)
+    },
   },
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang='less' scoped>
 .color-red{
   color: #FF0000;
 }
 .dltBtn{
   border-radius: 0 5px 5px 0 !important;
+}
+.zt-page{
+  min-height: 100vh;
 }
 </style>
