@@ -49,4 +49,9 @@ export default [
     name: 'Product',
     component: () => import('../views/Product/index'),
   },
+  {
+    name: 'OrderInfo',
+    path: '/order-info',
+    component: () => import('../views/Order/OrderInfo'),
+  },
 ]

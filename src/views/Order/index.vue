@@ -8,7 +8,7 @@
         v-for="order of list"
         :key="order.orderId"
         class="bg-white mb-3 mx-2 rounded-lg overflow-hidden"
-        @click="$Router.to('orderInfo', { orderId: order.orderId })"
+        @click="$router.to('OrderInfo', { orderId: order.orderId })"
       >
         <div class="flex justify-between p-2 text-sm border-b border-line">
           <span>
@@ -101,7 +101,7 @@ export default {
       })
       console.log(res)
       this.list = res.body.resultList
-      this.$loadMoreData(this.list, res.body.resultList, params)
+      // this.$loadMoreData(this.list, res.body.resultList, params)
       return res.body.count
     },
   },
