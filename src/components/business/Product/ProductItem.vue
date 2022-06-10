@@ -9,7 +9,7 @@
       src="/img/home/aa5a363f6fa67f8060afccd025976970.png"
       size="20"
     ></vc-img>
-    <vc-img v-if="item.imgUrlList[0]" class="h-150px overflow-hidden" :src="item.imgUrlList[0].resUrl"></vc-img>
+    <vc-img class="h-150px overflow-hidden" :src="item.resUrl"></vc-img>
     <div class="py-1">
       <div class="text-xs">{{ item.styleNo }}</div>
       <vc-text class="text-xs" tag="div" mode="price" :text="item.tradePrice" />

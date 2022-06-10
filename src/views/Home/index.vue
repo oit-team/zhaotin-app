@@ -65,9 +65,8 @@
           @click="$Router.to('productDetailNvue', { styleId: item.styleId })"
         >
           <vc-img
-            v-if="item.imgUrlList[0]"
             class="rounded overflow-hidden aspect-[4/5]"
-            :src="item.imgUrlList[0].resUrl"
+            :src="item.resUrl"
           ></vc-img>
         </div>
       </div>
@@ -145,6 +144,7 @@ export default {
       const res = await getStyleList({
         styleCode: '1',
         pageNum: 1,
+        status: 1,
         pageSize,
       })
       this.productList = [...this.productList, ...res.body.resultList]
