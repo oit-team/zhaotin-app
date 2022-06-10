@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '@/router'
+import shoppingCart from './shoppingCart'
+// import { getCheckUserInfo } from '../api/account'
 
 Vue.use(Vuex)
 
@@ -22,5 +24,7 @@ export default new Vuex.Store({
       toLogin && router.to('Login')
     },
   },
-  modules: {},
+  modules: {
+    shoppingCart,
+  },
 })

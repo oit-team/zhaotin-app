@@ -27,7 +27,7 @@
             title="购物车"
             is-link
             size="large"
-            @click="$Router.to('shoppingCartList')"
+            @click="$router.to('ShoppingCartList')"
           >
             <!-- <vc-icon slot="icon" class="text-primary" name="icon-gouwuche" size="18"></vc-icon> -->
           </van-cell>

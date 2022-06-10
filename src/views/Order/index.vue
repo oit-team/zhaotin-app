@@ -1,8 +1,10 @@
 <template>
   <div class="bg-gray">
-    <van-nav-bar
-      title="全部订单"
-    />
+    <van-sticky>
+      <van-nav-bar
+        title="全部订单"
+      />
+    </van-sticky>
     <van-pull-refresh
       v-model="isLoading"
       success-text="刷新成功"

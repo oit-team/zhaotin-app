@@ -96,17 +96,16 @@ export default {
       this.bgUrl = res.body.loginBackground
     },
     async checkLogin() {
-      // if (!uni.getStorageSync('token')) return
-      //
-      // this.loading = true
-      // await this.$promiseLoading(this.$store.dispatch('updateUserData'))
-      //   .finally(() => {
-      //     setTimeout(() => {
-      //       this.loading = false
-      //     }, 300)
-      //   })
-      // await this.$store.dispatch('shoppingCart/getShoppingCart')
-      // setTimeout(() => this.$Router.pushTab({ path: '/pages/home/index' }))
+      if (!localStorage.getItem('token')) return
+      this.loading = true
+      await this.$promiseLoading(this.$store.dispatch('updateUserData'))
+        .finally(() => {
+          setTimeout(() => {
+            this.loading = false
+          }, 300)
+        })
+      await this.$store.dispatch('shoppingCart/getShoppingCart')
+      setTimeout(() => this.$Router.pushTab({ path: '/pages/home/index' }))
     },
   },
 }

@@ -64,4 +64,9 @@ export default [
     path: '/order-info',
     component: () => import('../views/Order/OrderInfo'),
   },
+  {
+    path: '/shopping-cart-list',
+    name: 'ShoppingCartList',
+    component: () => import('../views/Product/ShoppingCartList'),
+  },
 ]
