@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <better-view :tabs="['Home', 'Product', 'Order', 'Account']" />
+    <better-view ref="view" :tabs="['Home', 'Product', 'Order', 'Account']" />
   </div>
 </template>
 

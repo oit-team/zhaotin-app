@@ -17,22 +17,31 @@
       </div>
       <div class="space-y-2">
         <van-cell-group class="bg-white">
-          <van-cell title="我的积分" size="large" :value="String($store.state.userData.customerIntegral)">
-            <!--          <template #icon>-->
-            <!--            <vc-icon class="text-primary" name="icon-a-jifen" size="18"></vc-icon>-->
-            <!--          </template>-->
-            <!-- <vc-icon slot="icon" class="text-primary" name="icon-a-jifen" size="18"></vc-icon> -->
+          <van-cell
+            class="items-center"
+            title="我的积分"
+            size="large"
+            :value="String($store.state.userData.customerIntegral)"
+          >
+            <vc-icon slot="icon" class="text-primary mr-1" name="credits" size="22"></vc-icon>
           </van-cell>
           <van-cell
-            title="购物车"
+            class="items-center"
+            title="进货车"
             is-link
             size="large"
             @click="$router.to('ShoppingCartList')"
           >
-            <!-- <vc-icon slot="icon" class="text-primary" name="icon-gouwuche" size="18"></vc-icon> -->
+            <vc-icon slot="icon" class="text-primary mr-2" name="shopping-cart" size="18"></vc-icon>
           </van-cell>
-          <van-cell title="我的收藏" size="large" is-link @click="$router.to('Collection')">
-            <!-- <vc-icon slot="icon" class="text-primary" name="icon-tuijian-xing1" size="16"></vc-icon> -->
+          <van-cell
+            class="items-center"
+            title="我的收藏"
+            size="large"
+            is-link
+            @click="$router.to('Collection')"
+          >
+            <vc-icon slot="icon" class="text-primary mr-2" name="star" size="18"></vc-icon>
           </van-cell>
         </van-cell-group>
       </div>
@@ -54,7 +63,8 @@ export default {
 .van-cell::v-deep .van-cell__body {
   padding: 14px 16px;
 }
-.zt-page{
+
+.zt-page {
   min-height: 100vh;
 }
 </style>

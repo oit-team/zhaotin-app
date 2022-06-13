@@ -1,8 +1,13 @@
-const theme = require('./src/theme')
+const { colors } = require('./src/theme')
 
 module.exports = {
-  'button-primary-background-color': theme.colors.primary,
-  'button-primary-border-color': theme.colors.primary,
-  'button-info-background-color': theme.colors.black,
-  'button-info-border-color': theme.colors.black,
+  'button-primary-background-color': colors.primary,
+  'button-primary-border-color': colors.primary,
+  'button-info-background-color': colors.black,
+  'button-info-border-color': colors.black,
+
+  'tabbar-item-text-color': '#7a7e83',
+  'tabbar-item-active-color': colors.primary,
+
+  'rate-icon-full-color': colors.primary,
 }

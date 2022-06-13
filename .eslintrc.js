@@ -24,5 +24,6 @@ module.exports = {
     ],
     'vue/html-self-closing': 'off',
     'vue/require-prop-types': 'off',
+    'vue/no-v-html': 'off',
   },
 }

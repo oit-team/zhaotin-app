@@ -22,6 +22,7 @@ export default {
   data: () => ({
     routeHistory: [],
     transitionName: '',
+    clearing: false,
   }),
 
   watch: {
@@ -77,6 +78,15 @@ export default {
         this.transitionName = defaultTransition
       }
     },
+    /**
+     * 清理缓存的组件
+     */
+    clearAlive() {
+      this.clearing = true
+      this.$nextTick(() => {
+        this.clearing = false
+      })
+    },
   },
 
   render(h) {
@@ -84,7 +94,7 @@ export default {
       <div class="vc-better-view">
         <transition name={this.transitionName}>
           <keep-alive
-            include={[...this.tabs, ...this.routeHistory, ...this.include]}
+            include={this.clearing ? [] : [...this.tabs, ...this.routeHistory, ...this.include]}
             exclude={this.exclude}
             max={this.max}
           >

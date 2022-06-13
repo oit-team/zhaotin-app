@@ -3,7 +3,7 @@
     <div>
       <vc-icon
         v-if="back"
-        class="mr-2 text-primary"
+        class="p-1 mr-2 text-primary text-lg"
         name="chevron-left"
         @click="$router.back()"
       />

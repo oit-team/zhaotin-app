@@ -40,8 +40,8 @@ export default [
     component: () => import('../views/Product/Collection'),
   },
   {
-    name: 'Order',
     path: '/order',
+    name: 'Order',
     component: () => import('../views/Order/index'),
   },
   {
@@ -68,5 +68,15 @@ export default [
     path: '/shopping-cart-list',
     name: 'ShoppingCartList',
     component: () => import('../views/Product/ShoppingCartList'),
+  },
+  {
+    path: '/product/detail/:styleId',
+    name: 'ProductDetail',
+    component: () => import('../views/Product/Detail'),
+  },
+  {
+    path: '/product/search',
+    name: 'ProductDetail',
+    component: () => import('../views/Product/Detail'),
   },
 ]

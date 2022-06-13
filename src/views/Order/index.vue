@@ -30,8 +30,13 @@
               :key="item.styleId"
               class="flex items-center"
             >
-              <vc-img class="rounded-lg overflow-hidden bg-white mr-2" fit="contain" :src="item.imgDetailUrl" size="50"></vc-img>
-              <div class="bg-[#f7f7f7] rounded-lg flex-1 flex items-center self-stretch pr-2">
+              <vc-img
+                class="rounded-lg overflow-hidden bg-white mr-2 flex-shrink-0"
+                fit="contain"
+                :src="item.imgDetailUrl"
+                size="50"
+              ></vc-img>
+              <div class="bg-[#f7f7f7] rounded-lg flex-1 flex items-center self-stretch pr-2 overflow-hidden">
                 <div class="flex-1 text-xs ml-3 pr-2 overflow-hidden">
                   <div class="mb-1 truncate">{{ item.styleName }}</div>
                   <div class="text-xs text-caption">{{ item.styleNo }}</div>
@@ -123,11 +128,12 @@ export default {
 }
 </script>
 
-<style lang='scss' scoped>
-.price-red{
+<style lang="scss" scoped>
+.price-red {
   color: #FF0000;
 }
-.black{
+
+.black {
   color: black;
 }
 </style>

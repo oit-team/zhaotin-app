@@ -4,9 +4,9 @@
     @click="$router.to('ProductDetail', { styleId: item.styleId })"
   >
     <vc-img
-      v-if="item.styleVideo"
+      v-if="item.styleIsVideo"
       class="absolute right-2 top-2 z-10"
-      src="/img/home/aa5a363f6fa67f8060afccd025976970.png"
+      src="img/home/aa5a363f6fa67f8060afccd025976970.png"
       size="20"
     ></vc-img>
     <vc-img class="h-150px overflow-hidden" :src="item.resUrl"></vc-img>

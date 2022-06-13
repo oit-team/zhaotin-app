@@ -7,3 +7,7 @@ $tabbar-height: 50px;
 .van-tabbar {
   height: $tabbar-height;
 }
+
+.van-tabbar-item__icon img {
+  height: 100%;
+}

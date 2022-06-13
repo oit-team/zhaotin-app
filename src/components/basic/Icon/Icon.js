@@ -35,18 +35,22 @@ export default {
           color: this.color,
         },
       }, [
-        h('svg', {
-          class: 'vc-icon__svg',
-          attrs: {
-            'aria-hidden': true,
-          },
-          on: this.$listeners,
+        h('span', {
+          class: 'vc-icon__wrap',
         }, [
-          h('use', {
+          h('svg', {
+            class: 'vc-icon__svg',
             attrs: {
-              'xlink:href': `#icon-${this.iconName}`,
+              'aria-hidden': true,
             },
-          }),
+            on: this.$listeners,
+          }, [
+            h('use', {
+              attrs: {
+                'xlink:href': `#icon-${this.iconName}`,
+              },
+            }),
+          ]),
         ]),
       ])
     },

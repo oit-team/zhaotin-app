@@ -61,6 +61,9 @@ export default {
   mounted() {
     this.checkLogin()
     this.getLoginBackground()
+
+    const app = this.$root.$children[0]
+    app.$refs.view.clearAlive()
   },
 
   methods: {
@@ -73,7 +76,7 @@ export default {
         }))
         this.$store.commit('setUserData', data.body.resultList)
         localStorage.setItem('token', data.body.accessToken)
-        this.$router.to('Account')
+        this.$router.to('Home')
         this.$toast.success('登录成功')
       }
     },
@@ -96,16 +99,16 @@ export default {
       this.bgUrl = res.body.loginBackground
     },
     async checkLogin() {
-      if (!localStorage.getItem('token')) return
-      this.loading = true
-      await this.$promiseLoading(this.$store.dispatch('updateUserData'))
-        .finally(() => {
-          setTimeout(() => {
-            this.loading = false
-          }, 300)
-        })
-      await this.$store.dispatch('shoppingCart/getShoppingCart')
-      setTimeout(() => this.$Router.pushTab({ path: '/pages/home/index' }))
+      // if (!localStorage.getItem('token')) return
+      // this.loading = true
+      // await this.$promiseLoading(this.$store.dispatch('updateUserData'))
+      //   .finally(() => {
+      //     setTimeout(() => {
+      //       this.loading = false
+      //     }, 300)
+      //   })
+      // await this.$store.dispatch('shoppingCart/getShoppingCart')
+      // setTimeout(() => this.$Router.pushTab({ path: '/pages/home/index' }))
     },
   },
 }
