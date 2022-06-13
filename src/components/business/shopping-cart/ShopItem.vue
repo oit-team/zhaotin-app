@@ -3,7 +3,7 @@
     <div class="flex justify-between p-2 items-center">
       <div class="flex">
         <slot name="checkbox"></slot>
-        <span class="ml-2">{{ item.styleName }}</span>
+        <p class="ml-2 goodsName">{{ item.styleName }}</p>
       </div>
       <div class="text-xs text-secondary">{{ item.styleNo }}</div>
     </div>
@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  name: 'shop-item',
+  name: 'ShopItem',
 
   props: {
     item: Object,
@@ -32,5 +32,7 @@ export default {
 </script>
 
 <style scoped>
-
+.goodsName{
+  width: 80%;
+}
 </style>

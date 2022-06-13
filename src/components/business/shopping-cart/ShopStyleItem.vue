@@ -3,7 +3,6 @@
     <div
       class="flex items-center pl-2 py-1"
       :class="{'is-active': collapse}"
-      @click="collapse = !collapse"
     >
       <div class="flex items-center space-x-2">
         <slot name="checkbox"></slot>
@@ -15,7 +14,7 @@
           @click.native.stop="$router.to('productDetail', { styleId: item.styleId })"
         ></vc-img>
       </div>
-      <div class="flex items-center rounded-lg bg-line flex-1 px-2 self-stretch">
+      <div class="flex items-center rounded-lg bg-line flex-1 px-2 self-stretch" @click="collapse = !collapse">
         <div class="flex-1">
           <span>{{ item.styleColorName || item.styleColor }}</span>
         </div>
@@ -53,7 +52,7 @@
 <script>
 
 export default {
-  name: 'shop-style-item',
+  name: 'ShopStyleItem',
 
   props: {
     item: Object,
@@ -65,13 +64,12 @@ export default {
   }),
 
   methods: {
-    changeNumber({ value }, size) {
+    changeNumber(value, size) {
       console.log(value)
-      console.log(size)
-      // this.$emit('change-number', {
-      //   value,
-      //   size,
-      // })
+      this.$emit('change-number', {
+        value,
+        size,
+      })
     },
     calcTotal(item) {
       return item.styleSize.reduce((prev, curr) => prev + curr.sizeNumber, 0)
