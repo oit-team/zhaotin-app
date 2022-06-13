@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray zt-page">
+  <div class="bg-gray flex flex-col zt-page">
     <van-nav-bar
       title="购物车"
       :right-text="rightText"
@@ -8,46 +8,42 @@
       @click-right="changeRight"
     />
     <div class="flex-1 flex flex-col space-y-2 p-2">
-      <van-checkbox-group v-model="checkList" ref="checkboxGroup">
-        <ShopItem v-for="item of list" :key="item.styleId" :item="item" :price="getPrice(item)">
-          <!-- {{ item }} -->
+      <ShopItem v-for="item of list" :key="item.styleId" class="mb-2" :item="item" :price="getPrice(item)">
+        <template #checkbox>
+          <van-checkbox
+            icon-size="16px"
+            checked-color="#CDA46C"
+            label-disabled
+            class="!w-5"
+            :value="selectedMap[item.styleId] && selectedMap[item.styleId].length === item.style.length"
+            @input="checkFather(item ,item.styleId, $event)"
+          ></van-checkbox>
+        </template>
+        <ShopStyleItem
+          v-for="style of item.style"
+          :key="style.id"
+          :item="style"
+          @change-number="changeNumber(item.style, style.id, $event)"
+        >
           <template #checkbox>
             <van-checkbox
-              ref="childCheckbox"
               icon-size="16px"
               checked-color="#CDA46C"
               label-disabled
               class="!w-5"
-              @change="childCheck"
-              :name="selectedMap[item.styleId] && selectedMap[item.styleId].length === item.style.length"
+              :value="selectedMap[item.styleId] && selectedMap[item.styleId].includes(style.id)"
+              @input="checkChild(item.styleId, style.id, $event)"
             ></van-checkbox>
           </template>
-          <ShopStyleItem
-            v-for="style of item.style"
-            :key="style.id"
-            :item="style"
-            @change-number="changeNumber(item.style, style.id, $event)"
-          >
-            <template #checkbox>
-              <van-checkbox
-                icon-size="16px"
-                checked-color="#CDA46C"
-                label-disabled
-                class="!w-5"
-                :name="selectedMap[item.styleId] && selectedMap[item.styleId].includes(style.id)"
-              ></van-checkbox>
-            </template>
-          </ShopStyleItem>
-        </ShopItem>
-      </van-checkbox-group>
+        </ShopStyleItem>
+      </ShopItem>
     </div>
     <div class="flex items-center p-2 h-12 bg-white sticky-bottom">
-      <!-- <ShopCheckbox :value="allChecked" :disabled="!list.length" @input="selectAll">全选</ShopCheckbox> -->
       <van-checkbox
         icon-size="16px"
         checked-color="#CDA46C"
-        v-model="allCheck"
-        @change="checkAll"
+        v-model="allChecked"
+        @change="checkAll()"
       >
         全选
       </van-checkbox>
@@ -66,11 +62,11 @@
 </template>
 
 <script>
-import ShopItem from '@/components/business/shopping-cart/shop-item'
-import ShopStyleItem from '@/components/business/shopping-cart/shop-style-item'
+import { Dialog } from '@/components/vant'
+import ShopItem from '@/components/business/shopping-cart/ShopItem'
+import ShopStyleItem from '@/components/business/shopping-cart/ShopStyleItem'
 import { keyBy } from 'lodash'
-// import { getShoppingCart } from '@/api/product'
-// import { deleteShoppingCartStyle, updateShoppingCart } from '@/api/order'
+import { deleteShoppingCartStyle, updateShoppingCart } from '@/api/order'
 // import { SUBMIT_ORDER_EVENT } from '../order/submit-order'
 
 export default {
@@ -83,15 +79,13 @@ export default {
   data() {
     return {
       rightText: '删除',
-      isDelete: true,
       select: true,
       selectedMap: {},
       priceData: null,
       listPriceData: [],
-      // list: [],
       data: null,
-      checkList: [],
-      allCheck: false,
+      checkAllList: [],
+      allChecked: false,
     }
   },
   computed: {
@@ -101,14 +95,14 @@ export default {
     shoppingCartData() {
       return this.$store.state.shoppingCart.data
     },
-    allChecked() {
-      return this.list.every(item => {
-        if (this.selectedMap[item.styleId]) {
-          return this.selectedMap[item.styleId].length === item.style.length
-        }
-        return false
-      })
-    },
+    // allChecked() {
+    //   return this.list.every(item => {
+    //     if (this.selectedMap[item.styleId]) {
+    //       return this.selectedMap[item.styleId].length === item.style.length
+    //     }
+    //     return false
+    //   })
+    // },
     listMap() {
       return keyBy(this.list, 'styleId')
     },
@@ -134,11 +128,6 @@ export default {
     },
     async loadShoppingCart() {
       await this.$store.dispatch('shoppingCart/getShoppingCart')
-      // const res = await getShoppingCart({})
-      // this.data = res.body.resultList
-      // this.list = res.body.resultList.styleList
-      // console.log(this.data)
-      // console.log(this.list)
     },
     changeSelectItem(item, check) {
       const styleIdList = this.selectedMap[item.styleId]
@@ -165,49 +154,54 @@ export default {
         this.selectedMap = {}
       }
     },
-    // changeNumber(style, id, {
-    //   value,
-    //   size,
-    // }) {
-    //   const update = async () => {
-    //     await this.updateShopCart()
-    //     this.$store.commit('shoppingCart/setOrderList', this.getSelectedList())
-    //     await this.loadPriceData()
-    //   }
+    changeNumber(style, id, {
+      value,
+      size,
+    }) {
+      const update = async () => {
+        await this.updateShopCart()
+        this.$store.commit('shoppingCart/setOrderList', this.getSelectedList())
+        await this.loadPriceData()
+      }
 
-    //   if (value <= 0) {
-    //     // uni.showModal({
-    //     //   title: '提示',
-    //     //   content: '确定要删除吗',
-    //     //   success: ({ confirm }) => {
-    //     //     if (confirm) {
-    //     //       update()
-    //     //       this.loadShoppingCart()
-    //     //     } else {
-    //     //       size.sizeNumber = 1
-    //     //     }
-    //     //   },
-    //     // })
-    //     console.log(123)
-    //   } else {
-    //     update()
-    //   }
-    // },
+      if (value <= 0) {
+        // uni.showModal({
+        //   title: '提示',
+        //   content: '确定要删除吗',
+        //   success: ({ confirm }) => {
+        //     if (confirm) {
+        //       update()
+        //       this.loadShoppingCart()
+        //     } else {
+        //       size.sizeNumber = 1
+        //     }
+        //   },
+        // })
+        Dialog.confirm({
+          title: '提示',
+          message: '确定要删除吗',
+        })
+          .then((confirm) => {
+            if (confirm) {
+              update()
+              this.loadShoppingCart()
+            } else {
+              size.sizeNumber = 1
+            }
+          })
+          .catch(() => {
+            // on cancel
+          })
+        console.log(123)
+      } else {
+        update()
+      }
+    },
     getSelectedList() {
       const listMap = JSON.parse(JSON.stringify(this.listMap))
       return Object
         .entries(this.selectedMap)
         .map(([styleId, styleList]) => {
-          // styleList.filter(({ id }) => {
-          //   console.log(id)
-          //   return listMap[styleId].style?.find(style => style.id === id)
-          // })
-          // list.push({
-          //   ...listMap[styleId],
-          //   style: styleList.map(id => {
-          //     return listMap[styleId].style?.find(style => style.id === id)
-          //   }),
-          // })
           return {
             ...listMap[styleId],
             style: styleList.map(id => {
@@ -216,37 +210,37 @@ export default {
           }
         })
     },
-    // submit() {
-    //   if (!Object.values(this.selectedMap).some(item => item.some(count => count > 0))) {
-    //     return this.$toast('请选择商品')
-    //   }
-    //   // uni.$off(SUBMIT_ORDER_EVENT, this.clearSelectMap)
-    //   // uni.$once(SUBMIT_ORDER_EVENT, this.clearSelectMap)
-    //   this.$Router.to('submitOrder')
-    // },
-    // clearSelectMap() {
-    //   this.selectedMap = {}
-    // },
-    // async updateShopCart() {
-    //   const list = []
-    //   const selectList = this.$store.state.shoppingCart.list || []
-    //   selectList.forEach(({
-    //     style,
-    //     styleNo,
-    //   }) => {
-    //     style.forEach(item => {
-    //       list.push({
-    //         styleNo,
-    //         styleId: item.styleId,
-    //         styleSize: item.styleSize,
-    //         styleColor: item.id,
-    //       })
-    //     })
-    //   })
-    //   await this.$promiseLoading(updateShoppingCart({
-    //     styleList: list,
-    //   }))
-    // },
+    submit() {
+      if (!Object.values(this.selectedMap).some(item => item.some(count => count > 0))) {
+        return this.$toast('请选择商品')
+      }
+      // uni.$off(SUBMIT_ORDER_EVENT, this.clearSelectMap)
+      // uni.$once(SUBMIT_ORDER_EVENT, this.clearSelectMap)
+      this.$Router.to('submitOrder')
+    },
+    clearSelectMap() {
+      this.selectedMap = {}
+    },
+    async updateShopCart() {
+      const list = []
+      const selectList = this.$store.state.shoppingCart.list || []
+      selectList.forEach(({
+        style,
+        styleNo,
+      }) => {
+        style.forEach(item => {
+          list.push({
+            styleNo,
+            styleId: item.styleId,
+            styleSize: item.styleSize,
+            styleColor: item.id,
+          })
+        })
+      })
+      await this.$promiseLoading(updateShoppingCart({
+        styleList: list,
+      }))
+    },
     async getStylePrice() {
       this.$store.commit('shoppingCart/setOrderList', this.getSelectedList())
       const res = await this.$store.dispatch('shoppingCart/getStylePrice')
@@ -264,48 +258,95 @@ export default {
     getPrice(item) {
       return this.listPriceData?.styleMap?.[item.styleId]?.stylePrice || 0
     },
-    // async deleteShoppingItem() {
-    //   const styleList = []
+    async deleteShoppingItem() {
+      const styleList = []
 
-    //   Object.entries(this.selectedMap).forEach(([key, value]) => {
-    //     const item = value.map(id => ({
-    //       styleId: key,
-    //       styleColor: id,
-    //     }))
-    //     styleList.push(...item)
-    //   })
+      Object.entries(this.selectedMap).forEach(([key, value]) => {
+        const item = value.map(id => ({
+          styleId: key,
+          styleColor: id,
+        }))
+        styleList.push(...item)
+      })
 
-    //   if (!styleList.length) return this.$toast('请先选择')
+      if (!styleList.length) return this.$toast('请先选择')
 
-    //   await this.$showToast('确定要删除所选商品吗？')
-    //   await deleteShoppingCartStyle({
-    //     styleList,
-    //     shoppingCartId: this.shoppingCartData.id,
-    //   })
-    //   await this.loadShoppingCart()
-    //   this.selectedMap = {}
-    //   await this.loadPriceData()
-    //   this.$toast('删除成功')
-    // },
+      // await this.$toast('确定要删除所选商品吗？')
+      Dialog.confirm({
+        title: '提示',
+        message: '确定要删除吗',
+      })
+        .then(async () => {
+          await deleteShoppingCartStyle({
+            styleList,
+            shoppingCartId: this.shoppingCartData.id,
+          })
+          await this.loadShoppingCart()
+          this.selectedMap = {}
+          await this.loadPriceData()
+          this.$toast('删除成功')
+        })
+        .catch(() => {
+          // on cancel
+          this.$toast('删除失败')
+        })
+    },
     changeRight() {
-      this.rightText = this.isDelete ? '删除' : '取消'
-      this.isDelete = !this.isDelete
+      if (this.selectedMap !== {}) {
+        this.deleteShoppingItem()
+      }
     },
+    // 底部全选
     checkAll() {
-      if (this.allCheck) {
-        this.$refs.checkboxGroup.toggleAll(true)
+      console.log(this.allChecked)
+      if (this.allChecked) {
+        this.list.forEach(e => {
+          this.$set(this.selectedMap, e.styleId, [])
+          if (e.style.length) {
+            e.style.forEach(i => {
+              this.selectedMap[e.styleId].push(i.id)
+            })
+          }
+        })
       } else {
-        this.$refs.checkboxGroup.toggleAll()
+        this.selectedMap = {}
       }
     },
-    childCheck(e) {
-      console.log(e)
+    // 商品选择
+    checkFather(item, itemId, e) {
+      const that = this
       if (e) {
-        this.$refs.childCheckbox.toggleAll(true)
+        that.selectedMap[itemId] = []
+        item.style.forEach(i => {
+          that.selectedMap[itemId].push(i.id)
+        })
       } else {
-        this.$refs.childCheckbox.toggleAll()
+        delete that.selectedMap[itemId]
       }
+      that.$forceUpdate()
+      console.log(that.selectedMap)
     },
+    checkChild(itemId, styleId, e) {
+      const that = this
+      const styleIdList = that.selectedMap[itemId]
+      if (e) {
+        if (!styleIdList) that.$set(that.selectedMap, itemId, [])
+        that.selectedMap[itemId].push(styleId)
+      } else if (styleIdList.includes(styleId)) {
+        styleIdList.splice(styleIdList.indexOf(styleId), 1)
+      }
+      that.$forceUpdate()
+      console.log(that.selectedMap)
+    },
+    // isAllcheck() {
+    //   this.list.forEach(e => {
+    //     if (this.selectedMap[e.styleId] && this.selectedMap[e.styleId].length === e.style.length) {
+    //       this.allChecked = true
+    //     } else {
+    //       this.allChecked = false
+    //     }
+    //   })
+    // },
   },
 }
 </script>

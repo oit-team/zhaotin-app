@@ -146,7 +146,6 @@ export default {
         pageNum: 1,
         status: 1,
         pageSize,
-        status: 1,
       })
       this.productList = [...this.productList, ...res.body.resultList]
       this.seasonStyle = res.body.seasonStyle

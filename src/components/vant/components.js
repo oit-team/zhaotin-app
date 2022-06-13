@@ -23,7 +23,6 @@ export {
   NoticeBar,
   PullRefresh,
   List,
-  CheckboxGroup,
   Checkbox,
   Sticky,
 } from 'vant'
