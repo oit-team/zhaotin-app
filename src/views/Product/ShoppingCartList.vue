@@ -65,11 +65,11 @@
 
 <script>
 import { Dialog } from '@/components/vant'
-import ShopItem from '@/components/business/shopping-cart/ShopItem'
-import ShopStyleItem from '@/components/business/shopping-cart/ShopStyleItem'
+import ShopItem from '@/components/business/ShoppingCart/ShopItem'
+import ShopStyleItem from '@/components/business/ShoppingCart/ShopStyleItem'
 import { keyBy } from 'lodash'
 import { deleteShoppingCartStyle, updateShoppingCart } from '@/api/order'
-// import { SUBMIT_ORDER_EVENT } from '../order/submit-order'
+import { SUBMIT_ORDER_EVENT } from '../Order/OrderSubmit'
 
 export default {
   name: 'ShoppingCartList',
@@ -216,9 +216,9 @@ export default {
       if (!Object.values(this.selectedMap).some(item => item.some(count => count > 0))) {
         return this.$toast('请选择商品')
       }
-      // uni.$off(SUBMIT_ORDER_EVENT, this.clearSelectMap)
-      // uni.$once(SUBMIT_ORDER_EVENT, this.clearSelectMap)
-      this.$Router.to('submitOrder')
+      this.$root.$off(SUBMIT_ORDER_EVENT, this.clearSelectMap)
+      this.$root.$once(SUBMIT_ORDER_EVENT, this.clearSelectMap)
+      this.$router.push('/order/order-submit')
     },
     clearSelectMap() {
       this.selectedMap = {}

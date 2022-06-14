@@ -9,8 +9,10 @@ import '@/assets/icons'
 
 import '@/styles/index.scss'
 import 'windi.css'
+import theme from './theme'
 
 Vue.config.productionTip = false
+Vue.prototype.$theme = theme
 
 new Vue({
   router,

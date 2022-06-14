@@ -35,6 +35,16 @@ export default [
     component: () => import('../views/Account/About'),
   },
   {
+    path: '/address',
+    name: 'Address',
+    component: () => import('../views/Account/Address'),
+  },
+  {
+    path: '/address-update',
+    name: 'AddressUpdate',
+    component: () => import('../views/Account/AddressUpdate'),
+  },
+  {
     path: '/collection',
     name: 'Collection',
     component: () => import('../views/Product/Collection'),
@@ -51,7 +61,7 @@ export default [
   },
   {
     name: 'OrderInfo',
-    path: '/order-info',
+    path: '/order/order-info',
     component: () => import('../views/Order/OrderInfo'),
   },
   {
@@ -60,9 +70,9 @@ export default [
     component: () => import('../views/Product/index'),
   },
   {
-    name: 'OrderInfo',
-    path: '/order-info',
-    component: () => import('../views/Order/OrderInfo'),
+    path: '/order/order-submit',
+    name: 'OrderSubmit',
+    component: () => import('../views/Order/OrderSubmit'),
   },
   {
     path: '/shopping-cart-list',

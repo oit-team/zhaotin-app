@@ -11,7 +11,7 @@
           :src="item.imgUrl"
           fit="contain"
           size="40"
-          @click.native.stop="$router.to('productDetail', { styleId: item.styleId })"
+          @click.native.stop="$router.to('ProductDetail', { styleId: item.styleId })"
         ></vc-img>
       </div>
       <div class="flex items-center rounded-lg bg-line flex-1 px-2 self-stretch" @click="collapse = !collapse">

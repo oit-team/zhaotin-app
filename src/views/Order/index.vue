@@ -127,11 +127,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.price-red {
-  color: #FF0000;
-}
-
-.black {
-  color: black;
-}
 </style>

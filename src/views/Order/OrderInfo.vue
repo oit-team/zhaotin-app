@@ -59,8 +59,8 @@
 
 <script>
 import { getOrderById } from '@/api/order'
-import ShopItem from '@/components/business/shopping-cart/ShopItem'
-import ShopStyleItem from '@/components/business/shopping-cart/ShopStyleItem'
+import ShopItem from '@/components/business/ShoppingCart/ShopItem'
+import ShopStyleItem from '@/components/business/ShoppingCart/ShopStyleItem'
 
 export default {
   name: 'OrderInfo',

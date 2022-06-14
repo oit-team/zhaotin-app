@@ -90,12 +90,6 @@ export default {
 </script>
 
 <style lang='less' scoped>
-.color-red{
-  color: #FF0000;
-}
-.dltBtn{
-  border-radius: 0 5px 5px 0 !important;
-}
 .zt-page{
   min-height: 100vh;
 }
