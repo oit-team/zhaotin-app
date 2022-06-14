@@ -2,11 +2,13 @@
   <div class="bg-gray flex flex-col">
     <Search is-link />
 
-    <van-swipe class="aspect-[16/6]" :autoplay="5000" indicator-color="white">
-      <van-swipe-item v-for="(item, index) of carousel" :key="index">
-        <vc-img :src="item" size="100%" />
-      </van-swipe-item>
-    </van-swipe>
+    <div>
+      <van-swipe class="aspect-[16/6]" :autoplay="5000" indicator-color="white">
+        <van-swipe-item v-for="(item, index) of carousel" :key="index">
+          <vc-img :src="item" size="100%" />
+        </van-swipe-item>
+      </van-swipe>
+    </div>
 
     <div class="bg-white">
       <div class="grid grid-cols-5 gap-y-2 px-6 pt-4 pb-4 bg-gray rounded-b-[40px]">
@@ -23,7 +25,7 @@
           v-for="(item) of styleTypeList"
           :key="item.dictitemCode"
           class="flex flex-col items-center"
-          @click="productFilter({styleMajor: item.dicttimeDisplayName})"
+          @click="$router.to('Product', {styleMajor: item.dicttimeDisplayName})"
         >
           <vc-img class="rounded-circle overflow-hidden bg-white" :src="item.imgUrl" size="40" />
           <span class="mt-1 text-xs">{{ item.dicttimeDisplayName }}</span>
@@ -83,6 +85,7 @@ import Tabbar from '@/components/business/Tabbar'
 import Search from '@/components/business/Product/Search'
 
 import { getStyleList, dictitemInfoAllMethod, getStyleCategory, getSystemConfig } from '@/api/product'
+import { callCustomerService } from '@/utils'
 
 export default {
   name: 'Home',
@@ -136,6 +139,7 @@ export default {
       {
         name: '客服',
         icon: 'e63fa06c35ad927607be1536412ea7a8.png',
+        click: callCustomerService,
       },
     ]
   },
@@ -186,6 +190,6 @@ export default {
 
 <style scoped>
 ::v-deep .van-notice-bar__left-icon{
-  color: #c9a76e;
+  color: theme('colors.primary');
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="sticky-top z-50 bg-white flex items-center p-2">
+  <div class="sticky-top z-50 bg-white flex items-center px-3 py-2">
     <div>
       <vc-icon
         v-if="back"
@@ -9,6 +9,7 @@
       />
     </div>
     <van-search
+      ref="search"
       v-model="searchText"
       class="flex-1 p-0"
       shape="round"
@@ -16,6 +17,7 @@
       clearable
       placeholder="搜索商品名称/款号/面料"
       v-on="$listeners"
+      @click="onClick()"
     />
     <div>
       <slot name="after"></slot>
@@ -36,11 +38,25 @@ export default {
   props: {
     back: Boolean,
     isLink: Boolean,
+    autofocus: Boolean,
   },
 
   data: () => ({
     searchText: '',
   }),
+
+  mounted() {
+    if (this.autofocus) {
+      const search = this.$refs.search?.querySelector('input')
+      setTimeout(() => search.focus(), 400)
+    }
+  },
+
+  methods: {
+    onClick() {
+      this.isLink && this.$router.to('ProductSearch')
+    },
+  },
 }
 </script>
 

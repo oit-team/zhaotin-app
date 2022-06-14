@@ -1,4 +1,4 @@
-import { Toast } from 'vant'
+import { Dialog, Toast } from 'vant'
 import { isPlainObject } from 'lodash/lang'
 
 let promiseLoadingTimer = null
@@ -60,4 +60,13 @@ export function setComponentProps(components, props) {
 export function loadMoreData(list, newList, pageParams) {
   if (pageParams.pageNum === 1) list.length = 0
   list.push(...newList)
+}
+
+export async function callCustomerService() {
+  await Dialog.confirm({
+    title: '提示',
+    message: '是否要拨打客服电话',
+  })
+
+  window.open('tel:13345731912')
 }

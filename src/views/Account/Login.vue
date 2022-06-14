@@ -33,7 +33,7 @@
             clearable
           />
         </div>
-        <p class="mt-2 mb-5 text-xs text-right underline text-secondary" @click="callCustomerService">忘记密码</p>
+        <p class="mt-2 mb-5 text-xs text-right underline text-secondary" @click="callCustomerService()">忘记密码</p>
         <van-button type="info" @click="login()" block>登录</van-button>
       </div>
     </div>
@@ -45,6 +45,7 @@
 <script>
 import * as api from '@/api/account'
 import crypto from '@/utils/crypto'
+import { callCustomerService } from '@/utils'
 
 export default {
   name: 'Login',
@@ -67,7 +68,7 @@ export default {
   },
 
   methods: {
-    callCustomerService: () => {},
+    callCustomerService,
     async login() {
       if (this.verifyForm()) {
         const data = await this.$promiseLoading(api.login({
@@ -99,16 +100,16 @@ export default {
       this.bgUrl = res.body.loginBackground
     },
     async checkLogin() {
-      // if (!localStorage.getItem('token')) return
-      // this.loading = true
-      // await this.$promiseLoading(this.$store.dispatch('updateUserData'))
-      //   .finally(() => {
-      //     setTimeout(() => {
-      //       this.loading = false
-      //     }, 300)
-      //   })
-      // await this.$store.dispatch('shoppingCart/getShoppingCart')
-      // setTimeout(() => this.$Router.pushTab({ path: '/pages/home/index' }))
+      if (!localStorage.getItem('token')) return
+      this.loading = true
+      await this.$promiseLoading(this.$store.dispatch('updateUserData'), '验证登录中...')
+        .finally(() => {
+          setTimeout(() => {
+            this.loading = false
+          }, 300)
+        })
+      await this.$store.dispatch('shoppingCart/getShoppingCart')
+      setTimeout(() => this.$router.to('Home'))
     },
   },
 }

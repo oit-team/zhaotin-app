@@ -76,7 +76,7 @@ export default [
   },
   {
     path: '/product/search',
-    name: 'ProductDetail',
-    component: () => import('../views/Product/Detail'),
+    name: 'ProductSearch',
+    component: () => import('../views/Product/Search'),
   },
 ]

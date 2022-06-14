@@ -68,6 +68,13 @@ export default {
     this.getStyleCategory()
   },
 
+  activated() {
+    const { params } = this.$route
+    if (params.category) {
+      this.category = params.category
+    }
+  },
+
   methods: {
     async loadData(params) {
       params = {

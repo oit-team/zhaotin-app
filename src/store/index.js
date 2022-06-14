@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 import router from '@/router'
 import shoppingCart from './shoppingCart'
 import { getCheckUserInfo } from '../api/account'
-import { Toast } from 'vant'
 
 Vue.use(Vuex)
 
@@ -17,7 +16,6 @@ export default new Vuex.Store({
   mutations: {
     setUserData(state, data) {
       state.userData = data
-      localStorage.setItem('userData', data)
     },
   },
   actions: {
@@ -32,7 +30,7 @@ export default new Vuex.Store({
           return res
         })
         .catch(err => {
-          Toast('登录过期，请重新登录')
+          err.message = '登录过期，请重新登录'
           ctx.dispatch('logout')
           return Promise.reject(err)
         })

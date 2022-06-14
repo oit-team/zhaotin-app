@@ -13,7 +13,7 @@ export function login(params) {
 
 export function getCheckUserInfo() {
   return post[API_SERVICE.SYSTEM]('/user/getCheckUserInfo', {
-    token: 'fBWQQnZd4Ns67hbWk0EYk/wIHsj+bMCy0HZkWHnm1lFe4TBI1AdCeXIUWSqam/zZIZch4Z5Z3LzdtN3CIfDG2ZWvhV0f1/1vYyDTPrMZDmcG3HzcBpbwS+MIf5IrDmZ/JOn6PqE8D/IxsLDiu7HtCScj09lbIYQM53vzPbfxGPc=' || localStorage.getItem('token'),
+    token: localStorage.getItem('token'),
   })
 }
 

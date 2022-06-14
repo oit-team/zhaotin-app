@@ -11,13 +11,17 @@ export default {
   components: {
     BetterView,
   },
+
+  created() {
+    localStorage.getItem('token') && this.$store.dispatch('updateUserData')
+  },
 }
 </script>
 
 <style lang="scss">
 @layer {
   .vc-router-view {
-    background-color: #ffffff;
+    background-color: theme('colors.gray');
   }
 }
 </style>
