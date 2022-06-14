@@ -298,66 +298,6 @@ export default {
         this.deleteShoppingItem()
       }
     },
-    // 底部全选
-    checkAll(check) {
-      console.log(check)
-      if (this.allChecked) {
-        this.list.forEach(e => {
-          this.$set(this.selectedMap, e.styleId, [])
-          if (e.style.length) {
-            e.style.forEach(i => {
-              this.selectedMap[e.styleId].push(i.id)
-            })
-          }
-        })
-      } else {
-        this.selectedMap = {}
-      }
-    },
-    // 商品选择
-    checkFather(item, itemId, e) {
-      const that = this
-      if (e) {
-        that.selectedMap[itemId] = []
-        item.style.forEach(i => {
-          that.selectedMap[itemId].push(i.id)
-        })
-      } else {
-        delete that.selectedMap[itemId]
-      }
-      that.$forceUpdate()
-      console.log(that.selectedMap)
-    },
-    checkChild(itemId, styleId, e) {
-      const that = this
-      const styleIdList = that.selectedMap[itemId]
-      if (e) {
-        if (!styleIdList) that.$set(that.selectedMap, itemId, [])
-        that.selectedMap[itemId].push(styleId)
-      } else if (styleIdList.includes(styleId)) {
-        styleIdList.splice(styleIdList.indexOf(styleId), 1)
-      }
-      that.$forceUpdate()
-      console.log(that.selectedMap)
-    },
-    // isAllcheck() {
-    //   console.log(123)
-    //   let num = 0
-    //   this.list.forEach(e => {
-    //     // 遍历 如果当前项在  selectedMap 中存在  且 当前项在 selectedMap 中(以数组形式存在)的 length = 当前项的length
-    //     if (this.selectedMap[e.styleId]) {
-    //       num++
-    //     } else if (this.selectedMap[e.styleId].length !== e.style.length) {
-    //       this.allChecked = false
-    //       this.$forceUpdate()
-    //     }
-    //   })
-    //   if (this.list.length === num) {
-    //     this.allChecked = true
-    //   } else {
-    //     this.allChecked = false
-    //   }
-    // },
   },
 }
 </script>

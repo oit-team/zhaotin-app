@@ -24,7 +24,7 @@
     </div>
 
     <div class="p-2 space-y-2">
-      <!-- <ShopItem
+      <ShopItem
         v-for="item of data.orderStyleList"
         :key="item.styleId"
         :item="item"
@@ -37,7 +37,7 @@
           readonly
         >
         </ShopStyleItem>
-      </ShopItem> -->
+      </ShopItem>
     </div>
 
     <div>
@@ -59,9 +59,15 @@
 
 <script>
 import { getOrderById } from '@/api/order'
+import ShopItem from '@/components/business/shopping-cart/ShopItem'
+import ShopStyleItem from '@/components/business/shopping-cart/ShopStyleItem'
 
 export default {
   name: 'OrderInfo',
+  components: {
+    ShopItem,
+    ShopStyleItem,
+  },
   data() {
     return {
       orderId: null,
