@@ -6,7 +6,7 @@
       @click-left="$router.back()"
     />
 
-    <div class="mx-2 mt-2 flex items-center bg-white rounded-lg p-2" @click="switchAddress()">
+    <div class="mx-2 mt-2 px-4 flex items-center bg-white rounded-lg p-2" @click="switchAddress()">
       <div v-if="addressInfo" class="flex items-center flex-1">
         <div class="flex-1">
           <div>{{ addressInfo.address }}</div>
@@ -25,7 +25,7 @@
       </div>
     </div>
 
-    <div class="bg-white rounded-lg mx-2 mt-2 p-2 text-sm" @click="showReasonPopup = true">
+    <div class="bg-white rounded-lg mx-2 mt-2 p-2 px-4 text-sm" @click="showReasonPopup = true">
       <span>下单事由</span>
       <span class="float-right">
         <span class="text-secondary">{{ form.orderReason || '请选择下单事由' }}</span>

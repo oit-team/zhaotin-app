@@ -1,9 +1,9 @@
 <template>
   <div class="bg-white rounded-lg">
-    <div class="flex justify-between p-2 items-center">
+    <div class="flex justify-between p-2 px-4 items-center">
       <div class="flex">
         <slot name="checkbox"></slot>
-        <p class="ml-2 goodsName">{{ item.styleName }}</p>
+        <p class=" goodsName">{{ item.styleName }}</p>
       </div>
       <div class="text-xs text-secondary">{{ item.styleNo }}</div>
     </div>
@@ -11,7 +11,7 @@
       <slot />
     </div>
     <div class="flex px-2 pb-2 justify-end">
-      <div class="flex text-sm">
+      <div class="flex text-sm mr-2">
         <span>单价：</span>
         <vc-text :text="price" mode="price"></vc-text>
       </div>
