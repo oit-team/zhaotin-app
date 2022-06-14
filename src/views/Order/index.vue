@@ -48,9 +48,7 @@
                       <span class="black">×{{ item.styleNumber }}</span>
                     </template>
                   </van-badge>
-                  <span class="price-red">
-                    ￥{{ item.styleTotal }}
-                  </span>
+                  <vc-text :text="item.styleTotal" mode="price"></vc-text>
                   <!-- <u-text class="text-price text-xs" mode="price" :text="item.styleTotal"></u-text> -->
                 </div>
               </div>
@@ -63,7 +61,7 @@
             </div>
             <div class="flex text-sm">
               <span>总价：</span>
-              <span class="price-red">￥{{ order.orderPrice }}</span>
+              <vc-text :text="order.orderPrice" mode="price"></vc-text>
             </div>
           </div>
         </div>

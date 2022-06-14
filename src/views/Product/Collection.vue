@@ -25,7 +25,7 @@
                 <div class="text-xs text-secondary">收藏时间：{{ item.createTime }}</div>
               </div>
               <div>
-                <span class="color-red">￥{{ item.tradePrice }}</span>
+                <vc-text :text="item.tradePrice" mode="price"></vc-text>
               </div>
             </div>
           </div>

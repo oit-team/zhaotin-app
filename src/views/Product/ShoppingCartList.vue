@@ -42,8 +42,8 @@
       <van-checkbox
         icon-size="16px"
         checked-color="#CDA46C"
-        v-model="allChecked"
-        @change="checkAll()"
+        :value="allChecked"
+        @input="selectAll"
       >
         全选
       </van-checkbox>
@@ -52,7 +52,7 @@
           <span class="text-xs text-right">已选{{ priceData.styleNumber }}件</span>
           <span class="flex text-xs">
             <span>共计</span>
-            <span>￥{{ priceData.styleTotalPrice }}</span>
+            <vc-text :text="priceData.styleTotalPrice" mode="price"></vc-text>
           </span>
         </div>
         <van-button class="!h-8" type="primary" @click="submit()">结算</van-button>
@@ -85,7 +85,7 @@ export default {
       listPriceData: [],
       data: null,
       checkAllList: [],
-      allChecked: false,
+      // allChecked: false,
     }
   },
   computed: {
@@ -95,14 +95,14 @@ export default {
     shoppingCartData() {
       return this.$store.state.shoppingCart.data
     },
-    // allChecked() {
-    //   return this.list.every(item => {
-    //     if (this.selectedMap[item.styleId]) {
-    //       return this.selectedMap[item.styleId].length === item.style.length
-    //     }
-    //     return false
-    //   })
-    // },
+    allChecked() {
+      return this.list.every(item => {
+        if (this.selectedMap[item.styleId]) {
+          return this.selectedMap[item.styleId].length === item.style.length
+        }
+        return false
+      })
+    },
     listMap() {
       return keyBy(this.list, 'styleId')
     },
@@ -297,8 +297,8 @@ export default {
       }
     },
     // 底部全选
-    checkAll() {
-      console.log(this.allChecked)
+    checkAll(check) {
+      console.log(check)
       if (this.allChecked) {
         this.list.forEach(e => {
           this.$set(this.selectedMap, e.styleId, [])
@@ -339,13 +339,22 @@ export default {
       console.log(that.selectedMap)
     },
     // isAllcheck() {
+    //   console.log(123)
+    //   let num = 0
     //   this.list.forEach(e => {
-    //     if (this.selectedMap[e.styleId] && this.selectedMap[e.styleId].length === e.style.length) {
-    //       this.allChecked = true
-    //     } else {
+    //     // 遍历 如果当前项在  selectedMap 中存在  且 当前项在 selectedMap 中(以数组形式存在)的 length = 当前项的length
+    //     if (this.selectedMap[e.styleId]) {
+    //       num++
+    //     } else if (this.selectedMap[e.styleId].length !== e.style.length) {
     //       this.allChecked = false
+    //       this.$forceUpdate()
     //     }
     //   })
+    //   if (this.list.length === num) {
+    //     this.allChecked = true
+    //   } else {
+    //     this.allChecked = false
+    //   }
     // },
   },
 }

@@ -13,8 +13,7 @@
     <div class="flex px-2 pb-2 justify-end">
       <div class="flex text-sm">
         <span>单价：</span>
-        <!-- <u-text class="text-price" mode="price" :text="price"></u-text> -->
-        <span class="text-price">￥{{ price }}</span>
+        <vc-text :text="price" mode="price"></vc-text>
       </div>
     </div>
   </div>
