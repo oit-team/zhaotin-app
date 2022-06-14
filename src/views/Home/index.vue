@@ -72,6 +72,8 @@
       </div>
       <!--      <vc-load-more ref="loadMore" :promise="loadData" first-load></vc-load-more>-->
     </div>
+
+    <!-- 底部导航 -->
     <Tabbar />
   </div>
 </template>

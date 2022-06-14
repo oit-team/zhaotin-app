@@ -40,7 +40,7 @@ export default {
   },
 
   render(h) {
-    if (this.text) {
+    if (this.text !== undefined) {
       switch (this.mode) {
         case MODE.PRICE:
           return this.genPrice(h)

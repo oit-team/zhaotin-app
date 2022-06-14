@@ -7,6 +7,7 @@
       @click-left="$router.back()"
       @click-right="changeRight"
     />
+
     <div class="flex-1 flex flex-col space-y-2 p-2">
       <ShopItem v-for="item of list" :key="item.styleId" class="mb-2" :item="item" :price="getPrice(item)">
         <template #checkbox>
@@ -16,7 +17,7 @@
             label-disabled
             class="!w-5"
             :value="selectedMap[item.styleId] && selectedMap[item.styleId].length === item.style.length"
-            @input="checkFather(item ,item.styleId, $event)"
+            @input="changeSelectItem(item , $event)"
           ></van-checkbox>
         </template>
         <ShopStyleItem
@@ -32,12 +33,13 @@
               label-disabled
               class="!w-5"
               :value="selectedMap[item.styleId] && selectedMap[item.styleId].includes(style.id)"
-              @input="checkChild(item.styleId, style.id, $event)"
+              @input="changeSelectStyle(item, style.id, $event)"
             ></van-checkbox>
           </template>
         </ShopStyleItem>
       </ShopItem>
     </div>
+
     <div class="flex items-center p-2 h-12 bg-white sticky-bottom">
       <van-checkbox
         icon-size="16px"
@@ -52,7 +54,7 @@
           <span class="text-xs text-right">已选{{ priceData.styleNumber }}件</span>
           <span class="flex text-xs">
             <span>共计</span>
-            <vc-text :text="priceData.styleTotalPrice" mode="price"></vc-text>
+            <vc-text :text="priceData.styleTotalPrice || 0" mode="price"></vc-text>
           </span>
         </div>
         <van-button class="!h-8" type="primary" @click="submit()">结算</van-button>
