@@ -24,12 +24,20 @@ axiosInstance.interceptors.response.use((response) => {
   if (response.data.head?.status !== API_STATUS.OK) {
     return Promise.reject(new ApiError({
       response,
-      message: response.data.head?.msg,
+      message: response.data.head.msg,
       status: response.data.head.status,
     }))
   }
   return response
-}, function (error) {
+}, async (error) => {
+  console.log(error)
+  if (error.response.status === 403) {
+    // token失效自动刷新
+    await store.dispatch('updateUserData')
+    // 重新发起请求
+    return axiosInstance.request(error.config)
+  }
+
   return Promise.reject(new ApiError({ error }))
 })
 

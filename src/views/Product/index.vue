@@ -57,6 +57,12 @@ export default {
     filterCount: 0,
   }),
 
+  watch: {
+    category() {
+      this.loadData()
+    },
+  },
+
   mounted() {
     this.loadData()
     this.getStyleCategory()

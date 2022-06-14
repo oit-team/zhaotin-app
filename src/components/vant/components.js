@@ -25,4 +25,5 @@ export {
   List,
   Checkbox,
   Sticky,
+  Rate,
 } from 'vant'

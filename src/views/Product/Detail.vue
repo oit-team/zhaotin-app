@@ -1,0 +1,295 @@
+<template>
+  <div class="bg-gray">
+    <Search is-link back></Search>
+
+    <Swiper :data="data" />
+
+    <div class="p-3">
+      <div class="p-3 mb-2 bg-white rounded-lg">
+        <div class="mb-2">
+          <span class="font-bold">{{ data.styleName }}</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <div>
+            <div class="items-center mb-2">
+              <span class="text-sm text-secondary">款号：</span>
+              <span class="text-sm">{{ data.styleNo }}</span>
+            </div>
+            <div class="relative flex flex-row items-center">
+              <span class="text-sm text-secondary">推荐：</span>
+              <van-rate count="5" :value="data.recommendationLevel" size="12"></van-rate>
+              <div class="absolute inset-0"></div>
+            </div>
+          </div>
+          <div>
+            <vc-text mode="price" :text="data.tradePrice || 0"></vc-text>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-3 mb-2 bg-white rounded-lg flex flex-col">
+        <div class="flex-row" @click="openChoose(1)">
+          <span class="mr-3 text-sm text-secondary">规格</span>
+          <span class="flex-1 text-sm">{{ colorCount }}种颜色 · {{ sizeCount }} 种尺码 可选</span>
+          <vc-icon class="text-sm text-primary" name="icon-chevron-right"></vc-icon>
+        </div>
+        <div class="flex flex-row mt-4" @click="showProperty = true">
+          <span class="mr-3 text-sm text-secondary">属性</span>
+          <div class="flex flex-row flex-1 -ml-2">
+            <span class="px-2 text-sm">{{ data.styleFabric }}</span>
+            <span class="px-2 text-sm">{{ data.styleFlowerPattern }}</span>
+            <span class="px-2 text-sm">{{ data.styleCategory }}</span>
+          </div>
+          <vc-icon class="text-sm text-primary" name="icon-chevron-right"></vc-icon>
+        </div>
+        <div class="flex-row mt-4" @click="showProperty = true">
+          <span class="mr-3 text-sm text-secondary">标签</span>
+          <span class="flex-1 text-sm truncate">
+            {{ data.styleLabel && data.styleLabel.replace(/[,，]/g, ' ') }}
+          </span>
+          <vc-icon class="text-sm text-primary" name="icon-chevron-right"></vc-icon>
+        </div>
+      </div>
+
+      <div class="p-3 mb-2 bg-white rounded-lg" @click="showSellingPoint = true">
+        <div class="flex-row items-center mb-3 flex">
+          <span class="flex-1 font-bold text-sm leading-16px">商品卖点</span>
+          <vc-icon class="text-sm text-primary" name="chevron-right"></vc-icon>
+        </div>
+        <div>
+          <div
+            v-for="item of [
+              {key: 'sellingPointFabric', name: '面料'},
+              {key: 'designSellingPoint', name: '设计'},
+              {key: 'wearSellingPoint', name: '穿着'},
+            ]"
+            :key="item.key"
+            class="flex flex-row items-center mt-3"
+          >
+            <span class="mr-4 text-sm leading-16px text-secondary self-start">{{ item.name }}</span>
+            <span v-html="data[item.key]" class="flex-1 text-xs line-clamp-2 leading-16px"></span>
+          </div>
+        </div>
+      </div>
+
+      <div v-if="data._styleData && data._styleData.length" class="p-3 mb-2 bg-white rounded-lg">
+        <span class="flex-1 font-bold text-sm">商品属性</span>
+        <div
+          v-for="(item, index) of data._styleData"
+          :key="index"
+          class="flex flex-row items-center py-2 border-b border-line"
+        >
+          <span class="mr-6 text-sm w-120rpx text-secondary">{{ item.name }}</span>
+          <div
+            class="flex flex-row flex-1 justify-around py-1 text-center tags"
+          >
+            <span
+              v-for="opt of item.options"
+              :key="opt.option"
+              class="text-sm text-center rounded leading-24px w-1/3 mx-2"
+              :class="opt.status ? 'bg-primary text-white' : ''"
+            >
+              {{ opt.option }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div v-if="data._styleWashing && data._styleWashing.length" class="p-3 mb-2 bg-white rounded-lg">
+        <span class="pb-2 font-bold text-sm">洗涤说明</span>
+
+        <div class="grid grid-cols-4 gap-2">
+          <div
+            v-for="(item, index) of data._styleWashing"
+            :key="index"
+            class="flex flex-col items-center"
+          >
+            <vc-img :src="item.resUrl" height="50px" width="50px"></vc-img>
+            <span class="text-xs text-center">{{ item.name }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex items-center px-2 bg-white h-15 sticky-bottom border-t border-line" v-if="false">
+      <div class="flex space-x-2 text-center whitespace-nowrap mr-2">
+        <div @click="addStyleCollection()">
+          <vc-icon name="icon-shoucang" size="16px"></vc-icon>
+          <div class="-mt-1 text-xs transform scale-65">收藏</div>
+        </div>
+        <div @click="callCustomerService()">
+          <vc-icon name="icon-kefu" size="16px"></vc-icon>
+          <div class="-mt-1 text-xs transform scale-65">客服</div>
+        </div>
+      </div>
+      <div class="flex flex-1 space-x-2">
+        <van-button
+          class="!text-white"
+          block
+          color="#FF9326"
+          text="加入购物车"
+          round
+          @click="openChoose(0)"
+        ></van-button>
+        <van-button
+          class="!bg-price !text-white"
+          block
+          text="立即订购"
+          round
+          @click="openChoose(1)"
+        ></van-button>
+      </div>
+    </div>
+
+    <ProductChoose ref="productChoose" :data="data" @confirm="confirm"></ProductChoose>
+  </div>
+</template>
+
+<script>
+import { addStyleCollection, getStyleById, insertShoppingCart } from '@/api/product'
+import theme from '@/theme'
+import { keyBy } from 'lodash'
+import Search from '@/components/business/Product/Search'
+import Swiper from '@/components/business/Product/Swiper'
+import ProductChoose from '@/components/business/Product/ProductChoose'
+
+const MODE = {
+  SHOPPING_CART: 0,
+  ORDER: 1,
+}
+
+export default {
+  name: 'ProductDetail',
+
+  components: {
+    Search,
+    Swiper,
+    ProductChoose,
+  },
+
+  data() {
+    return {
+      theme,
+      keyword: '',
+      data: {},
+      // 订购方式
+      mode: 0,
+      showShopping: false,
+      showProperty: false,
+      showSellingPoint: false,
+      sellingPointIndex: 0,
+    }
+  },
+
+  computed: {
+    styleColorMap() {
+      return keyBy(this.data?.styleColorList, 'id')
+    },
+    colorCount() {
+      return this.data?.styleColorList?.length ?? 0
+    },
+    sizeCount() {
+      return this.data?.styleColorList?.reduce((prev, curr) => prev + curr.styleSize.length, 0)
+    },
+  },
+
+  created() {
+    this.styleId = this.$route.params.styleId
+    this.getStyleInfo()
+  },
+
+  methods: {
+    async getStyleInfo() {
+      try {
+        const res = await this.$promiseLoading(getStyleById(this.styleId))
+        const data = res?.body.resultList
+        data._styleData = data.styleData ? JSON.parse(data.styleData) : []
+        data._styleWashing = (data.styleWashing ? JSON.parse(data.styleWashing) : []).filter(item => item.status)
+        data._title = data.titleMap && Object
+          .keys(data.titleMap)
+          .sort((prev, next) => (+prev.substring(3)) - (+next.substring(3)))
+          .map(key => data.titleMap[key])
+        this.data = res?.body.resultList
+      } catch (e) {
+        console.error(e)
+        this.$router.back()
+        return Promise.reject(e)
+      }
+    },
+    openChoose(mode) {
+      this.mode = mode
+      this.$refs.productChoose.open()
+    },
+    confirm(select) {
+      const styleList = []
+      Object
+        .entries(select)
+        .forEach(([styleId, sizeInfo]) => {
+          const color = this.styleColorMap[styleId]
+          const size = Object
+            .entries(sizeInfo)
+            .filter(([, num]) => num > 0)
+            .map(([sizeName, sizeNumber]) => ({
+              sizeName,
+              sizeNumber,
+            }))
+          if (size.length) {
+            let styleItem = {
+              styleColor: color.id,
+              styleId: this.data.styleId,
+              styleNo: this.data.styleNo,
+              styleSize: size,
+            }
+
+            if (this.mode === MODE.ORDER) {
+              styleItem = {
+                ...color,
+                ...styleItem,
+                styleColorName: color.styleColor,
+                imgUrl: color?.styleImg[0]?.resUrl,
+              }
+            }
+
+            styleList.push(styleItem)
+          }
+        })
+
+      if (!styleList.length) return this.$toast('请选择下单数量')
+
+      if (this.mode === MODE.SHOPPING_CART) { // 添加到购物车
+        this.insertShoppingCart(styleList)
+      } else if (this.mode === MODE.ORDER) { // 提交订单
+        const order = [
+          {
+            style: styleList,
+            styleId: this.data.styleId,
+            styleName: this.data.styleName,
+            styleNo: this.data.styleNo,
+          },
+        ]
+        // uni.$once(SUBMIT_ORDER_EVENT, this.$refs.productChoose.reset)
+        this.$store.commit('shoppingCart/setOrderList', order)
+        // uni.navigateTo({ url: '/pages/order/submit-order' })
+      }
+    },
+    async insertShoppingCart(styleList) {
+      await this.$promiseLoading(insertShoppingCart({ styleList }))
+      await this.$store.dispatch('shoppingCart/getShoppingCart')
+      this.$toast('添加成功')
+    },
+    genTabs(tabs) {
+      return tabs.map(name => ({ name }))
+    },
+    async addStyleCollection() {
+      await this.$promiseLoading(addStyleCollection({
+        styleId: this.data.styleId,
+      }))
+      this.$toast('收藏成功')
+    },
+  },
+}
+</script>
+
+<style scoped>
+
+</style>

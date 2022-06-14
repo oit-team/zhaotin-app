@@ -34,6 +34,7 @@ specifiers:
   vant: ^2.12.47
   vue: ^2.6.14
   vue-cli-plugin-windicss: ^1.1.4
+  vue-plyr: ^7.0.0
   vue-router: ^3.5.1
   vue-template-compiler: ^2.6.14
   vuex: ^3.6.2
@@ -49,6 +50,7 @@ dependencies:
   lodash: 4497220af3.zicp.vip/lodash/4.17.21
   vant: 4497220af3.zicp.vip/vant/2.12.47_vue@2.6.14
   vue: 4497220af3.zicp.vip/vue/2.6.14
+  vue-plyr: 4497220af3.zicp.vip/vue-plyr/7.0.0
   vue-router: 4497220af3.zicp.vip/vue-router/3.5.4
   vuex: 4497220af3.zicp.vip/vuex/3.6.2_vue@2.6.14
 
@@ -4405,6 +4407,12 @@ packages:
       css-tree: 4497220af3.zicp.vip/css-tree/1.1.3
     dev: true
 
+  4497220af3.zicp.vip/custom-event-polyfill/1.0.7:
+    resolution: {integrity: sha512-TDDkd5DkaZxZFM8p+1I3yAlvM3rSr1wbrOliG4yJiwinMZN8z/iGL7BTlDkrJcYTmgUSb4ywVCc3ZaUtOtC76w==, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/custom-event-polyfill/-/custom-event-polyfill-1.0.7.tgz}
+    name: custom-event-polyfill
+    version: 1.0.7
+    dev: false
+
   4497220af3.zicp.vip/de-indent/1.0.2:
     resolution: {integrity: sha1-sgOOhG3DO6pXlhKNCAS0VbjB4h0=, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/de-indent/-/de-indent-1.0.2.tgz}
     name: de-indent
@@ -7048,6 +7056,12 @@ packages:
       json5: 4497220af3.zicp.vip/json5/2.2.1
     dev: true
 
+  4497220af3.zicp.vip/loadjs/4.2.0:
+    resolution: {integrity: sha512-AgQGZisAlTPbTEzrHPb6q+NYBMD+DP9uvGSIjSUM5uG+0jG15cb8axWpxuOIqrmQjn6scaaH8JwloiP27b2KXA==, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/loadjs/-/loadjs-4.2.0.tgz}
+    name: loadjs
+    version: 4.2.0
+    dev: false
+
   4497220af3.zicp.vip/locate-path/2.0.0:
     resolution: {integrity: sha1-K1aLJl7slExtnA3pw9u7ygNUzY4=, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/locate-path/-/locate-path-2.0.0.tgz}
     name: locate-path
@@ -8732,6 +8746,12 @@ packages:
     engines: {node: '>= 0.6'}
     dev: true
 
+  4497220af3.zicp.vip/rangetouch/2.0.1:
+    resolution: {integrity: sha512-sln+pNSc8NGaHoLzwNBssFSf/rSYkqeBXzX1AtJlkJiUaVSJSbRAWJk+4omsXkN+EJalzkZhWQ3th1m0FpR5xA==, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/rangetouch/-/rangetouch-2.0.1.tgz}
+    name: rangetouch
+    version: 2.0.1
+    dev: false
+
   4497220af3.zicp.vip/read-pkg-up/7.0.1:
     resolution: {integrity: sha512-zK0TB7Xd6JpCLmlLmufqykGE+/TlOePD6qKClNW7hHDKFh/J7/7gCWGR7joEQEW1bKq3a3yUZSObOoWLFQ4ohg==, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/read-pkg-up/-/read-pkg-up-7.0.1.tgz}
     name: read-pkg-up
@@ -10205,6 +10225,12 @@ packages:
     deprecated: Please see https://github.com/lydell/urix#deprecated
     dev: true
 
+  4497220af3.zicp.vip/url-polyfill/1.1.12:
+    resolution: {integrity: sha512-mYFmBHCapZjtcNHW0MDq9967t+z4Dmg5CJ0KqysK3+ZbyoNOWQHksGCTWwDhxGXllkWlOc10Xfko6v4a3ucM6A==, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/url-polyfill/-/url-polyfill-1.1.12.tgz}
+    name: url-polyfill
+    version: 1.1.12
+    dev: false
+
   4497220af3.zicp.vip/url-slug/2.0.0:
     resolution: {integrity: sha1-p4nVrtSZXA2VrzM3etHVxo1NcCc=, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/url-slug/-/url-slug-2.0.0.tgz}
     name: url-slug
@@ -10421,6 +10447,15 @@ packages:
       loader-utils: 4497220af3.zicp.vip/loader-utils/2.0.2
       webpack: 4497220af3.zicp.vip/webpack/5.73.0
     dev: true
+
+  4497220af3.zicp.vip/vue-plyr/7.0.0:
+    resolution: {integrity: sha512-NvbO/ZzV1IxlBQQbQlon5Sk8hKuGAj3k4k0XVdi7gM4oSqu8mZMhJ3WM3FfAtNfV790jbLnb8P3dHYqaBqIv6g==, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/vue-plyr/-/vue-plyr-7.0.0.tgz}
+    name: vue-plyr
+    version: 7.0.0
+    dependencies:
+      plyr: github.com/sampotts/plyr/d434c9af16e641400aaee93188594208d88f2658
+      vue: 4497220af3.zicp.vip/vue/2.6.14
+    dev: false
 
   4497220af3.zicp.vip/vue-router/3.5.4:
     resolution: {integrity: sha512-x+/DLAJZv2mcQ7glH2oV9ze8uPwcI+H+GgTgTmb5I55bCgY3+vXWIsqbYUzbBSZnwFHEJku4eoaH/x98veyymQ==, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/vue-router/-/vue-router-3.5.4.tgz}
@@ -10900,3 +10935,15 @@ packages:
       normalize-path: 4497220af3.zicp.vip/normalize-path/1.0.0
       strip-indent: 4497220af3.zicp.vip/strip-indent/2.0.0
     dev: true
+
+  github.com/sampotts/plyr/d434c9af16e641400aaee93188594208d88f2658:
+    resolution: {tarball: https://codeload.github.com/sampotts/plyr/tar.gz/d434c9af16e641400aaee93188594208d88f2658}
+    name: plyr
+    version: 3.7.0
+    dependencies:
+      core-js: 4497220af3.zicp.vip/core-js/3.22.8
+      custom-event-polyfill: 4497220af3.zicp.vip/custom-event-polyfill/1.0.7
+      loadjs: 4497220af3.zicp.vip/loadjs/4.2.0
+      rangetouch: 4497220af3.zicp.vip/rangetouch/2.0.1
+      url-polyfill: 4497220af3.zicp.vip/url-polyfill/1.1.12
+    dev: false

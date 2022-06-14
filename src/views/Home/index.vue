@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-gray flex flex-col">
     <Search is-link />
 
     <van-swipe class="aspect-[16/6]" :autoplay="5000" indicator-color="white">
@@ -53,16 +53,16 @@
       />
     </div>
 
-    <div class="overflow-visible flex-1 bg-white rounded-t-lg">
-      <div class="text-center px-100px">
-        <van-divider :hairline="false" :style="{ height: '3', color: '#333333', borderColor: '#c9a76e', padding: '0' }">{{ seasonStyle }}</van-divider>
+    <div class="flex-1 bg-white rounded-t-lg py-2">
+      <div class="text-center px-100px mb-2">
+        <van-divider :hairline="false" class="border-primary text-primary">{{ seasonStyle }}</van-divider>
       </div>
       <div class="grid grid-cols-3 gap-3 px-4 mb-3">
         <div
           v-for="item of productList"
           :key="item.styleId"
           class="flex overflow-hidden flex-col border border-line rounded-lg"
-          @click="$Router.to('productDetailNvue', { styleId: item.styleId })"
+          @click="$router.to('ProductDetail', { styleId: item.styleId })"
         >
           <vc-img
             class="rounded overflow-hidden aspect-[4/5]"
@@ -115,14 +115,14 @@ export default {
         },
       },
       {
-        name: '购物车',
+        name: '进货车',
         icon: 'ffc9161564acf3b3f6296bd305a2f922.png',
-        to: 'shoppingCartList',
+        to: 'ShoppingCartList',
       },
       {
         name: '商品视频',
         icon: '235a4909826ec42730c1b1c784d1ca84.png',
-        to: 'searchProduct',
+        to: 'ProductSearch',
         params: {
           video: true,
         },

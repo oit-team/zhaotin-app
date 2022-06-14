@@ -6,6 +6,18 @@
   -webkit-appearance: none;
 }
 
+* {
+  user-select: none;
+}
+
+img {
+  -webkit-touch-callout: none;
+}
+
 .van-image {
   display: flex;
+}
+
+.van-divider {
+  margin: 0;
 }
