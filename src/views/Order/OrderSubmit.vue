@@ -166,7 +166,6 @@ export default {
       this.getStylePrice(),
       this.dictitemInfoAllMethod(),
     ])
-    console.log(this.list)
   },
 
   methods: {

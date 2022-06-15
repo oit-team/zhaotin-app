@@ -7,12 +7,12 @@
     />
 
     <div class="p-2 flex-1 overflow-auto space-y-2">
-      <van-swipe-cell class="rounded-lg">
-        <div
-          v-for="item of addressList"
-          :key="item.id"
-          class="bg-white mb-2"
-        >
+      <div
+        v-for="item of addressList"
+        :key="item.id"
+        class="bg-white mb-2"
+      >
+        <van-swipe-cell class="rounded-lg">
           <div
             class="flex items-center px-2 py-1"
             @click="select(item)"
@@ -39,11 +39,11 @@
               <vc-icon class="text-sm text-secondary" name="icon-pen-line" @click.stop="updateAddress(item)"></vc-icon>
             </div>
           </div>
-        </div>
-        <template #right>
-          <van-button class="h-full" square type="danger" @click="remove(item)" text="删除" />
-        </template>
-      </van-swipe-cell>
+          <template #right>
+            <van-button class="h-full" square type="danger" @click="remove(item)" text="删除" />
+          </template>
+        </van-swipe-cell>
+      </div>
     </div>
 
     <div class="p-2 bg-white">
@@ -75,11 +75,14 @@ export default {
     this.selectMode = this.$route.params.selectMode
   },
 
+  activated() {
+    this.getReceiving()
+  },
+
   methods: {
     async getReceiving() {
       const res = await getReceiving()
       this.addressList = res.body.resultList
-      console.log(this.addressList)
     },
     select(item) {
       if (!this.selectMode) return

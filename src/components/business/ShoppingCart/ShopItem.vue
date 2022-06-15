@@ -1,13 +1,13 @@
 <template>
   <div class="bg-white rounded-lg">
     <div class="flex justify-between p-2 px-4 items-center">
-      <div class="flex">
+      <div class="flex text-sm">
         <slot name="checkbox"></slot>
         <p class=" goodsName">{{ item.styleName }}</p>
       </div>
       <div class="text-xs text-secondary">{{ item.styleNo }}</div>
     </div>
-    <div class="px-2 pb-2 space-y-2">
+    <div class="px-2 pb-2 px-4 space-y-2">
       <slot />
     </div>
     <div class="flex px-2 pb-2 justify-end">

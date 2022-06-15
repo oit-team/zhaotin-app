@@ -15,7 +15,7 @@
         ></vc-img>
       </div>
       <div class="flex items-center rounded-lg bg-line flex-1 px-2 self-stretch" @click="collapse = !collapse">
-        <div class="flex-1">
+        <div class="flex-1 text-xs">
           <span>{{ item.styleColorName || item.styleColor }}</span>
         </div>
         <div class="flex flex-col items-end">
@@ -42,7 +42,7 @@
             :long-press="false"
             @change="changeNumber($event, size)"
           />
-          <span v-else class="times-symbol text-xs">{{ size.sizeNumber }}</span>
+          <span v-else class="times-symbol text-xs">×{{ size.sizeNumber }}</span>
         </div>
       </div>
     </div>
@@ -65,7 +65,6 @@ export default {
 
   methods: {
     changeNumber(value, size) {
-      console.log(value)
       this.$emit('change-number', {
         value,
         size,
