@@ -81,10 +81,11 @@ export default {
   }),
 
   created() {
-    const { id } = this.$route.query
+    const { id } = this.$route.params
     if (id) {
       this.title = '修改地址'
       this.isEdit = true
+      this.loadData(id)
     }
   },
 
@@ -103,6 +104,7 @@ export default {
     async loadData(id) {
       const res = await this.$promiseLoading(getReceivingById(id))
       const data = res.body.resultList
+      console.log(data)
       Object.keys(this.form).forEach(dataKey => {
         this.form[dataKey] = data[dataKey]
       })

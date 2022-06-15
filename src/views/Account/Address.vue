@@ -36,7 +36,8 @@
               </div>
             </div>
             <div>
-              <vc-icon class="text-sm text-secondary" name="icon-pen-line" @click.stop="updateAddress(item)"></vc-icon>
+              <!-- <vc-icon class="text-sm text-secondary" name="icon-pen-line" @click.stop="updateAddress(item)"></vc-icon> -->
+              <van-icon name="edit" size="20" @click.stop="updateAddress(item)" />
             </div>
           </div>
           <template #right>
@@ -90,9 +91,9 @@ export default {
       this.$router.back()
     },
     updateAddress(item) {
-      this.$router.resolve({
+      this.$router.push({
         name: 'AddressUpdate',
-        query: {
+        params: {
           id: item.id,
         },
       })
