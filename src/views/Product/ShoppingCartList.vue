@@ -120,8 +120,6 @@ export default {
   },
   created() {
     this.loadData()
-    // this.loadShoppingCart()
-    console.log(this.$store.state.shoppingCart)
   },
   methods: {
     async loadData() {
@@ -194,7 +192,6 @@ export default {
           .catch(() => {
             // on cancel
           })
-        console.log(123)
       } else {
         update()
       }

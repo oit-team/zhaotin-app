@@ -110,7 +110,7 @@ export default {
       this.defaultAddress = !!data.defaultNum
     },
     onFailed(errorInfo) {
-      console.log('failed', errorInfo)
+      this.$message(errorInfo)
     },
   },
 }
