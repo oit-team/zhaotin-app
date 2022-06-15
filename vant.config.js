@@ -10,4 +10,10 @@ module.exports = {
   'tabbar-item-active-color': colors.primary,
 
   'rate-icon-full-color': colors.primary,
+
+  'popup-background-color': 'initial',
+
+  'tabs-default-color': colors.primary,
+  'tabs-line-height': '30px',
+  'tabs-bottom-bar-width': 'var(--vc-tab-line-width)',
 }

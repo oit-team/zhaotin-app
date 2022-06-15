@@ -41,15 +41,18 @@
     </div>
 
     <div>
-      <van-popup round v-model="showReasonPopup" position="bottom" closeable @close="showReasonPopup = false">
-        <div class="bg-white rounded-t-lg px-3 pt-8 min-h-300px">
+      <van-popup v-model="showReasonPopup" round position="bottom">
+        <div class="bg-white rounded-t-lg px-6 min-h-300px text-sm">
+          <vc-tabs class="py-2">
+            <van-tab title="下单事由"></van-tab>
+          </vc-tabs>
           <div class="flex">
             <span>类型：</span>
             <span>{{ data.orderReason }}</span>
           </div>
           <div class="flex">
             <span>备注：</span>
-            <span class="break-all flex-1">{{ data.orderNote }}</span>
+            <span class="break-all flex-1">{{ data.orderNote || '无' }}</span>
           </div>
         </div>
       </van-popup>
@@ -95,6 +98,6 @@ export default {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 
 </style>

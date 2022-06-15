@@ -48,7 +48,7 @@
               class="rounded-lg overflow-hidden w-[50px] h-[50px] border border-line flex-shrink-0 relative"
             >
               <vc-img :src="item.styleImg[0].resUrl" size="100%"></vc-img>
-              <div class="absolute bottom-0 text-center w-full text-white leading-0">
+              <div class="absolute bottom-0 text-center w-full text-white leading-0 bg-black bg-opacity-60">
                 <span class="text-xs transform scale-80 inline-block">{{ item.styleColor }}</span>
               </div>
             </vc-item>

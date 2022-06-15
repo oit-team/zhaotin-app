@@ -1,11 +1,11 @@
 <template>
-  <div class="sticky-top z-50 bg-white flex items-center px-3 py-2">
+  <div class="sticky-top z-50 bg-white flex items-center px-3 py-2 flex-shrink-0">
     <div>
       <vc-icon
         v-if="back"
         class="p-1 mr-2 text-primary text-lg"
         name="chevron-left"
-        @click="$router.back()"
+        @click.native="$router.back()"
       />
     </div>
     <van-search

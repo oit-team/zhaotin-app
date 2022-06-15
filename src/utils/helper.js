@@ -65,7 +65,7 @@ export function loadMoreData(list, newList, pageParams) {
 export async function callCustomerService() {
   await Dialog.confirm({
     title: '提示',
-    message: '是否要拨打客服电话',
+    message: '连线客服为您一对一服务',
   })
 
   window.open('tel:13345731912')

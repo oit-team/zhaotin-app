@@ -2,6 +2,14 @@ import { post } from './index'
 import API_SERVICE from './enum/API_SERVICE'
 
 /**
+ * 新增订单
+ * @param params
+ */
+export function addOrder(params) {
+  return post[API_SERVICE.ORDER]('/orderInfo/addOrder', params)
+}
+
+/**
  * 查询订单
  * @param params
  */

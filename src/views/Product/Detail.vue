@@ -28,26 +28,26 @@
       </div>
 
       <div class="p-3 mb-2 bg-white rounded-lg flex flex-col">
-        <div class="flex-row" @click="openChoose(1)">
+        <div class="flex" @click="openChoose(1)">
           <span class="mr-3 text-sm text-secondary">规格</span>
           <span class="flex-1 text-sm">{{ colorCount }}种颜色 · {{ sizeCount }} 种尺码 可选</span>
-          <vc-icon class="text-sm text-primary" name="icon-chevron-right"></vc-icon>
+          <vc-icon class="text-sm text-primary" name="chevron-right"></vc-icon>
         </div>
-        <div class="flex flex-row mt-4" @click="showProperty = true">
+        <div class="flex mt-4" @click="showProperty = true">
           <span class="mr-3 text-sm text-secondary">属性</span>
           <div class="flex flex-row flex-1 -ml-2">
             <span class="px-2 text-sm">{{ data.styleFabric }}</span>
             <span class="px-2 text-sm">{{ data.styleFlowerPattern }}</span>
             <span class="px-2 text-sm">{{ data.styleCategory }}</span>
           </div>
-          <vc-icon class="text-sm text-primary" name="icon-chevron-right"></vc-icon>
+          <vc-icon class="text-sm text-primary" name="chevron-right"></vc-icon>
         </div>
-        <div class="flex-row mt-4" @click="showProperty = true">
+        <div class="flex mt-4" @click="showProperty = true">
           <span class="mr-3 text-sm text-secondary">标签</span>
           <span class="flex-1 text-sm truncate">
             {{ data.styleLabel && data.styleLabel.replace(/[,，]/g, ' ') }}
           </span>
-          <vc-icon class="text-sm text-primary" name="icon-chevron-right"></vc-icon>
+          <vc-icon class="text-sm text-primary" name="chevron-right"></vc-icon>
         </div>
       </div>
 
@@ -95,6 +95,42 @@
         </div>
       </div>
 
+      <div v-if="data._title && data._title.length" class="p-3 mb-2 bg-white rounded-lg">
+        <div class="font-bold mb-3 text-sm">尺码信息</div>
+
+        <div class="overflow-x-auto">
+          <table class="text-sm text-center whitespace-nowrap">
+            <thead>
+              <tr>
+                <th class="font-normal pr-6 sticky left-0 bg-white text-secondary">尺码</th>
+                <th
+                  v-for="item of data._title"
+                  :key="item"
+                  class="font-normal px-6"
+                >
+                  {{ item }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="size of data.styleSizeList"
+                :key="size.sizeName"
+                class="h-8"
+              >
+                <td class="pr-6 sticky left-0 bg-white text-secondary">{{ size.sizeName }}</td>
+                <td
+                  v-for="(item, index) of size.sizeConfig"
+                  :key="index"
+                >
+                  {{ item }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       <div v-if="data._styleWashing && data._styleWashing.length" class="p-3 mb-2 bg-white rounded-lg">
         <span class="pb-2 font-bold text-sm">洗涤说明</span>
 
@@ -111,7 +147,7 @@
       </div>
     </div>
 
-    <div class="flex items-center px-2 bg-white h-15 sticky-bottom border-t border-line" v-if="false">
+    <div v-if="false" class="flex items-center px-2 bg-white h-15 sticky-bottom border-t border-line">
       <div class="flex space-x-2 text-center whitespace-nowrap mr-2">
         <div @click="addStyleCollection()">
           <vc-icon name="icon-shoucang" size="16px"></vc-icon>
@@ -142,6 +178,43 @@
     </div>
 
     <ProductChoose ref="productChoose" :data="data" @confirm="confirm"></ProductChoose>
+
+    <van-popup v-model="showProperty" position="bottom">
+      <div class="bg-white h-[50vh] overflow-auto rounded-t-xl">
+        <vc-tabs class="my-2">
+          <van-tab title="基本信息"></van-tab>
+        </vc-tabs>
+        <div class="text-sm py-2 px-6 space-y-2">
+          <div>
+            <span class="mr-3 text-secondary">材质</span>
+            <span>{{ data.styleFabric }}</span>
+          </div>
+          <div>
+            <span class="mr-3 text-secondary">廓形</span>
+            <span>{{ data.styleFlowerPattern }}</span>
+          </div>
+          <div>
+            <span class="mr-3 text-secondary">类别</span>
+            <span>{{ data.styleCategory }}</span>
+          </div>
+          <div class="flex">
+            <span class="mr-3 text-secondary">服务</span>
+            <span v-html="data.service" class="flex-1"></span>
+          </div>
+        </div>
+      </div>
+    </van-popup>
+
+    <van-popup v-model="showSellingPoint" position="bottom">
+      <div class="bg-white h-[50vh] overflow-auto rounded-t-xl">
+        <vc-tabs v-model="sellingPointIndex" class="my-2">
+          <van-tab v-for="tab of ['面料卖点', '设计卖点', '穿着卖点']" :key="tab" :title="tab"></van-tab>
+        </vc-tabs>
+        <div class="text-sm leading-loose py-2 px-6">
+          <div v-html="data[['sellingPointFabric', 'designSellingPoint', 'wearSellingPoint'][sellingPointIndex]]"></div>
+        </div>
+      </div>
+    </van-popup>
   </div>
 </template>
 

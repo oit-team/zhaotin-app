@@ -43,7 +43,7 @@
                 </div>
                 <div class="flex items-center">
                   <!--            <span class="mr-2 text-xs">&#215;3</span>-->
-                  <van-badge class="times-symbol mr-4" color="white">
+                  <van-badge class="times-symbol mr-4 text-black" color="white">
                     <template #content>
                       <span class="black">×{{ item.styleNumber }}</span>
                     </template>

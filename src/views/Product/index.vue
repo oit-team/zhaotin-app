@@ -3,10 +3,10 @@
     <div class="sticky-top z-50 bg-white">
       <Search is-link></Search>
 
-      <div class="flex">
+      <div class="flex items-center px-3">
         <vc-item-group
           v-model="category"
-          class="flex flex-1 overflow-x-auto space-x-2 p-2"
+          class="flex flex-1 overflow-x-auto space-x-2 py-2"
           active-class="!bg-black text-primary"
           mandatory
         >
@@ -23,10 +23,17 @@
             <span class="text-xs transform scale-65 self-end">({{ item.countNum }})</span>
           </vc-item>
         </vc-item-group>
+
+        <div class="px-3">
+          <van-badge :content="filterCount || ''" @click.native="() => $refs.filterPanel.toggle()">
+            <vc-icon name="filter"></vc-icon>
+          </van-badge>
+        </div>
       </div>
     </div>
 
-    <div class="flex-1 relative bg-gray">
+    <div class="flex-1 relative bg-gray overflow-auto">
+      <FilterPanel ref="filterPanel" @confirm="onFilter" />
       <product-list :list="productList"></product-list>
     </div>
 
@@ -37,6 +44,7 @@
 <script>
 import Search from '@/components/business/Product/Search'
 import ProductList from '@/components/business/Product/ProductList'
+import FilterPanel from '@/components/business/Product/FilterPanel'
 import Tabbar from '@/components/business/Tabbar'
 import { getStyleCategory, getStyleList } from '@/api/product'
 
@@ -46,6 +54,7 @@ export default {
   components: {
     Search,
     ProductList,
+    FilterPanel,
     Tabbar,
   },
 
@@ -70,9 +79,17 @@ export default {
 
   activated() {
     const { params } = this.$route
-    if (params.category) {
-      this.category = params.category
+    if (params) {
+      this.$refs.filterPanel.setFilter(params)
+
+      if (params.category) {
+        this.category = params.category
+      }
     }
+  },
+
+  deactivated() {
+    this.$refs.filterPanel?.close()
   },
 
   methods: {
@@ -94,6 +111,12 @@ export default {
     async getStyleCategory() {
       const res = await getStyleCategory()
       this.categoryList = res.body.styleCategory
+    },
+    onFilter({ params, count }) {
+      this.filterForm = params
+      this.filterCount = count
+      this.loadData()
+      // this.$refs.loadMore.reset().load()
     },
   },
 }

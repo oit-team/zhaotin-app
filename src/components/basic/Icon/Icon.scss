@@ -4,27 +4,26 @@
   align-items: center;
   justify-content: center;
   box-sizing: initial;
-  width: 1em;
-  height: 1em;
-
-  &::after {
-    content: "";
-    display: list-item;
-    opacity: 0;
-  }
 }
 
 .vc-icon__wrap {
   position: relative;
   width: 100%;
   height: 100%;
+
+  &::after {
+    content: "";
+    display: list-item;
+    opacity: 0;
+    width: 1em;
+  }
 }
 
 .vc-icon__svg {
   position: absolute;
   top: 50%;
-  width: 100%;
-  height: 100%;
+  width: 1em;
+  height: 1em;
   transform: translateY(-50%);
   fill: currentColor;
 }

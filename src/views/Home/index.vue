@@ -2,77 +2,79 @@
   <div class="bg-gray flex flex-col">
     <Search is-link />
 
-    <div>
-      <van-swipe class="aspect-[16/6]" :autoplay="5000" indicator-color="white">
-        <van-swipe-item v-for="(item, index) of carousel" :key="index">
-          <vc-img :src="item" size="100%" />
-        </van-swipe-item>
-      </van-swipe>
-    </div>
+    <div class="flex-1 overflow-auto">
+      <div>
+        <van-swipe class="aspect-[16/6]" :autoplay="5000" indicator-color="white">
+          <van-swipe-item v-for="(item, index) of carousel" :key="index">
+            <vc-img :src="item" size="100%" />
+          </van-swipe-item>
+        </van-swipe>
+      </div>
 
-    <div class="bg-white">
-      <div class="grid grid-cols-5 gap-y-2 px-6 pt-4 pb-4 bg-gray rounded-b-[40px]">
+      <div class="bg-white">
+        <div class="grid grid-cols-5 gap-y-2 px-6 pt-4 pb-4 bg-gray rounded-b-[40px]">
+          <div
+            v-for="(item, index) of fastNav"
+            :key="index"
+            class="flex flex-col items-center mb-2"
+            @click="fastNavClick(item)"
+          >
+            <vc-img class="rounded" :src="`img/home/${item.icon}`" width="40" height="40" />
+            <span class="mt-1 text-xs">{{ item.name }}</span>
+          </div>
+          <div
+            v-for="(item) of styleTypeList"
+            :key="item.dictitemCode"
+            class="flex flex-col items-center"
+            @click="$router.to('Product', {styleMajor: item.dicttimeDisplayName})"
+          >
+            <vc-img class="rounded-circle overflow-hidden bg-white" :src="item.imgUrl" size="40" />
+            <span class="mt-1 text-xs">{{ item.dicttimeDisplayName }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!--类别-->
+      <div class="flex py-4 px-6 bg-white rounded overflow-auto">
         <div
-          v-for="(item, index) of fastNav"
+          v-for="(item, index) of styleCategoryList"
           :key="index"
-          class="flex flex-col items-center mb-2"
-          @click="fastNavClick(item)"
+          class="flex flex-col justify-center items-center min-w-[20%]"
+          @click="$router.to('Product', {category: item.categoryName})"
         >
-          <vc-img class="rounded" :src="`img/home/${item.icon}`" width="40" height="40" />
-          <span class="mt-1 text-xs">{{ item.name }}</span>
-        </div>
-        <div
-          v-for="(item) of styleTypeList"
-          :key="item.dictitemCode"
-          class="flex flex-col items-center"
-          @click="$router.to('Product', {styleMajor: item.dicttimeDisplayName})"
-        >
-          <vc-img class="rounded-circle overflow-hidden bg-white" :src="item.imgUrl" size="40" />
-          <span class="mt-1 text-xs">{{ item.dicttimeDisplayName }}</span>
+          <vc-img class="rounded-circle bg-[#f6f6f6] overflow-hidden mb-2" :src="item.imgUrl" size="40" />
+          <div class="text-xs truncate">{{ item.categoryName }}</div>
         </div>
       </div>
-    </div>
 
-    <!--类别-->
-    <div class="flex py-4 px-6 bg-white rounded overflow-auto">
-      <div
-        v-for="(item, index) of styleCategoryList"
-        :key="index"
-        class="flex flex-col justify-center items-center min-w-[20%]"
-        @click="$router.to('Product', {category: item.categoryName})"
-      >
-        <vc-img class="rounded-circle bg-[#f6f6f6] overflow-hidden mb-2" :src="item.imgUrl" size="40" />
-        <div class="text-xs truncate">{{ item.categoryName }}</div>
+      <div v-if="notice[0]" class="py-2">
+        <van-notice-bar
+          left-icon="volume-o"
+          :text="notice[0]"
+          background="#ffffff"
+          color="#9B9B9B"
+        />
       </div>
-    </div>
 
-    <div v-if="notice[0]" class="py-2">
-      <van-notice-bar
-        left-icon="volume-o"
-        :text="notice[0]"
-        background="#ffffff"
-        color="#9B9B9B"
-      />
-    </div>
-
-    <div class="flex-1 bg-white rounded-t-lg py-2">
-      <div class="text-center px-100px mb-2">
-        <van-divider :hairline="false" class="border-primary text-primary">{{ seasonStyle }}</van-divider>
-      </div>
-      <div class="grid grid-cols-3 gap-3 px-4 mb-3">
-        <div
-          v-for="item of productList"
-          :key="item.styleId"
-          class="flex overflow-hidden flex-col border border-line rounded-lg"
-          @click="$router.to('ProductDetail', { styleId: item.styleId })"
-        >
-          <vc-img
-            class="rounded overflow-hidden aspect-[4/5]"
-            :src="item.resUrl"
-          ></vc-img>
+      <div class="flex-1 bg-white rounded-t-lg py-2">
+        <div class="text-center px-100px mb-2">
+          <van-divider :hairline="false" class="border-primary text-primary">{{ seasonStyle }}</van-divider>
         </div>
+        <div class="grid grid-cols-3 gap-3 px-4 mb-3">
+          <div
+            v-for="item of productList"
+            :key="item.styleId"
+            class="flex overflow-hidden flex-col border border-line rounded-lg"
+            @click="$router.to('ProductDetail', { styleId: item.styleId })"
+          >
+            <vc-img
+              class="rounded overflow-hidden aspect-[4/5]"
+              :src="item.resUrl"
+            ></vc-img>
+          </div>
+        </div>
+        <!--      <vc-load-more ref="loadMore" :promise="loadData" first-load></vc-load-more>-->
       </div>
-      <!--      <vc-load-more ref="loadMore" :promise="loadData" first-load></vc-load-more>-->
     </div>
 
     <!-- 底部导航 -->
