@@ -26,7 +26,7 @@ export function getOrderById(orderId) {
 }
 
 /**
- * 更新购物车
+ * 更新进货车
  * @param params
  */
 export function updateShoppingCart(params) {
@@ -34,7 +34,7 @@ export function updateShoppingCart(params) {
 }
 
 /**
- * 移除购物车内商品
+ * 移除进货车内商品
  * @param params
  */
 export function deleteShoppingCartStyle(params) {

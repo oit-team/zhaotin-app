@@ -19,7 +19,7 @@ export function dictitemInfoAllMethod(params, config = {}) {
 }
 
 /**
- * 获取购物车列表
+ * 获取进货车列表
  * @param params
  */
 export function getShoppingCart(params) {
@@ -27,7 +27,7 @@ export function getShoppingCart(params) {
 }
 
 /**
- * 添加购物车
+ * 添加进货车
  * @param params
  */
 export function insertShoppingCart(params) {

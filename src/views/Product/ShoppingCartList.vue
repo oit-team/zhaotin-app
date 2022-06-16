@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray flex flex-col zt-page">
     <van-nav-bar
-      title="购物车"
+      title="进货车"
       :right-text="rightText"
       left-arrow
       @click-left="$router.back()"
@@ -40,8 +40,9 @@
       </ShopItem>
     </div>
 
-    <div class="flex items-center p-2 h-12 bg-white sticky-bottom">
+    <div class="flex items-center p-3 h-12 bg-white sticky-bottom">
       <van-checkbox
+        class="ml-2"
         icon-size="16px"
         checked-color="#CDA46C"
         :value="allChecked"

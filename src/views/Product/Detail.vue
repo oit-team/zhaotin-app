@@ -163,7 +163,7 @@
           class="!text-white"
           block
           color="#FF9326"
-          text="加入购物车"
+          text="加入进货车"
           round
           @click="openChoose(0)"
         ></van-button>
@@ -329,7 +329,7 @@ export default {
 
       if (!styleList.length) return this.$toast('请选择下单数量')
 
-      if (this.mode === MODE.SHOPPING_CART) { // 添加到购物车
+      if (this.mode === MODE.SHOPPING_CART) { // 添加到进货车
         this.insertShoppingCart(styleList)
       } else if (this.mode === MODE.ORDER) { // 提交订单
         const order = [
