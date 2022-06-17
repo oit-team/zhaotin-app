@@ -1,7 +1,11 @@
 <template>
   <div class="flex flex-col h-screen">
     <div class="sticky-top z-50 bg-white">
-      <Search is-link></Search>
+      <Search is-link>
+        <template #after>
+          <ShopCartIcon class="mx-3" />
+        </template>
+      </Search>
 
       <div class="flex items-center px-3">
         <vc-item-group
@@ -26,15 +30,17 @@
 
         <div class="px-3">
           <van-badge :content="filterCount || ''" @click.native="() => $refs.filterPanel.toggle()">
-            <vc-icon name="filter"></vc-icon>
+            <vc-icon class="align-baseline text-lg" name="filter"></vc-icon>
           </van-badge>
         </div>
       </div>
     </div>
 
-    <div class="flex-1 relative bg-gray overflow-auto">
+    <div class="flex-1 relative bg-gray overflow-hidden">
       <FilterPanel ref="filterPanel" @confirm="onFilter" />
-      <product-list :list="productList"></product-list>
+      <vc-list ref="list" class="h-full overflow-auto" :promise="loadData" first-load>
+        <product-list :list="productList"></product-list>
+      </vc-list>
     </div>
 
     <Tabbar />
@@ -46,6 +52,7 @@ import Search from '@/components/business/Product/Search'
 import ProductList from '@/components/business/Product/ProductList'
 import FilterPanel from '@/components/business/Product/FilterPanel'
 import Tabbar from '@/components/business/Tabbar'
+import ShopCartIcon from '@/components/business/ShoppingCart/ShopCartIcon'
 import { getStyleCategory, getStyleList } from '@/api/product'
 
 export default {
@@ -56,6 +63,7 @@ export default {
     ProductList,
     FilterPanel,
     Tabbar,
+    ShopCartIcon,
   },
 
   data: () => ({
@@ -68,12 +76,11 @@ export default {
 
   watch: {
     category() {
-      this.loadData()
+      this.$refs.list.reset().load()
     },
   },
 
   mounted() {
-    this.loadData()
     this.getStyleCategory()
   },
 
@@ -94,17 +101,12 @@ export default {
 
   methods: {
     async loadData(params) {
-      params = {
-        pageNum: 1,
-        pageSize: 9,
-      }
-      const promise = getStyleList({
+      const res = await getStyleList({
         styleCategory: this.category,
         status: 1,
         ...this.filterForm,
         ...params,
       })
-      const res = await promise
       this.$loadMoreData(this.productList, res.body.resultList, params)
       return res.body.totalCount
     },
@@ -115,8 +117,7 @@ export default {
     onFilter({ params, count }) {
       this.filterForm = params
       this.filterCount = count
-      this.loadData()
-      // this.$refs.loadMore.reset().load()
+      this.$refs.list.reset().load()
     },
   },
 }

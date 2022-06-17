@@ -9,8 +9,8 @@
       />
     </div>
     <van-search
-      ref="search"
       v-model="searchText"
+      ref="search"
       class="flex-1 p-0"
       shape="round"
       :disabled="isLink"
@@ -19,7 +19,7 @@
       v-on="$listeners"
       @click="onClick()"
     />
-    <div>
+    <div class="search-after">
       <slot name="after"></slot>
     </div>
   </div>
@@ -67,5 +67,9 @@ export default {
   ::v-deep .van-icon-search {
     @apply text-primary;
   }
+}
+
+.search-after {
+  flex-shrink: 0;
 }
 </style>

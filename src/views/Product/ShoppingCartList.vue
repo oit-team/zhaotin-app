@@ -166,18 +166,6 @@ export default {
       }
 
       if (value <= 0) {
-        // uni.showModal({
-        //   title: '提示',
-        //   content: '确定要删除吗',
-        //   success: ({ confirm }) => {
-        //     if (confirm) {
-        //       update()
-        //       this.loadShoppingCart()
-        //     } else {
-        //       size.sizeNumber = 1
-        //     }
-        //   },
-        // })
         Dialog.confirm({
           title: '提示',
           message: '确定要删除吗',

@@ -1,15 +1,16 @@
 <template>
   <div class="flex flex-col bg-gray">
     <Search
+      v-model="searchText"
       back
       :autofocus="!onlyVideo"
-      v-model="searchText"
       @search="onConfirm()"
       @clear="onConfirm()"
     ></Search>
-    <div class="flex-1">
+
+    <vc-list ref="list" class="flex-1 overflow-auto" :promise="loadData">
       <ProductList :list="productList"></ProductList>
-    </div>
+    </vc-list>
   </div>
 </template>
 
@@ -32,31 +33,25 @@ export default {
     onlyVideo: false,
   }),
 
-  created() {
+  mounted() {
     this.onlyVideo = Boolean(this.$route.params.video)
-    this.loadData()
+    this.$refs.list.load()
   },
 
   methods: {
     async loadData(params) {
-      params = {
-        pageNum: 1,
-        pageSize: 9,
-      }
-      const promise = getStyleList({
+      const res = await getStyleList({
         videoCode: Number(this.onlyVideo),
         styleSearch: this.searchText,
         status: 1,
         ...params,
       })
-      const res = await promise
-      this.productList = [...this.productList, ...res.body.resultList]
+      this.$loadMoreData(this.productList, res.body.resultList, params)
       return res.body.totalCount
     },
     onConfirm() {
       this.productList = []
-      this.loadData()
-      // this.$refs.loadMore.reset().load()
+      this.$refs.list.reset().load()
     },
   },
 }

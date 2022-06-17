@@ -1,22 +1,18 @@
 <template>
-  <div class="h-full">
+  <vc-container>
     <van-nav-bar
       title="我的收藏"
       left-arrow
       @click-left="$router.back()"
     />
-    <!-- <vc-scroll-view class="p-2 h-full"> -->
-    <van-pull-refresh
-      v-model="isLoading"
-      success-text="刷新成功"
-      @refresh="onRefresh"
-    >
-      <div class="p-2 h-full zt-page">
-        <van-swipe-cell v-for="item of list" :key="item.id" class="rounded-x1 space-y-3">
+
+    <vc-list :promise="loadData" first-load>
+      <div class="p-2 space-y-3">
+        <van-swipe-cell v-for="item of list" :key="item.id" class="rounded-xl">
           <div
             class="rounded-x1 overflow-hidden"
           >
-            <div class="flex items-center p-2 bg-white" @click="$Router.to('productDetailNvue', {styleId: item.styleId})">
+            <div class="flex items-center p-2 bg-white" @click="$router.to('ProductDetail', {styleId: item.styleId})">
               <div class="mr-2">
                 <vc-img fit="contain" :src="item.resUrl" size="60"></vc-img>
               </div>
@@ -30,23 +26,28 @@
             </div>
           </div>
           <template #right>
-            <van-button square @click="remove(item)" class="dltBtn h-full bg-red-400 border-current" type="danger" text="删除" />
+            <van-button
+              class="dltBtn h-full bg-red-400 border-current"
+              square
+              type="danger"
+              text="删除"
+              @click="remove(item)"
+            />
           </template>
         </van-swipe-cell>
       </div>
-    </van-pull-refresh>
-    <!-- <vc-load-more ref="loadMore" :promise="loadData" first-load></vc-load-more> -->
-    <!-- </vc-scroll-view> -->
-  </div>
+    </vc-list>
+  </vc-container>
 </template>
 
 <script>
 import { delStyleCollection, getStyleCollection } from '@/api/product'
 import theme from '@/theme'
+import VcContainer from '../../components/basic/Container/Container'
 
 export default {
   name: 'Collection',
-
+  components: { VcContainer },
   data: () => ({
     list: [],
     swipeOptions: [
@@ -56,41 +57,22 @@ export default {
         style: { backgroundColor: theme.colors.error },
       },
     ],
-    pageForm: {
-    },
-    isLoading: false,
-    count: 0,
   }),
 
-  created() {
-    this.loadData(this.pageForm)
-  },
   methods: {
     async loadData(params) {
       const res = await getStyleCollection(params)
-      this.list = [...this.list, ...res.body.styleCollection]
-      // this.$loadMoreData(this.list, res.body.styleCollection, params)
+      this.$loadMoreData(this.list, res.body.styleCollection, params)
       return res.body.count
     },
     async remove(item) {
       await this.$promiseLoading(delStyleCollection(item.id))
+      this.list.splice(this.list.indexOf(item), 1)
       this.$toast('删除成功')
-      this.list = []
-      // this.$refs.loadMore.reset().load()
-    },
-    onRefresh() {
-      setTimeout(() => {
-        this.$toast('刷新成功')
-        this.isLoading = false
-        this.count++
-      }, 1000)
     },
   },
 }
 </script>
 
-<style lang='less' scoped>
-.zt-page{
-  min-height: 100vh;
-}
+<style lang="less" scoped>
 </style>

@@ -12,8 +12,11 @@ export default {
     BetterView,
   },
 
-  created() {
-    localStorage.getItem('token') && this.$store.dispatch('updateUserData')
+  async created() {
+    if (localStorage.getItem('token')) {
+      await this.$store.dispatch('updateUserData')
+      await this.$store.dispatch('shoppingCart/getShoppingCart')
+    }
   },
 }
 </script>

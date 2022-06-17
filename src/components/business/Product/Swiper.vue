@@ -14,7 +14,7 @@
             <VuePlyr
               ref="plyr"
               :options="{
-                controls: ['play-large', 'progress', 'mute'],
+                controls: ['play-large', 'progress', 'mute', 'fullscreen'],
               }"
             >
               <video
@@ -27,14 +27,14 @@
               ></video>
             </VuePlyr>
           </van-swipe-item>
-          <van-swipe-item v-for="(item, index) of swiperImageList" :key="index">
+          <van-swipe-item v-for="(item, index) of swiperImageList" :key="index" @click="openPreview(index)">
             <vc-img :src="item.resUrl" size="100%" />
           </van-swipe-item>
         </van-swipe>
       </div>
 
       <div v-if="tabIndex === TAB_TYPE.STYLE" class="absolute left-2 bottom-2 right-2 flex">
-        <div class="bg-white z-10 p-2 rounded-lg">
+        <div class="bg-white z-10 p-2 rounded-lg bg-opacity-60 backdrop-filter backdrop-blur-lg">
           <div class="text-sm">颜色分类({{ data.styleColorList.length }})</div>
           <vc-item-group
             v-model="colorCategoryIndex"
@@ -86,6 +86,7 @@
 
 <script>
 import { size } from 'lodash'
+import { ImagePreview } from 'vant'
 import VuePlyr from 'vue-plyr'
 import 'vue-plyr/dist/vue-plyr.css'
 
@@ -148,7 +149,11 @@ export default {
   },
 
   methods: {
-    openPreview() {
+    openPreview(index) {
+      ImagePreview({
+        images: this.swiperImageList.map(item => item.resUrl),
+        startPosition: index,
+      })
     },
     stopPropagation() {
       const controls = document.querySelector('.swipe-video input')

@@ -1,0 +1,12 @@
+.vc-list {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+
+  .van-pull-refresh {
+    flex: 1;
+    overflow: initial;
+  }
+}

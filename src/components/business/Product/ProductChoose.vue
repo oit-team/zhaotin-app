@@ -8,11 +8,11 @@
               <vc-img class="overflow-hidden rounded" :src="item.styleImg[0].resUrl" width="35" height="60"></vc-img>
               <div class="ml-2">
                 <div class="text-xs text-secondary">{{ item.styleColor }}</div>
-                <u-badge
-                  class="bg-price !inline-flex choose-num"
+                <van-badge
+                  class="times-symbol"
                   max="99"
-                  :value="selectedItemTotal(item.id)"
-                ></u-badge>
+                  :content="selectedItemTotal(item.id)"
+                ></van-badge>
               </div>
             </vc-item>
           </vc-item-group>
@@ -28,7 +28,7 @@
             <div class="flex-1 -mr-5 text-center">
               <div>
                 <vc-text
-                  class="text-price text-lg font-bold pr-2 !justify-center"
+                  class="text-lg font-bold pr-2"
                   mode="price"
                   :text="data.tradePrice"
                 ></vc-text>
@@ -41,15 +41,12 @@
             class="flex justify-between items-center"
           >
             <div class="text-sm">{{ size.sizeName }}</div>
-            <div class="flex-1">
-              <u-number-box
-                class="justify-end"
-                :value="numberMap[selected.id] ? numberMap[selected.id][size.sizeName] : 0"
-                :min="0"
-                integer
-                @change="changeNumber($event, size.sizeName)"
-              ></u-number-box>
-            </div>
+            <van-stepper
+              :value="numberMap[selected.id] ? numberMap[selected.id][size.sizeName] : 0"
+              :min="0"
+              integer
+              @change="changeNumber($event, size.sizeName)"
+            ></van-stepper>
           </div>
         </div>
       </div>
@@ -65,8 +62,8 @@
         <van-button
           class="!bg-price !text-white"
           block
+          round
           text="确定"
-          shape="circle"
           @click="onConfirm"
         ></van-button>
       </div>
@@ -90,9 +87,13 @@ export default {
 
   methods: {
     open() {
-      // this.showShopping = true
+      this.showShopping = true
     },
-    changeNumber({ value }, size) {
+    close() {
+      console.log(1)
+      this.showShopping = false
+    },
+    changeNumber(value, size) {
       if (!this.numberMap[this.selected.id]) this.$set(this.numberMap, this.selected.id, {})
       this.$set(this.numberMap[this.selected.id], size, value)
     },
@@ -113,37 +114,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.u-popup::v-deep {
-  .u-transition {
-    z-index: 60 !important;
-  }
-
-  .u-popup__content {
-    overflow: hidden;
-  }
-}
-
-.choose-num ::before {
-  margin-right: 2px;
-  content: "\00D7";
-}
-
-.u-number-box::v-deep {
-  & > {
-    * {
-      height: 25px !important;
-    }
-
-    .u-number-box__input {
-      margin: 0;
-      border: 1px solid #f5ede2;
-      background-color: white !important;
-    }
-
-    .u-number-box__minus, .u-number-box__plus {
-      width: 25px !important;
-      background-color: #f5ede2 !important;
-    }
-  }
-}
 </style>

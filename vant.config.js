@@ -16,4 +16,7 @@ module.exports = {
   'tabs-default-color': colors.primary,
   'tabs-line-height': '30px',
   'tabs-bottom-bar-width': 'var(--vc-tab-line-width)',
+
+  'nav-bar-icon-color': colors.primary,
+  'nav-bar-text-color': colors.primary,
 }

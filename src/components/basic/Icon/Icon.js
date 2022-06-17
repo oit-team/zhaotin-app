@@ -35,23 +35,23 @@ export default {
           color: this.color,
         },
       }, [
-        h('span', {
-          class: 'vc-icon__wrap',
+        // h('span', {
+        //   class: 'vc-icon__wrap',
+        // }, [
+        h('svg', {
+          class: 'vc-icon__svg',
+          attrs: {
+            'aria-hidden': true,
+          },
+          on: this.$listeners,
         }, [
-          h('svg', {
-            class: 'vc-icon__svg',
+          h('use', {
             attrs: {
-              'aria-hidden': true,
+              'xlink:href': `#icon-${this.iconName}`,
             },
-            on: this.$listeners,
-          }, [
-            h('use', {
-              attrs: {
-                'xlink:href': `#icon-${this.iconName}`,
-              },
-            }),
-          ]),
+          }),
         ]),
+        // ]),
       ])
     },
     /**

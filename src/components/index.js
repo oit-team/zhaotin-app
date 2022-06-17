@@ -10,7 +10,20 @@ const propsConfig = {
   Img: {
     fit: 'cover',
   },
+  List: {
+    refresh: true,
+    pageNum: 1,
+    pageSize: 15,
+  },
 }
+
+vantComponents.Popup.mixins.push({
+  deactivated() {
+    this.$nextTick(() => {
+      this.shouldReopen = false
+    })
+  },
+})
 
 Object
   .entries(propsConfig)

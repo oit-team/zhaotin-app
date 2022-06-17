@@ -50,8 +50,8 @@
       </ShopItem>
     </div>
 
-    <div class="sticky-bottom bg-white h-12 p-2 flex items-center justify-between">
-      <div>
+    <div class="sticky-bottom bg-white h-12 p-3 flex items-center justify-between">
+      <div class="pl-1">
         <div v-if="priceData" class="flex flex-col whitespace-nowrap mr-2">
           <span class="text-xs">已选{{ priceData.styleNumber }}件</span>
           <span class="flex text-xs">
@@ -193,6 +193,7 @@ export default {
       await this.$store.commit('shoppingCart/setOrderList', [])
       this.$root.$emit(SUBMIT_ORDER_EVENT)
       this.$toast('下单成功！')
+      this.$store.dispatch('shoppingCart/getShoppingCart')
       this.$router.back()
     },
     async getReceiving() {

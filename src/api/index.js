@@ -4,6 +4,8 @@ import { Toast } from 'vant'
 import { ApiError } from '@oit/utils'
 import API_SERVICE from './enum/API_SERVICE'
 import API_STATUS from './enum/API_STATUS'
+// eslint-disable-next-line no-unused-vars
+import Vue from 'vue'
 
 const BASE_URL = process.env.NODE_ENV === 'production' ? '/ztApi' : '/api'
 
@@ -84,3 +86,11 @@ window.addEventListener('unhandledrejection', event => {
     event.preventDefault()
   }
 }, false)
+
+Vue.config.errorHandler = (err, vm, info) => {
+  if (err instanceof ApiError) {
+    return Promise.reject(err)
+  } else {
+    console.error(err)
+  }
+}

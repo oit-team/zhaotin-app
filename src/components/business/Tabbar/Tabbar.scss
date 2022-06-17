@@ -11,3 +11,7 @@ $tabbar-height: 50px;
 .van-tabbar-item__icon img {
   height: 100%;
 }
+
+.van-tabbar--fixed {
+  z-index: 50;
+}

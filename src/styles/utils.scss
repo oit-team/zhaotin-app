@@ -20,3 +20,8 @@
   right: 0;
   bottom: 0;
 }
+
+.times-symbol::before {
+  margin-right: 2px;
+  content: "\00D7";
+}

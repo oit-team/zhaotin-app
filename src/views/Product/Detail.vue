@@ -1,6 +1,10 @@
 <template>
   <div class="bg-gray">
-    <Search is-link back></Search>
+    <Search is-link back>
+      <template #after>
+        <ShopCartIcon class="ml-3 mr-2" />
+      </template>
+    </Search>
 
     <Swiper :data="data" />
 
@@ -147,15 +151,15 @@
       </div>
     </div>
 
-    <div v-if="false" class="flex items-center px-2 bg-white h-15 sticky-bottom border-t border-line">
-      <div class="flex space-x-2 text-center whitespace-nowrap mr-2">
+    <div class="flex items-center px-3 bg-white h-15 sticky-bottom border-t border-line">
+      <div class="flex space-x-3 text-center whitespace-nowrap mr-2">
         <div @click="addStyleCollection()">
-          <vc-icon name="icon-shoucang" size="16px"></vc-icon>
-          <div class="-mt-1 text-xs transform scale-65">收藏</div>
+          <vc-icon name="star-o"></vc-icon>
+          <div class="text-xs transform scale-65">收藏</div>
         </div>
         <div @click="callCustomerService()">
-          <vc-icon name="icon-kefu" size="16px"></vc-icon>
-          <div class="-mt-1 text-xs transform scale-65">客服</div>
+          <vc-icon name="message"></vc-icon>
+          <div class="text-xs transform scale-65">客服</div>
         </div>
       </div>
       <div class="flex flex-1 space-x-2">
@@ -180,37 +184,40 @@
     <ProductChoose ref="productChoose" :data="data" @confirm="confirm"></ProductChoose>
 
     <van-popup v-model="showProperty" position="bottom">
-      <div class="bg-white h-[50vh] overflow-auto rounded-t-xl">
+      <div class="bg-white h-[50vh] overflow-auto rounded-t-xl flex flex-col">
         <vc-tabs class="my-2">
           <van-tab title="基本信息"></van-tab>
         </vc-tabs>
-        <div class="text-sm py-2 px-6 space-y-2">
-          <div>
-            <span class="mr-3 text-secondary">材质</span>
-            <span>{{ data.styleFabric }}</span>
+        <div class="text-sm px-6 flex-1 overflow-auto">
+          <div
+            v-for="item of [
+              {title: '款式', key: 'styleLength'},
+              {title: '类别', key: 'styleCategory'},
+              {title: '标签', key: 'styleLabel'},
+              {title: '场合', key: 'styleInfo'},
+              {title: '材质', key: 'styleFabric'},
+              {title: '廓形', key: 'styleFlowerPattern'},
+            ]"
+            :key="item.key"
+            class="py-3 border-b border-line"
+          >
+            <span class="mr-4 text-secondary">{{ item.title }}</span>
+            <span class="text-sm">{{ data[item.key] }}</span>
           </div>
-          <div>
-            <span class="mr-3 text-secondary">廓形</span>
-            <span>{{ data.styleFlowerPattern }}</span>
-          </div>
-          <div>
-            <span class="mr-3 text-secondary">类别</span>
-            <span>{{ data.styleCategory }}</span>
-          </div>
-          <div class="flex">
-            <span class="mr-3 text-secondary">服务</span>
-            <span v-html="data.service" class="flex-1"></span>
+          <div class="flex flex-row py-3 border-b border-line">
+            <span class="mr-4 text-secondary">服务</span>
+            <span v-html="data.service"></span>
           </div>
         </div>
       </div>
     </van-popup>
 
     <van-popup v-model="showSellingPoint" position="bottom">
-      <div class="bg-white h-[50vh] overflow-auto rounded-t-xl">
+      <div class="bg-white h-[50vh] rounded-t-xl flex flex-col">
         <vc-tabs v-model="sellingPointIndex" class="my-2">
           <van-tab v-for="tab of ['面料卖点', '设计卖点', '穿着卖点']" :key="tab" :title="tab"></van-tab>
         </vc-tabs>
-        <div class="text-sm leading-loose py-2 px-6">
+        <div class="text-sm leading-loose py-2 px-6 flex-1 overflow-auto">
           <div v-html="data[['sellingPointFabric', 'designSellingPoint', 'wearSellingPoint'][sellingPointIndex]]"></div>
         </div>
       </div>
@@ -219,12 +226,15 @@
 </template>
 
 <script>
-import { addStyleCollection, getStyleById, insertShoppingCart } from '@/api/product'
-import theme from '@/theme'
-import { keyBy } from 'lodash'
 import Search from '@/components/business/Product/Search'
 import Swiper from '@/components/business/Product/Swiper'
 import ProductChoose from '@/components/business/Product/ProductChoose'
+import ShopCartIcon from '@/components/business/ShoppingCart/ShopCartIcon'
+import { addStyleCollection, getStyleById, insertShoppingCart } from '@/api/product'
+import theme from '@/theme'
+import { keyBy } from 'lodash'
+import { callCustomerService } from '@/utils'
+import { SUBMIT_ORDER_EVENT } from '../Order/OrderSubmit'
 
 const MODE = {
   SHOPPING_CART: 0,
@@ -238,6 +248,7 @@ export default {
     Search,
     Swiper,
     ProductChoose,
+    ShopCartIcon,
   },
 
   data() {
@@ -272,6 +283,7 @@ export default {
   },
 
   methods: {
+    callCustomerService,
     async getStyleInfo() {
       try {
         const res = await this.$promiseLoading(getStyleById(this.styleId))
@@ -340,15 +352,19 @@ export default {
             styleNo: this.data.styleNo,
           },
         ]
-        // uni.$once(SUBMIT_ORDER_EVENT, this.$refs.productChoose.reset)
+        this.$root.$once(SUBMIT_ORDER_EVENT, () => {
+          const choose = this.$refs.productChoose
+          choose.reset()
+          choose.close()
+        })
         this.$store.commit('shoppingCart/setOrderList', order)
-        // uni.navigateTo({ url: '/pages/order/submit-order' })
+        this.$router.to('OrderSubmit')
       }
     },
     async insertShoppingCart(styleList) {
       await this.$promiseLoading(insertShoppingCart({ styleList }))
       await this.$store.dispatch('shoppingCart/getShoppingCart')
-      this.$toast('添加成功')
+      this.$toast.success('添加成功')
     },
     genTabs(tabs) {
       return tabs.map(name => ({ name }))
@@ -357,7 +373,7 @@ export default {
       await this.$promiseLoading(addStyleCollection({
         styleId: this.data.styleId,
       }))
-      this.$toast('收藏成功')
+      this.$toast.success('收藏成功')
     },
   },
 }

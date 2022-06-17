@@ -19,10 +19,7 @@
           <span>{{ item.styleColorName || item.styleColor }}</span>
         </div>
         <div class="flex flex-col items-end">
-          <van-badge class="times-symbol !bg-primary text-white">
-            <template #content>
-              ×{{ calcTotal(item) }}
-            </template>
+          <van-badge class="times-symbol !bg-primary text-white" :content="calcTotal(item)">
           </van-badge>
         </div>
         <div class="ml-2">
@@ -42,7 +39,7 @@
             :long-press="false"
             @change="changeNumber($event, size)"
           />
-          <span v-else class="times-symbol text-xs">×{{ size.sizeNumber }}</span>
+          <span v-else class="times-symbol text-xs">{{ size.sizeNumber }}</span>
         </div>
       </div>
     </div>

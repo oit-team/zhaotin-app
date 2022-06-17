@@ -1,15 +1,10 @@
 <template>
-  <div class="bg-gray">
-    <van-sticky>
-      <van-nav-bar
-        title="全部订单"
-      />
-    </van-sticky>
-    <van-pull-refresh
-      v-model="isLoading"
-      success-text="刷新成功"
-      @refresh="onRefresh"
-    >
+  <vc-container class="bg-gray">
+    <van-nav-bar
+      title="全部订单"
+    />
+
+    <vc-list :promise="loadData" first-load>
       <div class="pt-2">
         <div
           v-for="order of list"
@@ -42,14 +37,8 @@
                   <div class="text-xs text-caption">{{ item.styleNo }}</div>
                 </div>
                 <div class="flex items-center">
-                  <!--            <span class="mr-2 text-xs">&#215;3</span>-->
-                  <van-badge class="times-symbol mr-4 text-black" color="white">
-                    <template #content>
-                      <span class="black">×{{ item.styleNumber }}</span>
-                    </template>
-                  </van-badge>
+                  <van-badge class="times-symbol mr-4 text-black" color="white" :content="item.styleNumber"></van-badge>
                   <vc-text :text="item.styleTotal" mode="price"></vc-text>
-                  <!-- <u-text class="text-price text-xs" mode="price" :text="item.styleTotal"></u-text> -->
                 </div>
               </div>
             </div>
@@ -66,15 +55,16 @@
           </div>
         </div>
       </div>
-    </van-pull-refresh>
+    </vc-list>
+
     <Tabbar />
-  </div>
+  </vc-container>
 </template>
 
 <script>
 import Tabbar from '@/components/business/Tabbar'
-import { getOrder } from '../../api/order'
-import { GLOBAL_EVENT } from '../../utils/events'
+import { getOrder } from '@/api/order'
+import VcContainer from '@/components/basic/Container/Container'
 
 const ORDER_STATE = {
   NOT_PAID: 0,
@@ -90,37 +80,25 @@ const ORDER_STATE_TEXT = {
 
 export default {
   name: 'Order',
+
   components: {
+    VcContainer,
     Tabbar,
   },
+
   data: () => ({
-    GLOBAL_EVENT,
     ORDER_STATE_TEXT,
     list: [],
-    pageform: {
-      pageNum: 1,
-      pageSize: 12,
-    },
-    isLoading: false,
   }),
-  created() {
-    this.LoadData(this.pageform)
-  },
+
   methods: {
-    async LoadData(params) {
+    async loadData(params) {
       const res = await getOrder({
+        userId: this.$store.state.userData.id,
         ...params,
       })
-      this.list = res.body.resultList
-      // this.$loadMoreData(this.list, res.body.resultList, params)
+      this.$loadMoreData(this.list, res.body.resultList, params)
       return res.body.count
-    },
-    onRefresh() {
-      setTimeout(() => {
-        this.LoadData(this.pageform)
-        this.$toast('刷新成功')
-        this.isLoading = false
-      }, 1000)
     },
   },
 }
