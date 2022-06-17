@@ -28,6 +28,7 @@ specifiers:
   lint-staged: ^11.1.2
   lodash: ^4.17.21
   postcss-px-to-viewport: ^1.1.1
+  rimraf: ^3.0.2
   sass: ^1.32.7
   sass-loader: ^12.0.0
   svg-sprite-loader: ^6.0.11
@@ -50,6 +51,7 @@ dependencies:
   crypto-js: 4497220af3.zicp.vip/crypto-js/4.1.1
   eruda: 2.4.1
   lodash: 4497220af3.zicp.vip/lodash/4.17.21
+  rimraf: 3.0.2
   vant: 4497220af3.zicp.vip/vant/2.12.47_vue@2.6.14
   vue: 4497220af3.zicp.vip/vue/2.6.14
   vue-plyr: 4497220af3.zicp.vip/vue-plyr/7.0.0
@@ -269,6 +271,9 @@ packages:
     resolution: {integrity: sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==}
     dev: true
 
+  /balanced-match/1.0.2:
+    resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
+
   /batch/0.6.1:
     resolution: {integrity: sha1-3DQxT05nkxgJP8dgJyUl+UvyXBY=}
     dev: true
@@ -280,6 +285,12 @@ packages:
   /bluebird/3.7.2:
     resolution: {integrity: sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==}
     dev: true
+
+  /brace-expansion/1.1.11:
+    resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
+    dependencies:
+      balanced-match: 1.0.2
+      concat-map: 0.0.1
 
   /bytes/3.0.0:
     resolution: {integrity: sha1-0ygVQE1olpn4Wk6k+odV3ROpYEg=}
@@ -293,7 +304,6 @@ packages:
 
   /concat-map/0.0.1:
     resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
-    dev: true
 
   /consolidate/0.15.1_lodash@4.17.21:
     resolution: {integrity: sha512-DW46nrsMJgy9kqAbPt5rKaCr7uFtpo4mSUvLHIUbJEjm0vo+aY5QLwBUq3FK4tRnJr/X0Psc0C4jf/h+HtXSMw==}
@@ -532,6 +542,9 @@ packages:
     engines: {node: '>= 0.6'}
     dev: true
 
+  /fs.realpath/1.0.0:
+    resolution: {integrity: sha1-FQStJSMVjKpA20onh8sBQRmU6k8=}
+
   /fsevents/2.3.2:
     resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -539,6 +552,16 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /glob/7.2.3:
+    resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
+    dependencies:
+      fs.realpath: 1.0.0
+      inflight: 1.0.6
+      inherits: 2.0.4
+      minimatch: 3.1.2
+      once: 1.4.0
+      path-is-absolute: 1.0.1
 
   /graceful-fs/4.2.10:
     resolution: {integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==}
@@ -553,6 +576,19 @@ packages:
     engines: {node: '>=0.10.0'}
     hasBin: true
     dev: true
+
+  /inflight/1.0.6:
+    resolution: {integrity: sha1-Sb1jMdfQLQwJvJEKEHW6gWW1bfk=}
+    dependencies:
+      once: 1.4.0
+      wrappy: 1.0.2
+
+  /inherits/2.0.3:
+    resolution: {integrity: sha1-Yzwsg+PaQqUC9SRmAiSA9CCCYd4=}
+    dev: true
+
+  /inherits/2.0.4:
+    resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
 
   /js-message/1.0.7:
     resolution: {integrity: sha512-efJLHhLjIyKRewNS9EGZ4UpI8NguuL6fKkhRxVuMmrGV2xN/0APGdQYwLFky5w9naebSZ0OwAGp0G6/2Cg90rA==}
@@ -643,6 +679,11 @@ packages:
     hasBin: true
     dev: true
 
+  /minimatch/3.1.2:
+    resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
+    dependencies:
+      brace-expansion: 1.1.11
+
   /minimist/1.2.6:
     resolution: {integrity: sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==}
     dev: true
@@ -673,6 +714,15 @@ packages:
       ee-first: 1.1.1
     dev: true
 
+  /once/1.4.0:
+    resolution: {integrity: sha1-WDsap3WWHUsROsF9nFC6753Xa9E=}
+    dependencies:
+      wrappy: 1.0.2
+
+  /path-is-absolute/1.0.1:
+    resolution: {integrity: sha1-F0uSaHNVNP+8es5r9TpanhtcX18=}
+    engines: {node: '>=0.10.0'}
+
   /path-to-regexp/0.1.7:
     resolution: {integrity: sha1-32BBeABfUi8V60SQ5yR6G/qmf4w=}
     dev: true
@@ -691,6 +741,16 @@ packages:
     dependencies:
       cssesc: 3.0.0
       util-deprecate: 1.0.2
+    dev: true
+
+  /postcss/5.2.18:
+    resolution: {integrity: sha512-zrUjRRe1bpXKsX1qAJNJjqZViErVuyEkMTRrwu4ud4sbTtIBRmtaYDrHmcGgmrbsW3MHfmtIf+vJumgQn+PrXg==}
+    engines: {node: '>=0.12'}
+    dependencies:
+      chalk: 4497220af3.zicp.vip/chalk/1.1.3
+      js-base64: 4497220af3.zicp.vip/js-base64/2.6.4
+      source-map: 0.5.7
+      supports-color: 4497220af3.zicp.vip/supports-color/3.2.3
     dev: true
 
   /postcss/7.0.39:
@@ -733,6 +793,12 @@ packages:
       iconv-lite: 4497220af3.zicp.vip/iconv-lite/0.4.24
       unpipe: 4497220af3.zicp.vip/unpipe/1.0.0
     dev: true
+
+  /rimraf/3.0.2:
+    resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
+    hasBin: true
+    dependencies:
+      glob: 7.2.3
 
   /setprototypeof/1.1.0:
     resolution: {integrity: sha512-BvE/TwpZX4FXExxOxZyRGQQv651MSwmWKZGqvmPcRIjDqWub67kTKuIMx43cZZrS/cBBzwBcNDWoFxt2XEFIpQ==}
@@ -878,6 +944,9 @@ packages:
   /vue-template-es2015-compiler/1.9.1:
     resolution: {integrity: sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==}
     dev: true
+
+  /wrappy/1.0.2:
+    resolution: {integrity: sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=}
 
   /yallist/2.1.2:
     resolution: {integrity: sha1-HBH5IY8HYImkfdUS+TxmmaaoHVI=}
@@ -2417,7 +2486,7 @@ packages:
       ignore: 4497220af3.zicp.vip/ignore/4.0.6
       import-fresh: 4497220af3.zicp.vip/import-fresh/3.3.0
       js-yaml: 4497220af3.zicp.vip/js-yaml/3.14.1
-      minimatch: 4497220af3.zicp.vip/minimatch/3.1.2
+      minimatch: 3.1.2
       strip-json-comments: 4497220af3.zicp.vip/strip-json-comments/3.1.1
     transitivePeerDependencies:
       - supports-color
@@ -2445,7 +2514,7 @@ packages:
     dependencies:
       '@humanwhocodes/object-schema': 4497220af3.zicp.vip/@humanwhocodes/object-schema/1.2.1
       debug: 4497220af3.zicp.vip/debug/4.3.4
-      minimatch: 4497220af3.zicp.vip/minimatch/3.1.2
+      minimatch: 3.1.2
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3904,12 +3973,6 @@ packages:
       - supports-color
     dev: true
 
-  4497220af3.zicp.vip/balanced-match/1.0.2:
-    resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/balanced-match/-/balanced-match-1.0.2.tgz}
-    name: balanced-match
-    version: 1.0.2
-    dev: true
-
   4497220af3.zicp.vip/base/0.11.2:
     resolution: {integrity: sha512-5T6P4xPgpp0YDFvSWwEZ4NoE3aM4QBQXDzmVbraCkFj8zHM+mba8SyqB5DbZWyR7mYHo6Y7BdQo3MoA4m0TeQg==, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/base/-/base-0.11.2.tgz}
     name: base
@@ -3944,7 +4007,7 @@ packages:
     version: 4.1.0
     dependencies:
       buffer: 4497220af3.zicp.vip/buffer/5.7.1
-      inherits: 4497220af3.zicp.vip/inherits/2.0.4
+      inherits: 2.0.4
       readable-stream: 4497220af3.zicp.vip/readable-stream/3.6.0
     dev: true
 
@@ -3991,15 +4054,6 @@ packages:
     resolution: {integrity: sha1-aN/1++YMUes3cl6p4+0xDcwed24=, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/boolbase/-/boolbase-1.0.0.tgz}
     name: boolbase
     version: 1.0.0
-    dev: true
-
-  4497220af3.zicp.vip/brace-expansion/1.1.11:
-    resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/brace-expansion/-/brace-expansion-1.1.11.tgz}
-    name: brace-expansion
-    version: 1.1.11
-    dependencies:
-      balanced-match: 4497220af3.zicp.vip/balanced-match/1.0.2
-      concat-map: 0.0.1
     dev: true
 
   4497220af3.zicp.vip/braces/2.3.2:
@@ -5320,7 +5374,7 @@ packages:
     name: end-of-stream
     version: 1.4.4
     dependencies:
-      once: 4497220af3.zicp.vip/once/1.4.0
+      once: 1.4.0
     dev: true
 
   4497220af3.zicp.vip/enhanced-resolve/0.9.1:
@@ -6154,7 +6208,7 @@ packages:
     engines: {node: ^10.12.0 || >=12.0.0}
     dependencies:
       flatted: 4497220af3.zicp.vip/flatted/3.2.5
-      rimraf: 4497220af3.zicp.vip/rimraf/3.0.2
+      rimraf: 3.0.2
     dev: true
 
   4497220af3.zicp.vip/flatted/3.2.5:
@@ -6223,12 +6277,6 @@ packages:
     resolution: {integrity: sha512-cybjIfiiE+pTWicSCLFHSrXZ6EilF30oh91FDP9S2B051prEa7QWfrVTQm10/dDpswBDXZugPa1Ogu8Yh+HV0Q==, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/fs-monkey/-/fs-monkey-1.0.3.tgz}
     name: fs-monkey
     version: 1.0.3
-    dev: true
-
-  4497220af3.zicp.vip/fs.realpath/1.0.0:
-    resolution: {integrity: sha1-FQStJSMVjKpA20onh8sBQRmU6k8=, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/fs.realpath/-/fs.realpath-1.0.0.tgz}
-    name: fs.realpath
-    version: 1.0.0
     dev: true
 
   4497220af3.zicp.vip/function-bind/1.1.1:
@@ -6360,19 +6408,6 @@ packages:
     resolution: {integrity: sha512-lkX1HJXwyMcprw/5YUZc2s7DrpAiHB21/V+E1rHUrVNokkvB6bqMzT0VfV6/86ZNabt1k14YOIaT7nDvOX3Iiw==, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/glob-to-regexp/-/glob-to-regexp-0.4.1.tgz}
     name: glob-to-regexp
     version: 0.4.1
-    dev: true
-
-  4497220af3.zicp.vip/glob/7.2.3:
-    resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/glob/-/glob-7.2.3.tgz}
-    name: glob
-    version: 7.2.3
-    dependencies:
-      fs.realpath: 4497220af3.zicp.vip/fs.realpath/1.0.0
-      inflight: 4497220af3.zicp.vip/inflight/1.0.6
-      inherits: 4497220af3.zicp.vip/inherits/2.0.4
-      minimatch: 4497220af3.zicp.vip/minimatch/3.1.2
-      once: 4497220af3.zicp.vip/once/1.4.0
-      path-is-absolute: 4497220af3.zicp.vip/path-is-absolute/1.0.1
     dev: true
 
   4497220af3.zicp.vip/globals/11.12.0:
@@ -6570,7 +6605,7 @@ packages:
     name: hpack.js
     version: 2.1.6
     dependencies:
-      inherits: 4497220af3.zicp.vip/inherits/2.0.4
+      inherits: 2.0.4
       obuf: 4497220af3.zicp.vip/obuf/1.1.2
       readable-stream: 4497220af3.zicp.vip/readable-stream/2.3.7
       wbuf: 4497220af3.zicp.vip/wbuf/1.7.3
@@ -6638,7 +6673,7 @@ packages:
       domhandler: 4497220af3.zicp.vip/domhandler/2.4.2
       domutils: 4497220af3.zicp.vip/domutils/1.7.0
       entities: 4497220af3.zicp.vip/entities/1.1.2
-      inherits: 4497220af3.zicp.vip/inherits/2.0.4
+      inherits: 2.0.4
       readable-stream: 4497220af3.zicp.vip/readable-stream/3.6.0
     dev: true
 
@@ -6666,7 +6701,7 @@ packages:
     engines: {node: '>= 0.6'}
     dependencies:
       depd: 4497220af3.zicp.vip/depd/1.1.2
-      inherits: 4497220af3.zicp.vip/inherits/2.0.3
+      inherits: 2.0.3
       setprototypeof: 1.1.0
       statuses: 4497220af3.zicp.vip/statuses/1.5.0
     dev: true
@@ -6678,7 +6713,7 @@ packages:
     engines: {node: '>= 0.8'}
     dependencies:
       depd: 4497220af3.zicp.vip/depd/2.0.0
-      inherits: 4497220af3.zicp.vip/inherits/2.0.4
+      inherits: 2.0.4
       setprototypeof: 1.2.0
       statuses: 4497220af3.zicp.vip/statuses/2.0.1
       toidentifier: 1.0.1
@@ -6802,27 +6837,6 @@ packages:
     name: indent-string
     version: 4.0.0
     engines: {node: '>=8'}
-    dev: true
-
-  4497220af3.zicp.vip/inflight/1.0.6:
-    resolution: {integrity: sha1-Sb1jMdfQLQwJvJEKEHW6gWW1bfk=, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/inflight/-/inflight-1.0.6.tgz}
-    name: inflight
-    version: 1.0.6
-    dependencies:
-      once: 4497220af3.zicp.vip/once/1.4.0
-      wrappy: 4497220af3.zicp.vip/wrappy/1.0.2
-    dev: true
-
-  4497220af3.zicp.vip/inherits/2.0.3:
-    resolution: {integrity: sha1-Yzwsg+PaQqUC9SRmAiSA9CCCYd4=, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/inherits/-/inherits-2.0.3.tgz}
-    name: inherits
-    version: 2.0.3
-    dev: true
-
-  4497220af3.zicp.vip/inherits/2.0.4:
-    resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/inherits/-/inherits-2.0.4.tgz}
-    name: inherits
-    version: 2.0.4
     dev: true
 
   4497220af3.zicp.vip/internal-slot/1.0.3:
@@ -7343,15 +7357,6 @@ packages:
     version: 1.0.1
     dev: true
 
-  4497220af3.zicp.vip/json5/1.0.1:
-    resolution: {integrity: sha512-aKS4WQjPenRxiQsC93MNfjx+nbF4PAdYzmd/1JIj8HYzqfbu86beTuNgXDzPknWk0n0uARlyewZo4s++ES36Ow==, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/json5/-/json5-1.0.1.tgz}
-    name: json5
-    version: 1.0.1
-    hasBin: true
-    dependencies:
-      minimist: 1.2.6
-    dev: true
-
   4497220af3.zicp.vip/json5/2.2.1:
     resolution: {integrity: sha512-1hqLFMSrGHRHxav9q9gNjJ5EXznIxGVO09xQRrwplcS8qs28pZ8s8hupZAmqDwZUmVZ2Qb2jnyPOWcDH8m8dlA==, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/json5/-/json5-2.2.1.tgz}
     name: json5
@@ -7863,7 +7868,7 @@ packages:
     name: minimatch
     version: 3.1.2
     dependencies:
-      brace-expansion: 4497220af3.zicp.vip/brace-expansion/1.1.11
+      brace-expansion: 1.1.11
     dev: true
 
   4497220af3.zicp.vip/minimist/1.2.6:
@@ -8190,14 +8195,6 @@ packages:
     engines: {node: '>= 0.8'}
     dev: true
 
-  4497220af3.zicp.vip/once/1.4.0:
-    resolution: {integrity: sha1-WDsap3WWHUsROsF9nFC6753Xa9E=, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/once/-/once-1.4.0.tgz}
-    name: once
-    version: 1.4.0
-    dependencies:
-      wrappy: 4497220af3.zicp.vip/wrappy/1.0.2
-    dev: true
-
   4497220af3.zicp.vip/onetime/2.0.1:
     resolution: {integrity: sha1-BnQoIw/WdEOyeUsiu6UotoZ5YtQ=, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/onetime/-/onetime-2.0.1.tgz}
     name: onetime
@@ -8433,13 +8430,6 @@ packages:
     name: path-exists
     version: 4.0.0
     engines: {node: '>=8'}
-    dev: true
-
-  4497220af3.zicp.vip/path-is-absolute/1.0.1:
-    resolution: {integrity: sha1-F0uSaHNVNP+8es5r9TpanhtcX18=, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/path-is-absolute/-/path-is-absolute-1.0.1.tgz}
-    name: path-is-absolute
-    version: 1.0.1
-    engines: {node: '>=0.10.0'}
     dev: true
 
   4497220af3.zicp.vip/path-key/2.0.1:
@@ -8919,7 +8909,7 @@ packages:
     peerDependencies:
       postcss: '>4 <9'
     dependencies:
-      postcss: 4497220af3.zicp.vip/postcss/5.2.18
+      postcss: 5.2.18
     dev: true
 
   4497220af3.zicp.vip/postcss-px-to-viewport/1.1.1:
@@ -8999,18 +8989,6 @@ packages:
     resolution: {integrity: sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz}
     name: postcss-value-parser
     version: 4.2.0
-    dev: true
-
-  4497220af3.zicp.vip/postcss/5.2.18:
-    resolution: {integrity: sha512-zrUjRRe1bpXKsX1qAJNJjqZViErVuyEkMTRrwu4ud4sbTtIBRmtaYDrHmcGgmrbsW3MHfmtIf+vJumgQn+PrXg==, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/postcss/-/postcss-5.2.18.tgz}
-    name: postcss
-    version: 5.2.18
-    engines: {node: '>=0.12'}
-    dependencies:
-      chalk: 4497220af3.zicp.vip/chalk/1.1.3
-      js-base64: 4497220af3.zicp.vip/js-base64/2.6.4
-      source-map: 0.5.7
-      supports-color: 4497220af3.zicp.vip/supports-color/3.2.3
     dev: true
 
   4497220af3.zicp.vip/postcss/7.0.39:
@@ -9146,7 +9124,7 @@ packages:
     version: 3.0.0
     dependencies:
       end-of-stream: 4497220af3.zicp.vip/end-of-stream/1.4.4
-      once: 4497220af3.zicp.vip/once/1.4.0
+      once: 1.4.0
     dev: true
 
   4497220af3.zicp.vip/punycode/2.1.1:
@@ -9216,7 +9194,7 @@ packages:
     version: 2.3.7
     dependencies:
       core-util-is: 4497220af3.zicp.vip/core-util-is/1.0.3
-      inherits: 4497220af3.zicp.vip/inherits/2.0.4
+      inherits: 2.0.4
       isarray: 4497220af3.zicp.vip/isarray/1.0.0
       process-nextick-args: 4497220af3.zicp.vip/process-nextick-args/2.0.1
       safe-buffer: 4497220af3.zicp.vip/safe-buffer/5.1.2
@@ -9230,7 +9208,7 @@ packages:
     version: 3.6.0
     engines: {node: '>= 6'}
     dependencies:
-      inherits: 4497220af3.zicp.vip/inherits/2.0.4
+      inherits: 2.0.4
       string_decoder: 4497220af3.zicp.vip/string_decoder/1.3.0
       util-deprecate: 1.0.2
     dev: true
@@ -9452,15 +9430,6 @@ packages:
     resolution: {integrity: sha512-V2hovdzFbOi77/WajaSMXk2OLm+xNIeQdMMuB7icj7bk6zi2F8GGAxigcnDFpJHbNyNcgyJDiP+8nOrY5cZGrA==, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/rfdc/-/rfdc-1.3.0.tgz}
     name: rfdc
     version: 1.3.0
-    dev: true
-
-  4497220af3.zicp.vip/rimraf/3.0.2:
-    resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/rimraf/-/rimraf-3.0.2.tgz}
-    name: rimraf
-    version: 3.0.2
-    hasBin: true
-    dependencies:
-      glob: 4497220af3.zicp.vip/glob/7.2.3
     dev: true
 
   4497220af3.zicp.vip/run-parallel/1.2.0:
@@ -10245,7 +10214,7 @@ packages:
       loader-utils: 1.4.0
       merge-options: 4497220af3.zicp.vip/merge-options/1.0.1
       micromatch: 4497220af3.zicp.vip/micromatch/3.1.0
-      postcss: 4497220af3.zicp.vip/postcss/5.2.18
+      postcss: 5.2.18
       postcss-prefix-selector: 4497220af3.zicp.vip/postcss-prefix-selector/1.15.0_postcss@5.2.18
       posthtml-rename-id: 4497220af3.zicp.vip/posthtml-rename-id/1.0.12
       posthtml-svg-mode: 4497220af3.zicp.vip/posthtml-svg-mode/1.0.3
@@ -10300,7 +10269,7 @@ packages:
       css-select: 4497220af3.zicp.vip/css-select/4.3.0
       css-tree: 4497220af3.zicp.vip/css-tree/1.1.3
       csso: 4497220af3.zicp.vip/csso/4.2.0
-      picocolors: 4497220af3.zicp.vip/picocolors/1.0.0
+      picocolors: 1.0.0
       stable: 4497220af3.zicp.vip/stable/0.1.8
     dev: true
 
@@ -10495,8 +10464,8 @@ packages:
     version: 3.14.1
     dependencies:
       '@types/json5': 4497220af3.zicp.vip/@types/json5/0.0.29
-      json5: 4497220af3.zicp.vip/json5/1.0.1
-      minimist: 4497220af3.zicp.vip/minimist/1.2.6
+      json5: 1.0.1
+      minimist: 1.2.6
       strip-bom: 4497220af3.zicp.vip/strip-bom/3.0.0
     dev: true
 
@@ -10951,7 +10920,7 @@ packages:
       ipaddr.js: 4497220af3.zicp.vip/ipaddr.js/2.0.1
       open: 4497220af3.zicp.vip/open/8.4.0
       p-retry: 4497220af3.zicp.vip/p-retry/4.6.2
-      rimraf: 4497220af3.zicp.vip/rimraf/3.0.2
+      rimraf: 3.0.2
       schema-utils: 4497220af3.zicp.vip/schema-utils/4.0.0
       selfsigned: 4497220af3.zicp.vip/selfsigned/2.0.1
       serve-index: 4497220af3.zicp.vip/serve-index/1.9.1
@@ -11172,12 +11141,6 @@ packages:
       strip-ansi: 4497220af3.zicp.vip/strip-ansi/6.0.1
     dev: true
 
-  4497220af3.zicp.vip/wrappy/1.0.2:
-    resolution: {integrity: sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/wrappy/-/wrappy-1.0.2.tgz}
-    name: wrappy
-    version: 1.0.2
-    dev: true
-
   4497220af3.zicp.vip/ws/7.5.8:
     resolution: {integrity: sha512-ri1Id1WinAX5Jqn9HejiGb8crfRio0Qgu8+MtL36rlTA6RLsMdWt1Az/19A2Qij6uSHUMphEFaTKa4WG+UNHNw==, registry: http://192.168.9.25:4873/, tarball: http://4497220af3.zicp.vip/ws/-/ws-7.5.8.tgz}
     name: ws
@@ -11258,7 +11221,7 @@ packages:
     dev: true
 
   github.com/sampotts/plyr/d434c9af16e641400aaee93188594208d88f2658:
-    resolution: {tarball: https://codeload.github.com/sampotts/plyr/tar.gz/d434c9af16e641400aaee93188594208d88f2658}
+    resolution: {commit: d434c9af16e641400aaee93188594208d88f2658, repo: git+ssh://git@github.com/sampotts/plyr.git, type: git}
     name: plyr
     version: 3.7.0
     dependencies:
