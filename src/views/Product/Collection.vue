@@ -66,7 +66,7 @@ export default {
       return res.body.count
     },
     async remove(item) {
-      await this.$promiseLoading(delStyleCollection(item.id))
+      await this.$promiseLoading(delStyleCollection(item.styleId))
       this.list.splice(this.list.indexOf(item), 1)
       this.$toast('删除成功')
     },

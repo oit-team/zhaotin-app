@@ -86,8 +86,8 @@ export function getStyleCollection(params) {
 
 /**
  * 取消收藏
- * @param id
+ * @param styleId
  */
-export function delStyleCollection(id) {
-  return post[API_SERVICE.GOODS]('/styleCollection/delStyleCollection', { id })
+export function delStyleCollection(styleId) {
+  return post[API_SERVICE.GOODS]('/styleCollection/delStyleCollection', { styleId })
 }

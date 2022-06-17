@@ -154,7 +154,7 @@
     <div class="flex items-center px-3 bg-white h-15 sticky-bottom border-t border-line">
       <div class="flex space-x-3 text-center whitespace-nowrap mr-2">
         <div @click="addStyleCollection()">
-          <vc-icon name="star-o"></vc-icon>
+          <vc-icon :name="data.styleIsCollection ? 'star' : 'star-o'"></vc-icon>
           <div class="text-xs transform scale-65">收藏</div>
         </div>
         <div @click="callCustomerService()">
@@ -230,7 +230,7 @@ import Search from '@/components/business/Product/Search'
 import Swiper from '@/components/business/Product/Swiper'
 import ProductChoose from '@/components/business/Product/ProductChoose'
 import ShopCartIcon from '@/components/business/ShoppingCart/ShopCartIcon'
-import { addStyleCollection, getStyleById, insertShoppingCart } from '@/api/product'
+import { addStyleCollection, delStyleCollection, getStyleById, insertShoppingCart } from '@/api/product'
 import theme from '@/theme'
 import { keyBy } from 'lodash'
 import { callCustomerService } from '@/utils'
@@ -370,10 +370,21 @@ export default {
       return tabs.map(name => ({ name }))
     },
     async addStyleCollection() {
-      await this.$promiseLoading(addStyleCollection({
-        styleId: this.data.styleId,
-      }))
-      this.$toast.success('收藏成功')
+      if (this.data.styleIsCollection) {
+        await this.$dialog.confirm({
+          title: '提示',
+          message: '要取消收藏吗？',
+        })
+        await this.$promiseLoading(delStyleCollection(this.data.styleId))
+        this.$toast('已取消收藏')
+      } else {
+        await this.$promiseLoading(addStyleCollection({
+          styleId: this.data.styleId,
+        }))
+        this.$toast.success('收藏成功')
+      }
+
+      this.data.styleIsCollection = !this.data.styleIsCollection
     },
   },
 }
