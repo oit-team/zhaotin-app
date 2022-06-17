@@ -154,7 +154,10 @@
     <div class="flex items-center px-3 bg-white h-15 sticky-bottom border-t border-line">
       <div class="flex space-x-3 text-center whitespace-nowrap mr-2">
         <div @click="addStyleCollection()">
-          <vc-icon :name="data.styleIsCollection ? 'star' : 'star-o'"></vc-icon>
+          <vc-icon
+            :class="{'text-primary': data.styleIsCollection}"
+            :name="data.styleIsCollection ? 'star' : 'star-o'"
+          ></vc-icon>
           <div class="text-xs transform scale-65">收藏</div>
         </div>
         <div @click="callCustomerService()">
@@ -254,6 +257,7 @@ export default {
   data() {
     return {
       theme,
+      styleId: '',
       keyword: '',
       data: {},
       // 订购方式
@@ -277,9 +281,12 @@ export default {
     },
   },
 
-  created() {
+  watch: {
+    styleId: 'getStyleInfo',
+  },
+
+  activated() {
     this.styleId = this.$route.params.styleId
-    this.getStyleInfo()
   },
 
   methods: {
