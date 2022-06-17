@@ -17,7 +17,7 @@
                 <vc-img fit="contain" :src="item.resUrl" size="60"></vc-img>
               </div>
               <div class="flex overflow-hidden flex-col flex-1 justify-around self-stretch">
-                <div class="truncate">{{ item.styleName }}</div>
+                <div class="truncate text-sm">{{ item.styleName }}</div>
                 <div class="text-xs text-secondary">收藏时间：{{ item.createTime }}</div>
               </div>
               <div>
@@ -43,7 +43,7 @@
 <script>
 import { delStyleCollection, getStyleCollection } from '@/api/product'
 import theme from '@/theme'
-import VcContainer from '../../components/basic/Container/Container'
+import VcContainer from '@/components/basic/Container/Container'
 
 export default {
   name: 'Collection',
