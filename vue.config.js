@@ -1,6 +1,15 @@
 const { defineConfig } = require('@vue/cli-service')
 const modifyVars = require('./vant.config')
 const path = require('path')
+const rimraf = require('rimraf')
+
+const pkg = require('./package')
+
+// 输出目录，格式：项目名@环境
+const outputDir = `${pkg.name}@${process.env.NODE_ENV}`
+
+// 清理压缩包
+rimraf(`${outputDir}.{zip,7z}`, () => {})
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -9,6 +18,7 @@ function resolve(dir) {
 module.exports = defineConfig({
   transpileDependencies: true,
   publicPath: './',
+  outputDir,
   devServer: {
     port: process.env.PORT || 5000,
     proxy: {
