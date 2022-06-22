@@ -112,7 +112,6 @@ export default {
             this.error = e
           },
         },
-        directives: !this.refresh ? [{ name: 'scroll-record' }] : [],
       }
 
       return (
@@ -163,6 +162,9 @@ export default {
 
     if (this.refresh) vNode = this.genPullRefreshList(h)
 
-    return h('div', { class: 'vc-list' }, [vNode])
+    return h('div', {
+      class: 'vc-list',
+      directives: [{ name: 'scroll-record' }],
+    }, [vNode])
   },
 }
