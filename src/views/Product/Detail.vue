@@ -1,151 +1,153 @@
 <template>
-  <div class="bg-gray">
+  <vc-container class="bg-gray">
     <Search is-link back>
       <template #after>
         <ShopCartIcon class="ml-3 mr-2" />
       </template>
     </Search>
 
-    <Swiper :data="data" />
+    <div class="flex-1 overflow-auto">
+      <Swiper :data="data" />
 
-    <div class="p-3">
-      <div class="p-3 mb-2 bg-white rounded-lg">
-        <div class="mb-2">
-          <span class="font-bold">{{ data.styleName }}</span>
-        </div>
-        <div class="flex justify-between items-center">
-          <div>
-            <div class="items-center mb-2">
-              <span class="text-sm text-secondary">款号：</span>
-              <span class="text-sm">{{ data.styleNo }}</span>
+      <div class="p-3">
+        <div class="p-3 mb-2 bg-white rounded-lg">
+          <div class="mb-2">
+            <span class="font-bold">{{ data.styleName }}</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <div>
+              <div class="items-center mb-2">
+                <span class="text-sm text-secondary">款号：</span>
+                <span class="text-sm">{{ data.styleNo }}</span>
+              </div>
+              <div class="relative flex flex-row items-center">
+                <span class="text-sm text-secondary">推荐：</span>
+                <van-rate count="5" :value="data.recommendationLevel" size="12"></van-rate>
+                <div class="absolute inset-0"></div>
+              </div>
             </div>
-            <div class="relative flex flex-row items-center">
-              <span class="text-sm text-secondary">推荐：</span>
-              <van-rate count="5" :value="data.recommendationLevel" size="12"></van-rate>
-              <div class="absolute inset-0"></div>
+            <div>
+              <vc-text mode="price" :text="data.tradePrice || 0"></vc-text>
             </div>
           </div>
-          <div>
-            <vc-text mode="price" :text="data.tradePrice || 0"></vc-text>
-          </div>
         </div>
-      </div>
 
-      <div class="p-3 mb-2 bg-white rounded-lg flex flex-col">
-        <div class="flex" @click="openChoose(1)">
-          <span class="mr-3 text-sm text-secondary">规格</span>
-          <span class="flex-1 text-sm">{{ colorCount }}种颜色 · {{ sizeCount }} 种尺码 可选</span>
-          <vc-icon class="text-sm text-primary" name="chevron-right"></vc-icon>
-        </div>
-        <div class="flex mt-4" @click="showProperty = true">
-          <span class="mr-3 text-sm text-secondary">属性</span>
-          <div class="flex flex-row flex-1 -ml-2">
-            <span class="px-2 text-sm">{{ data.styleFabric }}</span>
-            <span class="px-2 text-sm">{{ data.styleFlowerPattern }}</span>
-            <span class="px-2 text-sm">{{ data.styleCategory }}</span>
+        <div class="p-3 mb-2 bg-white rounded-lg flex flex-col">
+          <div class="flex" @click="openChoose(1)">
+            <span class="mr-3 text-sm text-secondary">规格</span>
+            <span class="flex-1 text-sm">{{ colorCount }}种颜色 · {{ sizeCount }} 种尺码 可选</span>
+            <vc-icon class="text-sm text-primary" name="chevron-right"></vc-icon>
           </div>
-          <vc-icon class="text-sm text-primary" name="chevron-right"></vc-icon>
-        </div>
-        <div class="flex mt-4" @click="showProperty = true">
-          <span class="mr-3 text-sm text-secondary">标签</span>
-          <span class="flex-1 text-sm truncate">
-            {{ data.styleLabel && data.styleLabel.replace(/[,，]/g, ' ') }}
-          </span>
-          <vc-icon class="text-sm text-primary" name="chevron-right"></vc-icon>
-        </div>
-      </div>
-
-      <div class="p-3 mb-2 bg-white rounded-lg" @click="showSellingPoint = true">
-        <div class="flex-row items-center mb-3 flex">
-          <span class="flex-1 font-bold text-sm leading-16px">商品卖点</span>
-          <vc-icon class="text-sm text-primary" name="chevron-right"></vc-icon>
-        </div>
-        <div>
-          <div
-            v-for="item of [
-              {key: 'sellingPointFabric', name: '面料'},
-              {key: 'designSellingPoint', name: '设计'},
-              {key: 'wearSellingPoint', name: '穿着'},
-            ]"
-            :key="item.key"
-            class="flex flex-row items-center mt-3"
-          >
-            <span class="mr-4 text-sm leading-16px text-secondary self-start">{{ item.name }}</span>
-            <span v-html="data[item.key]" class="flex-1 text-xs line-clamp-2 leading-16px"></span>
+          <div class="flex mt-4" @click="showProperty = true">
+            <span class="mr-3 text-sm text-secondary">属性</span>
+            <div class="flex flex-row flex-1 -ml-2">
+              <span class="px-2 text-sm">{{ data.styleFabric }}</span>
+              <span class="px-2 text-sm">{{ data.styleFlowerPattern }}</span>
+              <span class="px-2 text-sm">{{ data.styleCategory }}</span>
+            </div>
+            <vc-icon class="text-sm text-primary" name="chevron-right"></vc-icon>
           </div>
-        </div>
-      </div>
-
-      <div v-if="data._styleData && data._styleData.length" class="p-3 mb-2 bg-white rounded-lg">
-        <span class="flex-1 font-bold text-sm">商品属性</span>
-        <div
-          v-for="(item, index) of data._styleData"
-          :key="index"
-          class="flex flex-row items-center py-2 border-b border-line"
-        >
-          <span class="mr-6 text-sm w-120rpx text-secondary">{{ item.name }}</span>
-          <div
-            class="flex flex-row flex-1 justify-around py-1 text-center tags"
-          >
-            <span
-              v-for="opt of item.options"
-              :key="opt.option"
-              class="text-sm text-center rounded leading-24px w-1/3 mx-2"
-              :class="opt.status ? 'bg-primary text-white' : ''"
-            >
-              {{ opt.option }}
+          <div class="flex mt-4" @click="showProperty = true">
+            <span class="mr-3 text-sm text-secondary">标签</span>
+            <span class="flex-1 text-sm truncate">
+              {{ data.styleLabel && data.styleLabel.replace(/[,，]/g, ' ') }}
             </span>
+            <vc-icon class="text-sm text-primary" name="chevron-right"></vc-icon>
           </div>
         </div>
-      </div>
 
-      <div v-if="data._title && data._title.length" class="p-3 mb-2 bg-white rounded-lg">
-        <div class="font-bold mb-3 text-sm">尺码信息</div>
-
-        <div class="overflow-x-auto">
-          <table class="text-sm text-center whitespace-nowrap">
-            <thead>
-              <tr>
-                <th class="font-normal pr-6 sticky left-0 bg-white text-secondary">尺码</th>
-                <th
-                  v-for="item of data._title"
-                  :key="item"
-                  class="font-normal px-6"
-                >
-                  {{ item }}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                v-for="size of data.styleSizeList"
-                :key="size.sizeName"
-                class="h-8"
-              >
-                <td class="pr-6 sticky left-0 bg-white text-secondary">{{ size.sizeName }}</td>
-                <td
-                  v-for="(item, index) of size.sizeConfig"
-                  :key="index"
-                >
-                  {{ item }}
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="p-3 mb-2 bg-white rounded-lg" @click="showSellingPoint = true">
+          <div class="flex-row items-center mb-3 flex">
+            <span class="flex-1 font-bold text-sm leading-16px">商品卖点</span>
+            <vc-icon class="text-sm text-primary" name="chevron-right"></vc-icon>
+          </div>
+          <div>
+            <div
+              v-for="item of [
+                {key: 'sellingPointFabric', name: '面料'},
+                {key: 'designSellingPoint', name: '设计'},
+                {key: 'wearSellingPoint', name: '穿着'},
+              ]"
+              :key="item.key"
+              class="flex flex-row items-center mt-3"
+            >
+              <span class="mr-4 text-sm leading-16px text-secondary self-start">{{ item.name }}</span>
+              <span v-html="data[item.key]" class="flex-1 text-xs line-clamp-2 leading-16px"></span>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div v-if="data._styleWashing && data._styleWashing.length" class="p-3 mb-2 bg-white rounded-lg">
-        <span class="pb-2 font-bold text-sm">洗涤说明</span>
-
-        <div class="grid grid-cols-4 gap-2">
+        <div v-if="data._styleData && data._styleData.length" class="p-3 mb-2 bg-white rounded-lg">
+          <span class="flex-1 font-bold text-sm">商品属性</span>
           <div
-            v-for="(item, index) of data._styleWashing"
+            v-for="(item, index) of data._styleData"
             :key="index"
-            class="flex flex-col items-center"
+            class="flex flex-row items-center py-2 border-b border-line"
           >
-            <vc-img :src="item.resUrl" height="50px" width="50px"></vc-img>
-            <span class="text-xs text-center">{{ item.name }}</span>
+            <span class="mr-6 text-sm w-120rpx text-secondary">{{ item.name }}</span>
+            <div
+              class="flex flex-row flex-1 justify-around py-1 text-center tags"
+            >
+              <span
+                v-for="opt of item.options"
+                :key="opt.option"
+                class="text-sm text-center rounded leading-24px w-1/3 mx-2"
+                :class="opt.status ? 'bg-primary text-white' : ''"
+              >
+                {{ opt.option }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="data._title && data._title.length" class="p-3 mb-2 bg-white rounded-lg">
+          <div class="font-bold mb-3 text-sm">尺码信息</div>
+
+          <div class="overflow-x-auto">
+            <table class="text-sm text-center whitespace-nowrap">
+              <thead>
+                <tr>
+                  <th class="font-normal pr-6 sticky left-0 bg-white text-secondary">尺码</th>
+                  <th
+                    v-for="item of data._title"
+                    :key="item"
+                    class="font-normal px-6"
+                  >
+                    {{ item }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="size of data.styleSizeList"
+                  :key="size.sizeName"
+                  class="h-8"
+                >
+                  <td class="pr-6 sticky left-0 bg-white text-secondary">{{ size.sizeName }}</td>
+                  <td
+                    v-for="(item, index) of size.sizeConfig"
+                    :key="index"
+                  >
+                    {{ item }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div v-if="data._styleWashing && data._styleWashing.length" class="p-3 mb-2 bg-white rounded-lg">
+          <span class="pb-2 font-bold text-sm">洗涤说明</span>
+
+          <div class="grid grid-cols-4 gap-2">
+            <div
+              v-for="(item, index) of data._styleWashing"
+              :key="index"
+              class="flex flex-col items-center"
+            >
+              <vc-img :src="item.resUrl" height="50px" width="50px"></vc-img>
+              <span class="text-xs text-center">{{ item.name }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -225,7 +227,7 @@
         </div>
       </div>
     </van-popup>
-  </div>
+  </vc-container>
 </template>
 
 <script>
