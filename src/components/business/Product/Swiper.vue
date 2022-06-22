@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="relative m-3">
-      <div>
+      <div class="aspect-1/1">
         <van-swipe
           ref="swipe"
-          class="aspect-square rounded-lg"
+          class="rounded-lg"
           indicator-color="white"
           lazy-render
           :show-indicators="false"
@@ -14,7 +14,7 @@
             <VuePlyr
               ref="plyr"
               :options="{
-                controls: ['play-large', 'progress', 'mute', 'fullscreen'],
+                controls: ['play-large', 'progress', 'mute'],
               }"
             >
               <video

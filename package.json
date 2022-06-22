@@ -41,8 +41,8 @@
     "less": "^4.1.2",
     "less-loader": "^5.0.0",
     "lint-staged": "^11.1.2",
-    "rimraf": "^3.0.2",
     "postcss-px-to-viewport": "^1.1.1",
+    "rimraf": "^3.0.2",
     "sass": "^1.32.7",
     "sass-loader": "^12.0.0",
     "svg-sprite-loader": "^6.0.11",
@@ -50,7 +50,6 @@
     "vue-cli-plugin-windicss": "^1.1.4",
     "vue-template-compiler": "^2.6.14",
     "windicss": "^3.5.4",
-    "windicss-plugin-aspect-ratio": "^1.0.1",
     "yorkie": "^2.0.0"
   },
   "gitHooks": {

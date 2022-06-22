@@ -33,7 +33,7 @@ module.exports = {
     },
   },
   plugins: [
-    require('windicss-plugin-aspect-ratio'),
+    require('windicss/plugin/aspect-ratio'),
     require('windicss/plugin/line-clamp'),
   ],
 }

@@ -3,8 +3,8 @@
     <Search is-link />
 
     <div class="flex-1 overflow-auto">
-      <div>
-        <van-swipe class="aspect-[16/6]" :autoplay="5000" indicator-color="white">
+      <div class="aspect-6/16">
+        <van-swipe :autoplay="5000" indicator-color="white">
           <van-swipe-item v-for="(item, index) of carousel" :key="index">
             <vc-img :src="item" size="100%" />
           </van-swipe-item>
@@ -64,11 +64,11 @@
           <div
             v-for="item of productList"
             :key="item.styleId"
-            class="flex overflow-hidden flex-col border border-line rounded-lg"
+            class="flex overflow-hidden flex-col border border-line rounded-lg aspect-5/4"
             @click="$router.to('ProductDetail', { styleId: item.styleId })"
           >
             <vc-img
-              class="rounded overflow-hidden aspect-[4/5]"
+              class="rounded overflow-hidden"
               :src="item.resUrl"
             ></vc-img>
           </div>
