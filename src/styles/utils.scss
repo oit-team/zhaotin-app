@@ -25,3 +25,7 @@
   margin-right: 2px;
   content: "\00D7";
 }
+
+.overflow-auto {
+  -webkit-overflow-scrolling: touch;
+}

@@ -1,4 +1,6 @@
-$route-transition: all .4s;
+$route-transition-property: transform;
+$route-transition-delay: .4s;
+$route-transition: $route-transition-property $route-transition-delay;
 $page-upper-index: 50;
 $page-lower-index: -1;
 $mask-bg: rgba(0, 0, 0, .3);
@@ -16,11 +18,19 @@ $mask-bg: rgba(0, 0, 0, .3);
 .push-route {
   &-enter-active, &-leave-active {
     position: absolute;
-    transition: $route-transition;
 
     &:before {
-      @include mask;
+      //@include mask;
     }
+  }
+
+  &-enter-active {
+    transition: $route-transition;
+  }
+
+  &-leave-active {
+    // 加一点延迟，减少在ios上会闪烁的情况
+    transition: $route-transition-property ($route-transition-delay + 0.2s);
   }
 
   &-enter {
@@ -51,7 +61,7 @@ $mask-bg: rgba(0, 0, 0, .3);
     will-change: transform;
 
     &:before {
-      @include mask;
+      //@include mask;
     }
   }
 
