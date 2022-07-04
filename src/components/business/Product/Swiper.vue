@@ -11,21 +11,7 @@
           @change="swiperIndex = $event"
         >
           <van-swipe-item v-if="tabIndex === TAB_TYPE.PRODUCT && data.styleVideo" class="swipe-video">
-            <VuePlyr
-              ref="plyr"
-              :options="{
-                controls: ['play-large', 'progress', 'mute'],
-              }"
-            >
-              <video
-                :poster="data.styleVideoPatch"
-                class="h-full w-full object-cover"
-                :src="data.styleVideo"
-                controls
-                @click="$refs.plyr.player.togglePlay()"
-                @ready="stopPropagation()"
-              ></video>
-            </VuePlyr>
+            <SwiperVideo :data="data" />
           </van-swipe-item>
           <van-swipe-item v-for="(item, index) of swiperImageList" :key="index" @click="openPreview(index)">
             <vc-img :src="item.resUrl" size="100%" />
@@ -87,8 +73,7 @@
 <script>
 import { size } from 'lodash'
 import { ImagePreview } from 'vant'
-import VuePlyr from 'vue-plyr'
-import 'vue-plyr/dist/vue-plyr.css'
+import SwiperVideo from './SwiperVideo'
 
 const TAB_TYPE = {
   PRODUCT: 0,
@@ -99,7 +84,7 @@ export default {
   name: 'Swiper',
 
   components: {
-    VuePlyr,
+    SwiperVideo,
   },
 
   props: {
@@ -155,10 +140,6 @@ export default {
         startPosition: index,
       })
     },
-    stopPropagation() {
-      const controls = document.querySelector('.swipe-video input')
-      controls.addEventListener('touchmove', e => e.stopPropagation())
-    },
   },
 }
 </script>
@@ -168,7 +149,7 @@ export default {
   --plyr-color-main: theme("colors.primary");
 
   .plyr__poster {
-    pointer-events: none;
+    //pointer-events: none;
   }
 
   .plyr__volume {
