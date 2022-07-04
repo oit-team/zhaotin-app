@@ -170,8 +170,6 @@ export default {
 
   methods: {
     async submit() {
-      if (!this.form.orderReason) return this.$toast('请选择下单事由')
-
       const styleList = this.list.reduce((prev, curr) => {
         const styles = curr.style.map(item => ({
           styleId: item.styleId,
