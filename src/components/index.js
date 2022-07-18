@@ -1,8 +1,8 @@
 import Vue from 'vue'
+import { setComponentProps } from '../utils'
 import * as basicComponents from './basic'
 import * as vantComponents from './vant'
 import * as businessComponents from './business/registry'
-import { setComponentProps } from '../utils'
 
 const propsConfig = {
   Icon: {
@@ -42,7 +42,7 @@ vantComponents.Popup.mixins.push({
 function registryComponents(components) {
   Object
     .values(components)
-    .forEach(component => {
+    .forEach((component) => {
       component = component.default ?? component
       Vue.component(component.name, component)
     })

@@ -3,7 +3,9 @@
     <vc-nav-bar title="积分订单" />
 
     <vc-list :promise="loadData" first-load>
-      <div v-for="item of list" :key="item.id">{{ item }}</div>
+      <div v-for="item of list" :key="item.id">
+        {{ item }}
+      </div>
     </vc-list>
   </vc-container>
 </template>

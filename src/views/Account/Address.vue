@@ -41,24 +41,26 @@
             </div>
           </div>
           <template #right>
-            <van-button class="h-full" square type="danger" @click="remove(item)" text="删除" />
+            <van-button class="h-full" square type="danger" text="删除" @click="remove(item)" />
           </template>
         </van-swipe-cell>
       </div>
     </div>
 
     <div class="p-2 bg-white">
-      <van-button shape="circle" round block type="primary" @click="$router.to('AddressUpdate')">添加收货地址</van-button>
+      <van-button shape="circle" round block type="primary" @click="$router.to('AddressUpdate')">
+        添加收货地址
+      </van-button>
     </div>
   </div>
 </template>
 
 <script>
-import { delReceiving, getReceiving } from '@/api/account'
 import theme from '../../theme'
+import { delReceiving, getReceiving } from '@/api/account'
 
 export default {
-  name: 'Address',
+  name: 'AccountAddress',
 
   data: () => ({
     addressList: [],
@@ -87,7 +89,7 @@ export default {
     },
     select(item) {
       if (!this.selectMode) return
-      this.$root.$emit('page:switch-address', item)
+      this.$root.$emit('switch-address', item)
       this.$router.back()
     },
     updateAddress(item) {

@@ -10,9 +10,9 @@
       <div class="mb-2">
         <div>反馈内容</div>
         <van-field
+          v-model="content"
           type="textarea"
           rows="2"
-          v-model="content"
           placeholder="请输入内容"
           show-word-limit
           maxlength="1000"
@@ -22,12 +22,16 @@
         <div>反馈类型</div>
         <div class="border border-[#dadbde] rounded p-2">
           <van-radio-group v-model="type" direction="horizontal">
-            <van-radio v-for="item of types" class="p-1" :key="item" :name="item">{{ item }}</van-radio>
+            <van-radio v-for="item of types" :key="item" class="p-1" :name="item">
+              {{ item }}
+            </van-radio>
           </van-radio-group>
         </div>
       </div>
       <div>
-        <van-button type="primary" block :disabled="!content || !type" @click="submit()">提交</van-button>
+        <van-button type="primary" block :disabled="!content || !type" @click="submit()">
+          提交
+        </van-button>
       </div>
     </div>
   </div>

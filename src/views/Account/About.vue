@@ -31,9 +31,8 @@ export default {
     }
   },
   created() {
-    if (this.$route.params.info) {
+    if (this.$route.params.info)
       this.title = '公司简介'
-    }
   },
 }
 </script>

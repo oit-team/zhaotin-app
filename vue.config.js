@@ -1,7 +1,7 @@
-const { defineConfig } = require('@vue/cli-service')
-const modifyVars = require('./vant.config')
 const path = require('path')
+const { defineConfig } = require('@vue/cli-service')
 const rimraf = require('rimraf')
+const modifyVars = require('./vant.config')
 
 const pkg = require('./package')
 
@@ -38,7 +38,7 @@ module.exports = defineConfig({
       },
     },
   },
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     config.module
       .rule('svg')
       .exclude.add(resolve('src/assets/icons/svg'))

@@ -74,15 +74,15 @@
           <div>
             <div
               v-for="item of [
-                {key: 'sellingPointFabric', name: '面料'},
-                {key: 'designSellingPoint', name: '设计'},
-                {key: 'wearSellingPoint', name: '穿着'},
+                { key: 'sellingPointFabric', name: '面料' },
+                { key: 'designSellingPoint', name: '设计' },
+                { key: 'wearSellingPoint', name: '穿着' },
               ]"
               :key="item.key"
               class="flex flex-row items-center mt-3"
             >
               <span class="mr-4 text-sm leading-16px text-secondary self-start">{{ item.name }}</span>
-              <span v-html="data[item.key]" class="flex-1 text-xs line-clamp-2 leading-16px"></span>
+              <span class="flex-1 text-xs line-clamp-2 leading-16px" v-html="data[item.key]"></span>
             </div>
           </div>
         </div>
@@ -111,13 +111,17 @@
         </div>
 
         <div v-if="data._title && data._title.length" class="p-3 mb-2 bg-white rounded-lg">
-          <div class="font-bold mb-3 text-sm">尺码信息</div>
+          <div class="font-bold mb-3 text-sm">
+            尺码信息
+          </div>
 
           <div class="overflow-x-auto">
             <table class="text-sm text-center whitespace-nowrap">
               <thead>
                 <tr>
-                  <th class="font-normal pr-6 sticky left-0 bg-white text-secondary">尺码</th>
+                  <th class="font-normal pr-6 sticky left-0 bg-white text-secondary">
+                    尺码
+                  </th>
                   <th
                     v-for="item of data._title"
                     :key="item"
@@ -133,7 +137,9 @@
                   :key="size.sizeName"
                   class="h-8"
                 >
-                  <td class="pr-6 sticky left-0 bg-white text-secondary">{{ size.sizeName }}</td>
+                  <td class="pr-6 sticky left-0 bg-white text-secondary">
+                    {{ size.sizeName }}
+                  </td>
                   <td
                     v-for="(item, index) of size.sizeConfig"
                     :key="index"
@@ -168,14 +174,18 @@
         <div class="flex space-x-3 text-center whitespace-nowrap mr-2">
           <div @click="addStyleCollection()">
             <vc-icon
-              :class="{'text-primary': data.styleIsCollection}"
+              :class="{ 'text-primary': data.styleIsCollection }"
               :name="data.styleIsCollection ? 'star' : 'star-o'"
             ></vc-icon>
-            <div class="text-xs transform scale-65">收藏</div>
+            <div class="text-xs transform scale-65">
+              收藏
+            </div>
           </div>
           <div @click="callCustomerService()">
             <vc-icon name="message"></vc-icon>
-            <div class="text-xs transform scale-65">客服</div>
+            <div class="text-xs transform scale-65">
+              客服
+            </div>
           </div>
         </div>
         <div class="flex flex-1 space-x-2">
@@ -197,7 +207,9 @@
         </div>
       </template>
       <template v-else>
-        <van-button class="bg-price text-white" block round @click="openChoose(2)">立即兑换</van-button>
+        <van-button class="bg-price text-white" block round @click="openChoose(2)">
+          立即兑换
+        </van-button>
       </template>
     </div>
 
@@ -211,12 +223,12 @@
         <div class="text-sm px-6 flex-1 overflow-auto">
           <div
             v-for="item of [
-              {title: '款式', key: 'styleLength'},
-              {title: '类别', key: 'styleCategory'},
-              {title: '标签', key: 'styleLabel'},
-              {title: '场合', key: 'styleInfo'},
-              {title: '材质', key: 'styleFabric'},
-              {title: '廓形', key: 'styleFlowerPattern'},
+              { title: '款式', key: 'styleLength' },
+              { title: '类别', key: 'styleCategory' },
+              { title: '标签', key: 'styleLabel' },
+              { title: '场合', key: 'styleInfo' },
+              { title: '材质', key: 'styleFabric' },
+              { title: '廓形', key: 'styleFlowerPattern' },
             ]"
             :key="item.key"
             class="py-3 border-b border-line"
@@ -246,16 +258,16 @@
 </template>
 
 <script>
+import { keyBy } from 'lodash'
+import { SUBMIT_ORDER_EVENT } from '../Order/OrderSubmit'
+import { getGoodsDetails } from '../../api/pointsMall'
 import Search from '@/components/business/Product/Search'
 import Swiper from '@/components/business/Product/Swiper'
 import ProductChoose from '@/components/business/Product/ProductChoose'
 import ShopCartIcon from '@/components/business/ShoppingCart/ShopCartIcon'
 import { addStyleCollection, delStyleCollection, getStyleById, insertShoppingCart } from '@/api/product'
 import theme from '@/theme'
-import { keyBy } from 'lodash'
 import { callCustomerService } from '@/utils'
-import { SUBMIT_ORDER_EVENT } from '../Order/OrderSubmit'
-import { getGoodsDetails } from '../../api/pointsMall'
 
 const MODE = {
   SHOPPING_CART: 0,

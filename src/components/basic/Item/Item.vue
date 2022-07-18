@@ -30,9 +30,8 @@ export default {
 
   computed: {
     active() {
-      if (this.ItemGroup?.multiple) {
+      if (this.ItemGroup?.multiple)
         return this.ItemGroup.innerValue.includes(this.itemValue)
-      }
 
       return this.ItemGroup?.innerValue === this.itemValue
     },

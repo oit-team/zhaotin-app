@@ -70,7 +70,7 @@
                   v-for="(item, index) of ['未下款', '已下款']"
                   :key="index"
                   class="text-sm text-center py-1 rounded bg-gray"
-                  :value="String(index+2)"
+                  :value="String(index + 2)"
                 >
                   {{ item }}
                 </vc-item>
@@ -80,8 +80,12 @@
         </div>
 
         <div class="flex p-3 space-x-3">
-          <van-button round block @click="reset()">重置</van-button>
-          <van-button type="primary" round block @click="submit()">确定</van-button>
+          <van-button round block @click="reset()">
+            重置
+          </van-button>
+          <van-button type="primary" round block @click="submit()">
+            确定
+          </van-button>
         </div>
       </div>
     </van-popup>
@@ -132,11 +136,11 @@ export default {
       this.show = !this.show
     },
     loadData() {
-      this.dictitemInfoAllMethod('STYLE_LENGTH').then(res => {
+      this.dictitemInfoAllMethod('STYLE_LENGTH').then((res) => {
         this.styleLengthList = res.body.result
       })
 
-      this.dictitemInfoAllMethod('STYLE_BAR_CODE').then(res => {
+      this.dictitemInfoAllMethod('STYLE_BAR_CODE').then((res) => {
         this.styleTypeList = res.body.result
       })
     },
@@ -163,7 +167,7 @@ export default {
 
       let changed = false
 
-      Object.keys(this.form).forEach(key => {
+      Object.keys(this.form).forEach((key) => {
         if (data[key]) {
           this.form[key] = data[key]
           changed = true

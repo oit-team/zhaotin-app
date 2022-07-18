@@ -5,7 +5,9 @@
         <slot name="checkbox"></slot>
         <p>{{ item.styleName }}</p>
       </div>
-      <div class="text-xs text-secondary">{{ item.styleNo }}</div>
+      <div class="text-xs text-secondary">
+        {{ item.styleNo }}
+      </div>
     </div>
     <div class="px-2 pb-2 px-4 space-y-2">
       <slot />

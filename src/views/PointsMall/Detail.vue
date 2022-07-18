@@ -48,15 +48,17 @@
     </div>
 
     <div class="bg-white px-3 py-2">
-      <van-button class="bg-price text-white" block round @click="submit">立即兑换</van-button>
+      <van-button class="bg-price text-white" block round @click="submit">
+        立即兑换
+      </van-button>
     </div>
   </vc-container>
 </template>
 
 <script>
+import { ImagePreview } from 'vant'
 import { getGoodsDetails } from '@/api/pointsMall'
 import SwiperVideo from '@/components/business/Product/SwiperVideo'
-import { ImagePreview } from 'vant'
 
 export default {
   name: 'PointsMallDetail',

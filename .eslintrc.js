@@ -1,28 +1,7 @@
 module.exports = {
-  root: true,
-  env: {
-    node: true,
-  },
   extends: [
     '@oit',
   ],
-  parserOptions: {
-    parser: '@babel/eslint-parser',
-  },
   rules: {
-    // 尾随逗号
-    'comma-dangle': ['error', 'always-multiline'],
-    // 函数圆括号之前的空格
-    'space-before-function-paren': [
-      'error', {
-        anonymous: 'always',
-        named: 'never',
-        asyncArrow: 'always',
-      },
-    ],
-    'vue/html-self-closing': 'off',
-    'vue/require-prop-types': 'off',
-    'vue/no-v-html': 'off',
-    'vue/require-render-return': 'off',
   },
 }

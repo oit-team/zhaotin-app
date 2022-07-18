@@ -1,6 +1,6 @@
-import store from '@/store'
-import { post } from './index'
 import API_SERVICE from './enum/API_SERVICE'
+import { post } from './index'
+import store from '@/store'
 
 export function getStyleList(params) {
   return post[API_SERVICE.GOODS]('/style/getStyleList', params)

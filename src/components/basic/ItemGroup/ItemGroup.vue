@@ -70,9 +70,8 @@ export default {
       const firstItemValue = this.items[0].itemValue
 
       if (this.multiple) {
-        if (!this.innerValue.length) {
+        if (!this.innerValue.length)
           this.innerValue.push(firstItemValue)
-        }
       } else {
         this.innerValue = this.innerValue ?? firstItemValue
       }
@@ -81,11 +80,10 @@ export default {
       if (this.multiple) {
         if (item.active) {
           if (
-            this.innerValue.includes(item.itemValue) &&
-            (!this.mandatory || this.innerValue.length > 1)
-          ) {
+            this.innerValue.includes(item.itemValue)
+            && (!this.mandatory || this.innerValue.length > 1)
+          )
             this.innerValue.splice(this.innerValue.indexOf(item.itemValue), 1)
-          }
         } else {
           this.innerValue.push(item.itemValue)
         }
@@ -104,9 +102,8 @@ export default {
       return this.items.length - 1
     },
     unregister(item) {
-      if (this.items.includes(item)) {
+      if (this.items.includes(item))
         this.items.splice(this.items.indexOf(item), 1)
-      }
     },
   },
 }

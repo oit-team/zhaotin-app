@@ -17,7 +17,7 @@
             label-disabled
             class="!w-5"
             :value="selectedMap[item.styleId] && selectedMap[item.styleId].length === item.style.length"
-            @input="changeSelectItem(item , $event)"
+            @input="changeSelectItem(item, $event)"
           ></van-checkbox>
         </template>
         <ShopStyleItem
@@ -58,19 +58,21 @@
             <vc-text :text="priceData.styleTotalPrice || 0" mode="price"></vc-text>
           </span>
         </div>
-        <van-button class="!h-8" type="primary" @click="submit()">结算</van-button>
+        <van-button class="!h-8" type="primary" @click="submit()">
+          结算
+        </van-button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { keyBy } from 'lodash'
+import { SUBMIT_ORDER_EVENT } from '../Order/OrderSubmit'
 import { Dialog } from '@/components/vant'
 import ShopItem from '@/components/business/ShoppingCart/ShopItem'
 import ShopStyleItem from '@/components/business/ShoppingCart/ShopStyleItem'
-import { keyBy } from 'lodash'
 import { deleteShoppingCartStyle, updateShoppingCart } from '@/api/order'
-import { SUBMIT_ORDER_EVENT } from '../Order/OrderSubmit'
 import { queryStylePrice } from '@/utils/actions'
 
 export default {
@@ -97,10 +99,10 @@ export default {
       return this.$store.state.shoppingCart.data
     },
     allChecked() {
-      return this.list.every(item => {
-        if (this.selectedMap[item.styleId]) {
+      return this.list.every((item) => {
+        if (this.selectedMap[item.styleId])
           return this.selectedMap[item.styleId].length === item.style.length
-        }
+
         return false
       })
     },
@@ -147,11 +149,10 @@ export default {
       }
     },
     selectAll(check) {
-      if (check) {
+      if (check)
         this.list.forEach(item => this.changeSelectItem(item, true))
-      } else {
+      else
         this.selectedMap = {}
-      }
     },
     changeNumber(style, id, {
       value,
@@ -190,16 +191,16 @@ export default {
         .map(([styleId, styleList]) => {
           return {
             ...listMap[styleId],
-            style: styleList.map(id => {
+            style: styleList.map((id) => {
               return listMap[styleId].style?.find(style => style.id === id)
             }),
           }
         })
     },
     submit() {
-      if (!Object.values(this.selectedMap).some(item => item.length)) {
+      if (!Object.values(this.selectedMap).some(item => item.length))
         return this.$toast('请选择商品')
-      }
+
       this.$root.$off(SUBMIT_ORDER_EVENT, this.clearSelectMap)
       this.$root.$once(SUBMIT_ORDER_EVENT, this.clearSelectMap)
       this.$router.to('OrderSubmit', {
@@ -216,7 +217,7 @@ export default {
         style,
         styleNo,
       }) => {
-        style.forEach(item => {
+        style.forEach((item) => {
           list.push({
             styleNo,
             styleId: item.styleId,
@@ -278,9 +279,8 @@ export default {
         })
     },
     changeRight() {
-      if (this.selectedMap !== {}) {
+      if (this.selectedMap !== {})
         this.deleteShoppingItem()
-      }
     },
   },
 }

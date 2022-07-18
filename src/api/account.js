@@ -1,5 +1,5 @@
-import { post } from '.'
 import API_SERVICE from './enum/API_SERVICE'
+import { post } from '.'
 
 /**
  * 登录

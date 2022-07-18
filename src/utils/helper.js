@@ -27,13 +27,12 @@ export function promiseLoading(promises, config) {
 export function convertToUnit(str, unit = 'px') {
   let size
 
-  if (str === null || str === undefined || str === '') {
+  if (str === null || str === undefined || str === '')
     return undefined
-  } else if (isNaN(+str)) {
+  else if (isNaN(+str))
     size = String(str)
-  } else {
+  else
     size = `${Number(str)}${unit}`
-  }
 
   if (/([0-9]+(\.?[0-9]+)?)px$/.test(size)) {
     const num = parseFloat(size)

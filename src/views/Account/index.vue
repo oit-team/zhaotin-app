@@ -9,7 +9,9 @@
           size="50"
         />
         <div class="flex-1">
-          <div class="font-bold">{{ $store.state.userData.customerName }}</div>
+          <div class="font-bold">
+            {{ $store.state.userData.customerName }}
+          </div>
         </div>
         <div>
           <!-- <vc-icon name="icon-chevron-right" /> -->

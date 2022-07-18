@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import axios from 'axios'
-import store from '@/store'
 import { Toast } from 'vant'
-import { ApiError } from '@oit/utils'
+import { ApiError } from '@oit/api-error'
 import API_SERVICE from './enum/API_SERVICE'
 import API_STATUS from './enum/API_STATUS'
+import store from '@/store'
 
 const BASE_URL = process.env.NODE_ENV === 'production' ? '/ztApi' : '/api'
 
@@ -16,7 +16,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use((config) => {
   config.headers.token = localStorage.getItem('token')
   return config
-}, function (error) {
+}, (error) => {
   return Promise.reject(new ApiError({ error }))
 })
 
@@ -68,14 +68,14 @@ export function post(url, params = {}, config = {}) {
 /**
  * 创建拼接请求服务的请求函数
  */
-Object.values(API_SERVICE).forEach(service => {
+Object.values(API_SERVICE).forEach((service) => {
   post[service] = function (url, params, config) {
     return post(`/${service}${url}`, params, config)
   }
 })
 
 // 捕获Promise错误
-window.addEventListener('unhandledrejection', event => {
+window.addEventListener('unhandledrejection', (event) => {
   const { reason } = event
   // 处理接口错误
   if (reason instanceof ApiError) {

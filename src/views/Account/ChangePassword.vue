@@ -13,9 +13,9 @@
       :border-bottom="false"
     >
       <van-field
+        v-model="form.oldPassword"
         label="旧密码"
         name="oldPassword"
-        v-model="form.oldPassword"
         type="password"
         :rules="rules.oldPassword"
         autocomplete
@@ -23,9 +23,9 @@
       >
       </van-field>
       <van-field
+        v-model="form.newPassword"
         label="新密码"
         name="newPassword"
-        v-model="form.newPassword"
         type="password"
         :rules="rules.newPassword"
         autocomplete
@@ -33,9 +33,9 @@
       >
       </van-field>
       <van-field
+        v-model="form.confirmPassword"
         label="确认密码"
         name="confirmPassword"
-        v-model="form.confirmPassword"
         :rules="rules.confirmPassword"
         type="password"
         autocomplete
@@ -44,7 +44,9 @@
       </van-field>
     </van-form>
     <div class="px-2 mt-6">
-      <van-button type="primary" block @click="updatePassWord()">确认修改</van-button>
+      <van-button type="primary" block @click="updatePassWord()">
+        确认修改
+      </van-button>
     </div>
   </div>
 </template>

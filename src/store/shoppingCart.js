@@ -47,7 +47,7 @@ export default {
         style,
         styleNo,
       }) => {
-        style.forEach(item => {
+        style.forEach((item) => {
           styleList.push({
             styleNo,
             styleId: item.styleId,

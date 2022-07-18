@@ -4,9 +4,9 @@ const baseConfig = require('./windi.config.base')
 const spacing = (() => {
   const spacers = {}
   const spacer = 4
-  for (let i = 0, l = 20; i <= l; i++) {
+  for (let i = 0, l = 20; i <= l; i++)
     spacers[i] = `${i * spacer}px`
-  }
+
   return spacers
 })()
 
@@ -25,7 +25,7 @@ module.exports = {
       spacing: {
         ...spacing,
         'status-bar': 'var(--status-bar-height)',
-        auto: 'auto',
+        'auto': 'auto',
       },
       borderRadius: {
         circle: '50%',

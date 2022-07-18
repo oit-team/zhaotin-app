@@ -1,11 +1,11 @@
 <template>
   <div class="grid grid-cols-3 p-3 gap-3">
-    <product-item
+    <ProductItem
       v-for="item of list"
       :key="item.styleId"
       :item="item"
       @click="$emit('click', item)"
-    ></product-item>
+    ></ProductItem>
   </div>
 </template>
 

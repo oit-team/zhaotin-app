@@ -1,4 +1,4 @@
-import { PullRefresh, List } from 'vant'
+import { List, PullRefresh } from 'vant'
 
 import './List.scss'
 
@@ -115,7 +115,7 @@ export default {
           offset: 150,
         },
         on: {
-          load: this.load,
+          'load': this.load,
           'update:error': (e) => {
             this.error = e
           },
@@ -154,11 +154,10 @@ export default {
     },
     execPromise(...args) {
       const promise = this.promise(...args)
-      if (promise instanceof Promise) {
+      if (promise instanceof Promise)
         return promise
-      } else {
+      else
         console.error('prop promise 必须返回 Promise')
-      }
     },
     updateFinished() {
       this.finished = (this.innerPageNum * this.pageSize) >= this.innerTotal

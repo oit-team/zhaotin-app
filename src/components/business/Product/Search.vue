@@ -9,8 +9,8 @@
       />
     </div>
     <van-search
-      v-model="searchText"
       ref="search"
+      v-model="searchText"
       class="flex-1 p-0"
       shape="round"
       :disabled="isLink"

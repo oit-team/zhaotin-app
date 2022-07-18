@@ -21,7 +21,9 @@
 
       <div v-if="tabIndex === TAB_TYPE.STYLE" class="absolute left-2 bottom-2 right-2 flex">
         <div class="bg-white z-10 p-2 rounded-lg bg-opacity-60 backdrop-filter backdrop-blur-lg">
-          <div class="text-sm">颜色分类({{ data.styleColorList.length }})</div>
+          <div class="text-sm">
+            颜色分类({{ data.styleColorList.length }})
+          </div>
           <vc-item-group
             v-model="colorCategoryIndex"
             class="space-x-1 overflow-x-auto flex"
@@ -127,9 +129,8 @@ export default {
       this.swiperIndex = 0
     },
     swiperIndex() {
-      if (this.tabIndex === TAB_TYPE.PRODUCT && this.swiperIndex > 0) {
+      if (this.tabIndex === TAB_TYPE.PRODUCT && this.swiperIndex > 0)
         this.$refs.plyr?.player?.stop()
-      }
     },
   },
 

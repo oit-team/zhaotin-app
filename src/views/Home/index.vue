@@ -26,7 +26,7 @@
             v-for="(item) of styleTypeList"
             :key="item.dictitemCode"
             class="flex flex-col items-center"
-            @click="$router.to('Product', {styleMajor: item.dicttimeDisplayName})"
+            @click="$router.to('Product', { styleMajor: item.dicttimeDisplayName })"
           >
             <vc-img class="rounded-circle overflow-hidden bg-white" :src="item.imgUrl" size="40" />
             <span class="mt-1 text-xs">{{ item.dicttimeDisplayName }}</span>
@@ -34,16 +34,18 @@
         </div>
       </div>
 
-      <!--类别-->
+      <!-- 类别 -->
       <div class="flex py-4 px-6 bg-white rounded overflow-auto">
         <div
           v-for="(item, index) of styleCategoryList"
           :key="index"
           class="flex flex-col justify-center items-center min-w-[20%]"
-          @click="$router.to('Product', {category: item.categoryName})"
+          @click="$router.to('Product', { category: item.categoryName })"
         >
           <vc-img class="rounded-circle bg-[#f6f6f6] overflow-hidden mb-2" :src="item.imgUrl" size="40" />
-          <div class="text-xs truncate">{{ item.categoryName }}</div>
+          <div class="text-xs truncate">
+            {{ item.categoryName }}
+          </div>
         </div>
       </div>
 
@@ -58,7 +60,9 @@
 
       <div class="flex-1 bg-white rounded-t-lg py-2">
         <div class="text-center px-100px mb-2">
-          <van-divider :hairline="false" class="border-primary text-primary">{{ seasonStyle }}</van-divider>
+          <van-divider :hairline="false" class="border-primary text-primary">
+            {{ seasonStyle }}
+          </van-divider>
         </div>
         <div class="grid grid-cols-3 gap-3 px-4 mb-3">
           <div
@@ -73,7 +77,7 @@
             ></vc-img>
           </div>
         </div>
-        <!--      <vc-load-more ref="loadMore" :promise="loadData" first-load></vc-load-more>-->
+        <!--      <vc-load-more ref="loadMore" :promise="loadData" first-load></vc-load-more> -->
       </div>
     </div>
 
@@ -86,7 +90,7 @@
 import Tabbar from '@/components/business/Tabbar'
 import Search from '@/components/business/Product/Search'
 
-import { getStyleList, dictitemInfoAllMethod, getStyleCategory, getSystemConfig } from '@/api/product'
+import { dictitemInfoAllMethod, getStyleCategory, getStyleList, getSystemConfig } from '@/api/product'
 import { callCustomerService } from '@/utils'
 
 export default {
@@ -166,11 +170,10 @@ export default {
       this.carousel = res.body.homePageImage
     },
     fastNavClick(item) {
-      if (item.to) {
+      if (item.to)
         this.$router.to(item.to, item.params)
-      } else if (item.click) {
+      else if (item.click)
         item.click()
-      }
     },
     async dictitemInfoAllMethod() {
       const res = await dictitemInfoAllMethod({

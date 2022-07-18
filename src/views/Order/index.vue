@@ -1,5 +1,5 @@
 <template>
-  <vc-container class="bg-gray">
+  <VcContainer class="bg-gray">
     <van-nav-bar
       title="全部订单"
     />
@@ -17,7 +17,7 @@
               <span>单号：</span>
               <span>{{ order.orderNo }}</span>
             </span>
-            <!--          <span>{{ ORDER_STATE_TEXT[order.orderState] }}</span>-->
+            <!--          <span>{{ ORDER_STATE_TEXT[order.orderState] }}</span> -->
           </div>
           <div class="space-y-2 p-2">
             <div
@@ -33,8 +33,12 @@
               ></vc-img>
               <div class="bg-[#f7f7f7] rounded-lg flex-1 flex items-center self-stretch pr-2 overflow-hidden">
                 <div class="flex-1 text-xs ml-3 pr-2 overflow-hidden">
-                  <div class="mb-1 truncate">{{ item.styleName }}</div>
-                  <div class="text-xs text-caption">{{ item.styleNo }}</div>
+                  <div class="mb-1 truncate">
+                    {{ item.styleName }}
+                  </div>
+                  <div class="text-xs text-caption">
+                    {{ item.styleNo }}
+                  </div>
                 </div>
                 <div class="flex items-center">
                   <van-badge class="times-symbol mr-4 text-black" color="white" :content="item.styleNumber"></van-badge>
@@ -58,7 +62,7 @@
     </vc-list>
 
     <Tabbar />
-  </vc-container>
+  </VcContainer>
 </template>
 
 <script>

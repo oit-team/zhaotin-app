@@ -20,7 +20,7 @@ export default {
         const el = this.$refs.Tabs.$el
         const active = el.querySelector('.van-tab--active .van-tab__text')
         const line = el.querySelector('.van-tabs__line')
-        active && line.style.setProperty('--vc-tab-line-width', active.offsetWidth + 'px')
+        active && line.style.setProperty('--vc-tab-line-width', `${active.offsetWidth}px`)
       })
     },
   },

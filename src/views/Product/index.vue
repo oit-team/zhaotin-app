@@ -39,10 +39,10 @@
     <div class="flex-1 relative bg-gray overflow-hidden">
       <FilterPanel ref="filterPanel" @confirm="onFilter" />
       <vc-list ref="list" class="h-full overflow-auto" :promise="loadData" first-load>
-        <product-list
+        <ProductList
           :list="productList"
           @click="$router.to('ProductDetail', { styleId: $event.styleId })"
-        ></product-list>
+        ></ProductList>
       </vc-list>
     </div>
 
@@ -92,9 +92,8 @@ export default {
     if (params) {
       this.$refs.filterPanel.setFilter(params)
 
-      if (params.category) {
+      if (params.category)
         this.category = params.category
-      }
     }
   },
 

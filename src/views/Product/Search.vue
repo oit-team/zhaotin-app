@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import ProductList from '@/components/business/Product/ProductList'
 import Search from '../../components/business/Product/Search'
+import ProductList from '@/components/business/Product/ProductList'
 import { getStyleList } from '@/api/product'
 
 export default {

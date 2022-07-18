@@ -13,9 +13,9 @@
         <van-cell title="版本" value="1.0.0" @click="debug"></van-cell>
       </van-cell-group>
 
-      <!--      <u-cell-group class="bg-white text-center">-->
-      <!--        <u-cell title="切换账号"></u-cell>-->
-      <!--      </u-cell-group>-->
+      <!--      <u-cell-group class="bg-white text-center"> -->
+      <!--        <u-cell title="切换账号"></u-cell> -->
+      <!--      </u-cell-group> -->
 
       <van-cell-group class="bg-white text-center">
         <van-cell title="退出登录" clickable @click="logout"></van-cell>
@@ -47,7 +47,7 @@ export default {
       if (process.env.NODE_ENV !== 'production') {
         times++
         if (times === 5) {
-          import('eruda').then(module => {
+          import('eruda').then((module) => {
             const eruda = { ...module }
             eruda.init()
           })

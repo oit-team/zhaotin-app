@@ -15,26 +15,34 @@
       </div>
 
       <div class="flex-1 mx-14 p-4 bg-white bg-opacity-70 backdrop-filter backdrop-blur-lg rounded-lg">
-        <p class="text-xl">Welcome</p>
-        <p class="text-xs text-secondary">登录您的账户</p>
+        <p class="text-xl">
+          Welcome
+        </p>
+        <p class="text-xs text-secondary">
+          登录您的账户
+        </p>
 
         <div class="mt-3 space-y-3">
           <van-field
-            class="rounded"
             v-model.trim="form.name"
+            class="rounded"
             placeholder="请输入账号"
             clearable
           />
           <van-field
-            class="rounded"
             v-model.trim="form.pwd"
+            class="rounded"
             type="password"
             placeholder="请输入密码"
             clearable
           />
         </div>
-        <p class="mt-2 mb-5 text-xs text-right underline text-secondary" @click="callCustomerService()">忘记密码</p>
-        <van-button type="info" @click="login()" block>登录</van-button>
+        <p class="mt-2 mb-5 text-xs text-right underline text-secondary" @click="callCustomerService()">
+          忘记密码
+        </p>
+        <van-button type="info" block @click="login()">
+          登录
+        </van-button>
       </div>
     </div>
 
@@ -83,11 +91,11 @@ export default {
     },
     verifyForm() {
       let msg
-      if (this.form.name === '') {
+      if (this.form.name === '')
         msg = '账号不能为空'
-      } else if (this.form.pwd === '') {
+      else if (this.form.pwd === '')
         msg = '密码不能为空'
-      }
+
       if (msg) {
         this.$toast(msg)
         return false

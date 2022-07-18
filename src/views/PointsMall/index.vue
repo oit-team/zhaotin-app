@@ -28,7 +28,7 @@
 
     <div class="flex-1 relative bg-gray overflow-hidden">
       <vc-list ref="list" class="h-full overflow-auto" :promise="loadData" first-load>
-        <product-list
+        <ProductList
           :list="productList"
           :key-map="{
             img: 'image',
@@ -36,16 +36,16 @@
             price: 'goodsPrice',
           }"
           @click="toDetail"
-        ></product-list>
+        ></ProductList>
       </vc-list>
     </div>
   </div>
 </template>
 
 <script>
+import { getGoodsList, getTypeAndData } from '../../api/pointsMall'
 import Search from '@/components/business/Product/Search'
 import ProductList from '@/components/business/Product/ProductList'
-import { getGoodsList, getTypeAndData } from '../../api/pointsMall'
 
 export default {
   name: 'PointsMall',

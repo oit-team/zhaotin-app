@@ -2,7 +2,7 @@
   <div v-if="item" class="relative">
     <div
       class="flex items-center pl-2 py-1"
-      :class="{'is-active': collapse}"
+      :class="{ 'is-active': collapse }"
     >
       <div class="flex items-center space-x-2 mr-2">
         <slot name="checkbox"></slot>
@@ -21,12 +21,14 @@
         <div class="flex flex-col items-end">
           <van-badge class="times-symbol !bg-primary text-white" :content="calcTotal(item)" />
         </div>
-        <vc-icon class="ml-2" :class="{'transform rotate-[180deg]': collapse}" name="angle-down"></vc-icon>
+        <vc-icon class="ml-2" :class="{ 'transform rotate-[180deg]': collapse }" name="angle-down"></vc-icon>
       </div>
     </div>
     <div v-show="collapse" class="mx-6 rounded-b-lg space-y-2 pt-2 pb-2">
       <div v-for="size of item.styleSize" :key="size.sizeName" class="flex items-center justify-between px-2">
-        <div class="text-xs ml-20">{{ size.sizeName }}</div>
+        <div class="text-xs ml-20">
+          {{ size.sizeName }}
+        </div>
         <div>
           <van-stepper
             v-if="!readonly"
@@ -44,7 +46,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'ShopStyleItem',
 

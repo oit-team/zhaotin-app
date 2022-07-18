@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import router from '@/router'
-import shoppingCart from './shoppingCart'
 import { getCheckUserInfo } from '../api/account'
+import shoppingCart from './shoppingCart'
+import router from '@/router'
 
 Vue.use(Vuex)
 
@@ -23,13 +23,13 @@ export default new Vuex.Store({
     updateUserData(ctx) {
       if (!updateUserDataPromise) updateUserDataPromise = getCheckUserInfo()
       return updateUserDataPromise
-        .then(res => {
+        .then((res) => {
           const token = res.body.accessToken
           localStorage.setItem('token', token)
           ctx.commit('setUserData', res.body.resultList)
           return res
         })
-        .catch(err => {
+        .catch((err) => {
           err.message = '登录过期，请重新登录'
           ctx.dispatch('logout')
           return Promise.reject(err)

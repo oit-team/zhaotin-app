@@ -1,5 +1,5 @@
 <template>
-  <vc-container>
+  <VcContainer>
     <van-nav-bar
       title="我的收藏"
       left-arrow
@@ -12,13 +12,17 @@
           <div
             class="rounded-x1 overflow-hidden"
           >
-            <div class="flex items-center p-2 bg-white" @click="$router.to('ProductDetail', {styleId: item.styleId})">
+            <div class="flex items-center p-2 bg-white" @click="$router.to('ProductDetail', { styleId: item.styleId })">
               <div class="mr-2">
                 <vc-img fit="contain" :src="item.resUrl" size="60"></vc-img>
               </div>
               <div class="flex overflow-hidden flex-col flex-1 justify-around self-stretch">
-                <div class="truncate text-sm">{{ item.styleName }}</div>
-                <div class="text-xs text-secondary">收藏时间：{{ item.createTime }}</div>
+                <div class="truncate text-sm">
+                  {{ item.styleName }}
+                </div>
+                <div class="text-xs text-secondary">
+                  收藏时间：{{ item.createTime }}
+                </div>
               </div>
               <div>
                 <vc-text :text="item.tradePrice" mode="price"></vc-text>
@@ -37,7 +41,7 @@
         </van-swipe-cell>
       </div>
     </vc-list>
-  </vc-container>
+  </VcContainer>
 </template>
 
 <script>

@@ -18,7 +18,9 @@
       </div>
       <div v-else class="flex-1 flex items-center">
         <vc-icon name="icon-pos" size="30"></vc-icon>
-        <div class="text-sm text-secondary">请先添加地址</div>
+        <div class="text-sm text-secondary">
+          请先添加地址
+        </div>
       </div>
       <div class="mr-2">
         <vc-icon name="chevron-right"></vc-icon>
@@ -95,7 +97,9 @@
         </div>
       </div>
       <div>
-        <van-button class="!h-8" type="primary" @click="submit()">提交订单</van-button>
+        <van-button class="!h-8" type="primary" @click="submit()">
+          提交订单
+        </van-button>
       </div>
     </div>
 
@@ -142,7 +146,9 @@
             show-word-limit
             height="40"
           ></van-field>
-          <van-button class="my-2" block type="primary" @click="confirmForm()">确定</van-button>
+          <van-button class="my-2" block type="primary" @click="confirmForm()">
+            确定
+          </van-button>
         </van-form>
       </van-popup>
     </div>
@@ -150,13 +156,13 @@
 </template>
 
 <script>
+import { keyBy } from 'lodash'
+import { queryStylePrice } from '../../utils/actions'
 import ShopItem from '@/components/business/ShoppingCart/ShopItem'
 import ShopStyleItem from '@/components/business/ShoppingCart/ShopStyleItem'
-import { keyBy } from 'lodash'
 import { getReceiving } from '@/api/account'
 import { addIntegralOrder, addOrder, getOrderIntegral } from '@/api/order'
 import { dictitemInfoAllMethod } from '@/api/product'
-import { queryStylePrice } from '../../utils/actions'
 
 export const SUBMIT_ORDER_EVENT = 'page:submit-order'
 
@@ -263,7 +269,7 @@ export default {
       if (this.pointsMallItem) {
         if (!this.remark) {
           this.$toast('请填写备注')
-          throw new Error()
+          throw new Error('请填写备注')
         }
         orderRemarks = this.remark
         item = this.pointsMallItem
@@ -298,7 +304,7 @@ export default {
       this.addressInfo = res.body.resultList[0]
     },
     switchAddress() {
-      this.$root.$once('page:switch-address', item => {
+      this.$root.$once('switch-address', (item) => {
         this.addressInfo = item
       })
       this.$router.to('Address', {

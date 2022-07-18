@@ -11,7 +11,9 @@
     ></vc-img>
     <vc-img class="h-150px overflow-hidden" :src="item[keyMap.img]"></vc-img>
     <div class="py-1">
-      <div class="text-xs">{{ item[keyMap.title] }}</div>
+      <div class="text-xs">
+        {{ item[keyMap.title] }}
+      </div>
       <vc-text class="text-xs" tag="div" mode="price" :text="item[keyMap.price]" />
     </div>
   </div>
