@@ -1,22 +1,24 @@
 <template>
-  <VuePlyr
-    ref="plyr"
-    :options="{
-      controls: ['play', 'play-large', 'progress', 'mute', 'fullscreen'],
-      fullscreen: { enabled: true, fallback: false, iosNative: true },
-    }"
-  >
-    <video
-      class="h-full w-full object-cover"
-      :poster="data.styleVideoPatch"
-      :src="data.styleVideo"
-      controls
-      playsinline="true"
-      webkit-playsinline="true"
-      @click="$refs.plyr.player.togglePlay()"
-      @ready="stopPropagation()"
-    ></video>
-  </VuePlyr>
+  <div class="product-video">
+    <VuePlyr
+      ref="plyr"
+      :options="{
+        controls: ['play', 'play-large', 'progress', 'mute', 'fullscreen'],
+        fullscreen: { enabled: true, fallback: false, iosNative: true },
+      }"
+    >
+      <video
+        class="h-full w-full object-cover"
+        :poster="data.styleVideoPatch"
+        :src="data.styleVideo"
+        controls
+        playsinline="true"
+        webkit-playsinline="true"
+        @click="$refs.plyr.player.togglePlay()"
+        @ready="stopPropagation()"
+      ></video>
+    </VuePlyr>
+  </div>
 </template>
 
 <script>
@@ -36,7 +38,7 @@ export default {
 
   methods: {
     stopPropagation() {
-      const controls = document.querySelector('.swipe-video input')
+      const controls = document.querySelector('.product-video input')
       controls.addEventListener('touchmove', e => e.stopPropagation())
     },
     stop() {
@@ -46,6 +48,18 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+.product-video {
+  --plyr-color-main: theme("colors.primary");
+  height: 100%;
 
+  .plyr__poster {
+    //pointer-events: none;
+  }
+
+  .plyr__volume {
+    width: auto;
+    min-width: auto;
+  }
+}
 </style>

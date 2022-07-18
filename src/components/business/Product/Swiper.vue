@@ -145,16 +145,4 @@ export default {
 </script>
 
 <style lang="scss">
-.swipe-video {
-  --plyr-color-main: theme("colors.primary");
-
-  .plyr__poster {
-    //pointer-events: none;
-  }
-
-  .plyr__volume {
-    width: auto;
-    min-width: auto;
-  }
-}
 </style>

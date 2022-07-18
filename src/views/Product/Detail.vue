@@ -1,10 +1,16 @@
 <template>
   <vc-container class="bg-gray">
-    <Search is-link back>
+    <Search v-if="!pointsMall" is-link back>
       <template #after>
         <ShopCartIcon class="ml-3 mr-2" />
       </template>
     </Search>
+    <van-nav-bar
+      v-else
+      title="兑品详情"
+      left-arrow
+      @click-left="$router.back()"
+    />
 
     <div class="flex-1 overflow-auto">
       <Swiper :data="data" />
@@ -26,8 +32,12 @@
                 <div class="absolute inset-0"></div>
               </div>
             </div>
-            <div>
+            <div class="flex flex-col items-end">
               <vc-text mode="price" :text="data.tradePrice || 0"></vc-text>
+              <div v-if="pointsMall">
+                <span>积分：</span>
+                <vc-text class="text-primary" mode="price" text-symbol="" :text="data.goodsPtice || 0"></vc-text>
+              </div>
             </div>
           </div>
         </div>
@@ -40,10 +50,10 @@
           </div>
           <div class="flex mt-4" @click="showProperty = true">
             <span class="mr-3 text-sm text-secondary">属性</span>
-            <div class="flex flex-row flex-1 -ml-2">
-              <span class="px-2 text-sm">{{ data.styleFabric }}</span>
-              <span class="px-2 text-sm">{{ data.styleFlowerPattern }}</span>
-              <span class="px-2 text-sm">{{ data.styleCategory }}</span>
+            <div class="flex flex-row flex-1 -ml-2 divide-x divide-line overflow-hidden">
+              <span class="px-2 text-sm truncate">{{ data.styleFabric }}</span>
+              <span class="px-2 text-sm truncate">{{ data.styleFlowerPattern }}</span>
+              <span class="px-2 text-sm truncate">{{ data.styleCategory }}</span>
             </div>
             <vc-icon class="text-sm text-primary" name="chevron-right"></vc-icon>
           </div>
@@ -154,36 +164,41 @@
     </div>
 
     <div class="flex items-center px-3 bg-white h-15 sticky-bottom border-t border-line">
-      <div class="flex space-x-3 text-center whitespace-nowrap mr-2">
-        <div @click="addStyleCollection()">
-          <vc-icon
-            :class="{'text-primary': data.styleIsCollection}"
-            :name="data.styleIsCollection ? 'star' : 'star-o'"
-          ></vc-icon>
-          <div class="text-xs transform scale-65">收藏</div>
+      <template v-if="!pointsMall">
+        <div class="flex space-x-3 text-center whitespace-nowrap mr-2">
+          <div @click="addStyleCollection()">
+            <vc-icon
+              :class="{'text-primary': data.styleIsCollection}"
+              :name="data.styleIsCollection ? 'star' : 'star-o'"
+            ></vc-icon>
+            <div class="text-xs transform scale-65">收藏</div>
+          </div>
+          <div @click="callCustomerService()">
+            <vc-icon name="message"></vc-icon>
+            <div class="text-xs transform scale-65">客服</div>
+          </div>
         </div>
-        <div @click="callCustomerService()">
-          <vc-icon name="message"></vc-icon>
-          <div class="text-xs transform scale-65">客服</div>
+        <div class="flex flex-1 space-x-2">
+          <van-button
+            class="!text-white"
+            block
+            color="#FF9326"
+            text="加入进货车"
+            round
+            @click="openChoose(0)"
+          ></van-button>
+          <van-button
+            class="!bg-price !text-white"
+            block
+            text="立即订购"
+            round
+            @click="openChoose(1)"
+          ></van-button>
         </div>
-      </div>
-      <div class="flex flex-1 space-x-2">
-        <van-button
-          class="!text-white"
-          block
-          color="#FF9326"
-          text="加入进货车"
-          round
-          @click="openChoose(0)"
-        ></van-button>
-        <van-button
-          class="!bg-price !text-white"
-          block
-          text="立即订购"
-          round
-          @click="openChoose(1)"
-        ></van-button>
-      </div>
+      </template>
+      <template v-else>
+        <van-button class="bg-price text-white" block round @click="openChoose(2)">立即兑换</van-button>
+      </template>
     </div>
 
     <ProductChoose ref="productChoose" :data="data" @confirm="confirm"></ProductChoose>
@@ -240,10 +255,12 @@ import theme from '@/theme'
 import { keyBy } from 'lodash'
 import { callCustomerService } from '@/utils'
 import { SUBMIT_ORDER_EVENT } from '../Order/OrderSubmit'
+import { getGoodsDetails } from '../../api/pointsMall'
 
 const MODE = {
   SHOPPING_CART: 0,
   ORDER: 1,
+  POINTS_MALL: 2,
 }
 
 export default {
@@ -258,6 +275,7 @@ export default {
 
   data() {
     return {
+      MODE,
       theme,
       styleId: '',
       keyword: '',
@@ -281,10 +299,19 @@ export default {
     sizeCount() {
       return this.data?.styleColorList?.reduce((prev, curr) => prev + curr.styleSize.length, 0)
     },
+    diffKeys() {
+      return this.pointsMall
+        ? {}
+        : {}
+    },
   },
 
   watch: {
     styleId: 'getStyleInfo',
+  },
+
+  beforeCreate() {
+    this.pointsMall = this.$route.meta.pointsMall
   },
 
   activated() {
@@ -295,8 +322,15 @@ export default {
     callCustomerService,
     async getStyleInfo() {
       try {
-        const res = await this.$promiseLoading(getStyleById(this.styleId))
+        const api = this.pointsMall ? getGoodsDetails : getStyleById
+        const res = await this.$promiseLoading(api(this.styleId))
         const data = res?.body.resultList
+        // 根据是否是积分商城判断不同的状态值
+        if (this.pointsMall ? data.state === 2 : data.status === 0) {
+          this.$toast.fail('商品已下架')
+          this.$router.back()
+          return
+        }
         data._styleData = data.styleData ? JSON.parse(data.styleData) : []
         data._styleWashing = (data.styleWashing ? JSON.parse(data.styleWashing) : []).filter(item => item.status)
         data._title = data.titleMap && Object
@@ -330,6 +364,7 @@ export default {
           if (size.length) {
             let styleItem = {
               styleColor: color.id,
+              styleColorName: color.styleColor,
               styleId: this.data.styleId,
               styleNo: this.data.styleNo,
               styleSize: size,
@@ -339,7 +374,6 @@ export default {
               styleItem = {
                 ...color,
                 ...styleItem,
-                styleColorName: color.styleColor,
                 imgUrl: color?.styleImg[0]?.resUrl,
               }
             }
@@ -350,24 +384,43 @@ export default {
 
       if (!styleList.length) return this.$toast('请选择下单数量')
 
-      if (this.mode === MODE.SHOPPING_CART) { // 添加到进货车
-        this.insertShoppingCart(styleList)
-      } else if (this.mode === MODE.ORDER) { // 提交订单
-        const order = [
-          {
+      switch (this.mode) {
+        // 添加到进货车
+        case MODE.SHOPPING_CART:
+          this.insertShoppingCart(styleList)
+          break
+        // 提交积分订单
+        case MODE.POINTS_MALL:
+        // 提交订单
+        // eslint-disable-next-line no-fallthrough
+        case MODE.ORDER: {
+          const orderItem = {
             style: styleList,
             styleId: this.data.styleId,
             styleName: this.data.styleName,
             styleNo: this.data.styleNo,
-          },
-        ]
-        this.$root.$once(SUBMIT_ORDER_EVENT, () => {
-          const choose = this.$refs.productChoose
-          choose.reset()
-          choose.close()
-        })
-        this.$store.commit('shoppingCart/setOrderList', order)
-        this.$router.to('OrderSubmit')
+          }
+
+          if (this.mode === MODE.POINTS_MALL) {
+            orderItem.goodsId = this.data.goodsId
+            orderItem.goodsIntegral = this.data.goodsIntegral
+            orderItem.goodsCode = this.data.goodsCode
+          }
+
+          const order = [orderItem]
+
+          this.$root.$once(SUBMIT_ORDER_EVENT, () => {
+            const choose = this.$refs.productChoose
+            choose.reset()
+            choose.close()
+          })
+          this.$store.commit('shoppingCart/setOrderList', order)
+          this.$router.to('OrderSubmit', {
+            pointsMall: this.pointsMall,
+            list: order,
+          })
+          break
+        }
       }
     },
     async insertShoppingCart(styleList) {

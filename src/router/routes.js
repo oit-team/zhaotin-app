@@ -89,4 +89,28 @@ export default [
     name: 'ProductSearch',
     component: () => import('../views/Product/Search'),
   },
+  {
+    path: '/points-mall',
+    name: 'PointsMall',
+    component: () => import('../views/PointsMall/index'),
+  },
+  {
+    path: '/points-mall/detail/:styleId',
+    name: 'PointsMallDetail',
+    component: () => import('../views/PointsMall/Detail'),
+  },
+  {
+    path: '/points-mall/product-detail/:styleId',
+    name: 'PointsMallProductDetail',
+    meta: {
+      pointsMall: true,
+      keepAliveName: 'ProductDetail',
+    },
+    component: () => import('../views/Product/Detail'),
+  },
+  {
+    path: '/points-mall/order',
+    name: 'PointsMallOrder',
+    component: () => import('../views/PointsMall/Order'),
+  },
 ]

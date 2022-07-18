@@ -1,11 +1,10 @@
+import Vue from 'vue'
 import axios from 'axios'
 import store from '@/store'
 import { Toast } from 'vant'
 import { ApiError } from '@oit/utils'
 import API_SERVICE from './enum/API_SERVICE'
 import API_STATUS from './enum/API_STATUS'
-// eslint-disable-next-line no-unused-vars
-import Vue from 'vue'
 
 const BASE_URL = process.env.NODE_ENV === 'production' ? '/ztApi' : '/api'
 
@@ -32,7 +31,7 @@ axiosInstance.interceptors.response.use((response) => {
   }
   return response
 }, async (error) => {
-  console.log(error)
+  console.error(error)
   if (error.response.status === 403) {
     // token失效自动刷新
     await store.dispatch('updateUserData')
@@ -92,5 +91,6 @@ Vue.config.errorHandler = (err, vm, info) => {
     return Promise.reject(err)
   } else {
     console.error(err)
+    Vue.util.warn(err, vm)
   }
 }

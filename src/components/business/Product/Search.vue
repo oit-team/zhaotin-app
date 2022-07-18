@@ -15,7 +15,7 @@
       shape="round"
       :disabled="isLink"
       clearable
-      placeholder="搜索商品名称/款号/面料"
+      :placeholder="placeholder"
       v-on="$listeners"
       @click="onClick()"
     />
@@ -39,6 +39,10 @@ export default {
     back: Boolean,
     isLink: Boolean,
     autofocus: Boolean,
+    placeholder: {
+      type: String,
+      default: '搜索商品名称/款号/面料',
+    },
   },
 
   data: () => ({

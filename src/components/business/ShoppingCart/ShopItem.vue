@@ -1,9 +1,9 @@
 <template>
   <div class="bg-white rounded-lg">
     <div class="flex justify-between p-2 px-4 items-center">
-      <div class="flex text-sm">
+      <div class="flex text-sm flex-1 overflow-hidden mr-2">
         <slot name="checkbox"></slot>
-        <p class=" goodsName">{{ item.styleName }}</p>
+        <p>{{ item.styleName }}</p>
       </div>
       <div class="text-xs text-secondary">{{ item.styleNo }}</div>
     </div>
@@ -11,10 +11,12 @@
       <slot />
     </div>
     <div class="flex px-2 pb-2 justify-end">
-      <div class="flex text-sm mr-2">
-        <span>单价：</span>
-        <vc-text :text="price" mode="price"></vc-text>
-      </div>
+      <slot name="price">
+        <div class="flex text-sm mr-2">
+          <span>单价：</span>
+          <vc-text :text="price" mode="price"></vc-text>
+        </div>
+      </slot>
     </div>
   </div>
 </template>
@@ -31,7 +33,4 @@ export default {
 </script>
 
 <style scoped>
-.goodsName{
-  width: 80%;
-}
 </style>

@@ -4,7 +4,7 @@
       class="flex items-center pl-2 py-1"
       :class="{'is-active': collapse}"
     >
-      <div class="flex items-center space-x-2">
+      <div class="flex items-center space-x-2 mr-2">
         <slot name="checkbox"></slot>
         <vc-img
           class="overflow-hidden rounded-lg"
@@ -19,12 +19,9 @@
           <span>{{ item.styleColorName || item.styleColor }}</span>
         </div>
         <div class="flex flex-col items-end">
-          <van-badge class="times-symbol !bg-primary text-white" :content="calcTotal(item)">
-          </van-badge>
+          <van-badge class="times-symbol !bg-primary text-white" :content="calcTotal(item)" />
         </div>
-        <div class="ml-2">
-          <!-- <vc-icon :class="{'transform rotate-[180deg]': collapse}" name="icon-angle-down"></vc-icon> -->
-        </div>
+        <vc-icon class="ml-2" :class="{'transform rotate-[180deg]': collapse}" name="angle-down"></vc-icon>
       </div>
     </div>
     <div v-show="collapse" class="mx-6 rounded-b-lg space-y-2 pt-2 pb-2">

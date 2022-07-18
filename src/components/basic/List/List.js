@@ -67,11 +67,19 @@ export default {
     },
     /**
      * 重置分页
+     * @public
      */
     reset() {
       this.innerPageNum = this.pageNum
       this.finished = false
       return this
+    },
+    /**
+     * 重新加载
+     * @public
+     */
+    reload() {
+      return this.reset().load()
     },
     genPullRefreshList(h) {
       const tips = {

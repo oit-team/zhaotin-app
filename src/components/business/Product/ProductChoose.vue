@@ -90,7 +90,6 @@ export default {
       this.showShopping = true
     },
     close() {
-      console.log(1)
       this.showShopping = false
     },
     changeNumber(value, size) {

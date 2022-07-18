@@ -1,6 +1,11 @@
 <template>
   <div class="grid grid-cols-3 p-3 gap-3">
-    <product-item v-for="item of list" :key="item.styleId" :item="item"></product-item>
+    <product-item
+      v-for="item of list"
+      :key="item.styleId"
+      :item="item"
+      @click="$emit('click', item)"
+    ></product-item>
   </div>
 </template>
 
@@ -14,8 +19,23 @@ export default {
     ProductItem,
   },
 
+  provide() {
+    return {
+      keyMap: this.keyMap,
+    }
+  },
+
   props: {
     list: Array,
+    keyMap: {
+      type: Object,
+      default: () => ({
+        isVideo: 'styleIsVideo',
+        img: 'resUrl',
+        title: 'styleNo',
+        price: 'tradePrice',
+      }),
+    },
   },
 }
 </script>

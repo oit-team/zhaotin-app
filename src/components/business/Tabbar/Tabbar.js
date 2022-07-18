@@ -33,7 +33,6 @@ export default {
       },
     ]
 
-    // eslint-disable-next-line no-unused-vars
     const genIcon = icon => <Img showLoading={false} src={`img/tabs/${icon}.png`} size={24} />
 
     return (

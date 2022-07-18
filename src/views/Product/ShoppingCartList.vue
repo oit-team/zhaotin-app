@@ -9,7 +9,7 @@
     />
 
     <div class="flex-1 flex flex-col space-y-2 p-2">
-      <ShopItem v-for="item of list" :key="item.styleId" class="mb-2" :item="item" :price="getPrice(item)">
+      <ShopItem v-for="item of list" :key="item.styleId" class="mb-2" :item="item" :price="item.stylePrice">
         <template #checkbox>
           <van-checkbox
             icon-size="16px"
@@ -71,6 +71,7 @@ import ShopStyleItem from '@/components/business/ShoppingCart/ShopStyleItem'
 import { keyBy } from 'lodash'
 import { deleteShoppingCartStyle, updateShoppingCart } from '@/api/order'
 import { SUBMIT_ORDER_EVENT } from '../Order/OrderSubmit'
+import { queryStylePrice } from '@/utils/actions'
 
 export default {
   name: 'ShoppingCartList',
@@ -85,10 +86,7 @@ export default {
       select: true,
       selectedMap: {},
       priceData: null,
-      listPriceData: [],
       data: null,
-      checkAllList: [],
-      // allChecked: false,
     }
   },
   computed: {
@@ -161,11 +159,11 @@ export default {
     }) {
       const update = async () => {
         await this.updateShopCart()
-        this.$store.commit('shoppingCart/setOrderList', this.getSelectedList())
         await this.loadPriceData()
       }
 
       if (value <= 0) {
+        // FIXME 完善删除功能
         Dialog.confirm({
           title: '提示',
           message: '确定要删除吗',
@@ -199,12 +197,14 @@ export default {
         })
     },
     submit() {
-      if (!Object.values(this.selectedMap).some(item => item.some(count => count > 0))) {
+      if (!Object.values(this.selectedMap).some(item => item.length)) {
         return this.$toast('请选择商品')
       }
       this.$root.$off(SUBMIT_ORDER_EVENT, this.clearSelectMap)
       this.$root.$once(SUBMIT_ORDER_EVENT, this.clearSelectMap)
-      this.$router.push('/order/order-submit')
+      this.$router.to('OrderSubmit', {
+        list: this.getSelectedList(),
+      })
     },
     clearSelectMap() {
       this.selectedMap = {}
@@ -229,22 +229,20 @@ export default {
         styleList: list,
       }))
     },
+    /**
+     * 已选商品价格
+     */
     async getStylePrice() {
-      this.$store.commit('shoppingCart/setOrderList', this.getSelectedList())
-      const res = await this.$store.dispatch('shoppingCart/getStylePrice')
+      const selectList = this.getSelectedList()
+      const hasSelect = selectList.some(item => item.style.length)
+      // 无选择时不调用接口
+      if (!this.priceData?.styleList?.length && !hasSelect) return
+
+      const res = await queryStylePrice(selectList)
       this.priceData = res.body
     },
-    async getStyleListPrice() {
-      const res = await this.$store.dispatch('shoppingCart/getStylePrice', true)
-      const data = res.body
-      data.styleMap = keyBy(data.styleList, 'styleId')
-      this.listPriceData = res.body
-    },
     loadPriceData() {
-      return Promise.all([this.getStylePrice(), this.getStyleListPrice()])
-    },
-    getPrice(item) {
-      return this.listPriceData?.styleMap?.[item.styleId]?.stylePrice || 0
+      return this.getStylePrice()
     },
     async deleteShoppingItem() {
       const styleList = []

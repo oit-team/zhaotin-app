@@ -36,7 +36,6 @@ export default {
   actions: {
     async getShoppingCart(ctx) {
       const res = await getShoppingCart()
-      console.log(res)
       ctx.commit('setData', res.body.resultList)
       ctx.commit('setList', res.body.resultList?.styleList)
       return res

@@ -137,6 +137,7 @@ export default {
       {
         name: '物流',
         icon: '3d2c66892fa51710bdf675a9024a9540.png',
+        to: 'PointsMall',
       },
       {
         name: '客服',

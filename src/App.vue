@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import BetterView from '@/components/business/BetterView'
+import { BetterView } from '@oit/vue-components'
 
 export default {
   components: {
@@ -22,9 +22,7 @@ export default {
 </script>
 
 <style lang="scss">
-@layer {
-  .vc-router-view {
-    background-color: theme('colors.gray');
-  }
+.vc-router-view {
+  background-color: theme('colors.gray');
 }
 </style>

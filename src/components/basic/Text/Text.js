@@ -15,6 +15,10 @@ export default {
     },
     mode: String,
     text: [String, Number],
+    textSymbol: {
+      type: String,
+      default: '￥',
+    },
   },
 
   computed: {
@@ -28,11 +32,11 @@ export default {
 
   methods: {
     genPrice(h) {
-      const tag = this.tag
+      const { tag } = this
 
       return (
         <tag class="vc-text-price">
-          <span class="vc-text-price__symbol">￥</span>
+          {this.textSymbol && <span class="vc-text-price__symbol">{this.textSymbol}</span>}
           <span class="vc-text-price__content">{this.price}</span>
         </tag>
       )

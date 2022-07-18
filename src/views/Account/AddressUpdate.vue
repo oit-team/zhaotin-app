@@ -104,7 +104,6 @@ export default {
     async loadData(id) {
       const res = await this.$promiseLoading(getReceivingById(id))
       const data = res.body.resultList
-      console.log(data)
       Object.keys(this.form).forEach(dataKey => {
         this.form[dataKey] = data[dataKey]
       })

@@ -39,7 +39,10 @@
     <div class="flex-1 relative bg-gray overflow-hidden">
       <FilterPanel ref="filterPanel" @confirm="onFilter" />
       <vc-list ref="list" class="h-full overflow-auto" :promise="loadData" first-load>
-        <product-list :list="productList"></product-list>
+        <product-list
+          :list="productList"
+          @click="$router.to('ProductDetail', { styleId: $event.styleId })"
+        ></product-list>
       </vc-list>
     </div>
 

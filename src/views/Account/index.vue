@@ -43,6 +43,15 @@
           >
             <vc-icon slot="icon" class="text-primary mr-2" name="star" size="18"></vc-icon>
           </van-cell>
+          <van-cell
+            class="items-center"
+            title="积分商城订单"
+            size="large"
+            is-link
+            @click="$router.to('PointsMallOrder')"
+          >
+            <vc-icon slot="icon" class="text-primary mr-2" name="star" size="18"></vc-icon>
+          </van-cell>
         </van-cell-group>
       </div>
     </div>
