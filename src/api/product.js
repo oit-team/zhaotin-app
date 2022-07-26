@@ -91,3 +91,18 @@ export function getStyleCollection(params) {
 export function delStyleCollection(styleId) {
   return post[API_SERVICE.GOODS]('/styleCollection/delStyleCollection', { styleId })
 }
+
+/**
+ * 查询类别
+ */
+export function getStyleTypeInfoAll() {
+  return post[API_SERVICE.GOODS]('/styleType/getStyleTypeInfoAll')
+}
+
+/**
+ * 查询层级类别
+ * @param params
+ */
+export function getStyleTypeList(params) {
+  return post[API_SERVICE.GOODS]('/styleType/getStyleTypeList', params)
+}

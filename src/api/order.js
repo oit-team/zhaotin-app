@@ -64,3 +64,11 @@ export function addIntegralOrder(params) {
 export function getPointMailOrderList(params) {
   return post[API_SERVICE.ORDER]('/integralShop/getOrderList', params)
 }
+
+/**
+ * 获取积分商城订单详情
+ * @param id
+ */
+export function getOrderIntegralDetail(id) {
+  return post[API_SERVICE.ORDER]('/integralShop/getOrderDetail', { id })
+}

@@ -5,6 +5,8 @@ import './Tabs.scss'
 export default {
   name: 'VcTabs',
 
+  model: Tabs.model,
+
   props: {
     ...Tabs.props,
     hideSlider: [Boolean],
@@ -34,10 +36,14 @@ export default {
       props: this.$props,
       on: {
         ...this.$listeners,
-        click: (e) => {
-          this.$emit('click', e)
-          this.$emit('input', e)
+        click: (...e) => {
+          this.$emit('click', ...e)
+          this.$emit('input', ...e)
           !this.hideSlider && this.syncWidth()
+        },
+        rendered: (...e) => {
+          this.$emit('rendered', ...e)
+          this.syncWidth()
         },
       },
     }, this.$slots.default)

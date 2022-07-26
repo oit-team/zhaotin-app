@@ -47,7 +47,7 @@
           </van-cell>
           <van-cell
             class="items-center"
-            title="积分商城订单"
+            title="积分订单"
             size="large"
             is-link
             @click="$router.to('PointsMallOrder')"

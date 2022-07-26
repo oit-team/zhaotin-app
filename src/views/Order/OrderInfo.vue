@@ -19,7 +19,7 @@
       <span>下单事由</span>
       <span class="float-right">
         <span class="text-secondary">{{ data.orderReason }}</span>
-        <!-- <vc-icon name="icon-chevron-right"></vc-icon> -->
+        <vc-icon name="chevron-right" />
       </span>
     </div>
 
@@ -92,7 +92,6 @@ export default {
     async loadData() {
       const res = await getOrderById(this.orderId)
       this.data = res.body.resultList
-      this.$forceUpdate()
     },
   },
 }

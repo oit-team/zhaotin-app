@@ -57,14 +57,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-::v-deep{
-  .van-cell__value{
+.van-field {
+  padding: 0;
+}
+
+::v-deep {
+  .van-cell__value {
     border: 1px solid #dadbde;
     border-radius: 3px;
     padding: 5px;
-  }
-  .van-field{
-    padding: 0;
   }
 }
 </style>

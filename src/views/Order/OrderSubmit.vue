@@ -62,7 +62,7 @@
       <!-- 积分商品 -->
       <template v-if="pointsMallItem">
         <div class="bg-white rounded-lg p-2 flex items-center">
-          <vc-img class="mr-2" :src="pointsMallItem.imgUrlList[0]" size="40"></vc-img>
+          <vc-img class="mr-2" :src="pointsMallItem.imgUrlList[0].resUrl" size="40"></vc-img>
           <span class="mr-2 flex-1 truncate">{{ pointsMallItem.goodsName }}</span>
           <span class="text-primary">{{ pointsMallItem.goodsIntegral }}</span>
         </div>
@@ -282,6 +282,7 @@ export default {
 
           return `${prev}${curr.styleColorName} ${styleSize}\n`
         }, '')
+        // 去除末尾换行
         orderRemarks = remark.replace(/ \n$/, '')
       }
 

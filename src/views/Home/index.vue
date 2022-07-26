@@ -40,11 +40,11 @@
           v-for="(item, index) of styleCategoryList"
           :key="index"
           class="flex flex-col justify-center items-center min-w-[20%]"
-          @click="$router.to('Product', { category: item.categoryName })"
+          @click="$router.to('Product', { category: item.dictitemDisplayName })"
         >
           <vc-img class="rounded-circle bg-[#f6f6f6] overflow-hidden mb-2" :src="item.imgUrl" size="40" />
           <div class="text-xs truncate">
-            {{ item.categoryName }}
+            {{ item.dictitemDisplayName }}
           </div>
         </div>
       </div>
@@ -90,7 +90,7 @@
 import Tabbar from '@/components/business/Tabbar'
 import Search from '@/components/business/Product/Search'
 
-import { dictitemInfoAllMethod, getStyleCategory, getStyleList, getSystemConfig } from '@/api/product'
+import { dictitemInfoAllMethod, getStyleList, getStyleTypeList, getSystemConfig } from '@/api/product'
 import { callCustomerService } from '@/utils'
 
 export default {
@@ -139,7 +139,7 @@ export default {
         },
       },
       {
-        name: '物流',
+        name: '积分商城',
         icon: '3d2c66892fa51710bdf675a9024a9540.png',
         to: 'PointsMall',
       },
@@ -185,10 +185,8 @@ export default {
       this.styleTypeList = res.body.result
     },
     async getStyleCategory() {
-      const res = await getStyleCategory({
-        dictCode: 'SYSTEM_CONFIG',
-      })
-      this.styleCategoryList = res.body.styleCategory
+      const res = await getStyleTypeList()
+      this.styleCategoryList = res.body.resultList
     },
   },
 }

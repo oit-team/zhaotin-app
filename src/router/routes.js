@@ -60,8 +60,8 @@ export default [
     component: () => import('../views/Product/index'),
   },
   {
+    path: '/order/order-info/:orderId',
     name: 'OrderInfo',
-    path: '/order/order-info',
     component: () => import('../views/Order/OrderInfo'),
   },
   {
@@ -112,5 +112,10 @@ export default [
     path: '/points-mall/order',
     name: 'PointsMallOrder',
     component: () => import('../views/PointsMall/Order'),
+  },
+  {
+    path: '/points-mall/order-info/:orderId',
+    name: 'PointsMallOrderInfo',
+    component: () => import('../views/PointsMall/OrderInfo'),
   },
 ]

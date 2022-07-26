@@ -13,11 +13,11 @@
             :show-indicators="false"
             @change="swiperIndex = $event"
           >
-            <van-swipe-item>
+            <van-swipe-item v-if="data.styleVideo">
               <SwiperVideo :data="data" />
             </van-swipe-item>
             <van-swipe-item v-for="(item, index) of data.imgUrlList" :key="index" @click="openPreview(index)">
-              <vc-img :src="item" size="100%" />
+              <vc-img :src="item.resUrl" size="100%" />
             </van-swipe-item>
           </van-swipe>
         </div>
