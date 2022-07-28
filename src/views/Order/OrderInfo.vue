@@ -73,24 +73,24 @@ export default {
   },
   data() {
     return {
-      orderId: null,
-      // data: null,  // 这个报错，Cannot read properties of null (reading 'consigneeAddress')
+      orderNo: null,
       data: {},
       showReasonPopup: false,
     }
   },
   created() {
-    this.orderId = this.$route.params.orderId
-    if (!this.orderId) {
-      this.$toast('订单ID不存在')
-      this.$Router.back()
+    this.orderNo = this.$route.params.orderNo
+    if (!this.orderNo) {
+      this.$toast('订单编号不存在')
+      this.$router.back()
       return
     }
+
     this.loadData()
   },
   methods: {
     async loadData() {
-      const res = await getOrderById(this.orderId)
+      const res = await getOrderById(this.orderNo)
       this.data = res.body.resultList
     },
   },

@@ -19,6 +19,10 @@ img {
 
 .van-image {
   display: flex;
+
+  &[class*=rounded] {
+    overflow: hidden;
+  }
 }
 
 .van-divider {

@@ -60,7 +60,7 @@ export default [
     component: () => import('../views/Product/index'),
   },
   {
-    path: '/order/order-info/:orderId',
+    path: '/order/info/:orderNo',
     name: 'OrderInfo',
     component: () => import('../views/Order/OrderInfo'),
   },
@@ -70,7 +70,7 @@ export default [
     component: () => import('../views/Product/index'),
   },
   {
-    path: '/order/order-submit',
+    path: '/order/submit',
     name: 'OrderSubmit',
     component: () => import('../views/Order/OrderSubmit'),
   },
@@ -114,7 +114,7 @@ export default [
     component: () => import('../views/PointsMall/Order'),
   },
   {
-    path: '/points-mall/order-info/:orderId',
+    path: '/points-mall/order-info/:orderNo',
     name: 'PointsMallOrderInfo',
     component: () => import('../views/PointsMall/OrderInfo'),
   },

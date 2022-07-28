@@ -21,8 +21,8 @@ export function getOrder(params) {
  * 获取订单详情
  * @param orderId
  */
-export function getOrderById(orderId) {
-  return post[API_SERVICE.ORDER]('/orderInfo/getOrderById', { orderId })
+export function getOrderById(orderNo) {
+  return post[API_SERVICE.ORDER]('/orderInfo/getOrderById', { orderNo })
 }
 
 /**
@@ -69,6 +69,14 @@ export function getPointMailOrderList(params) {
  * 获取积分商城订单详情
  * @param id
  */
-export function getOrderIntegralDetail(id) {
-  return post[API_SERVICE.ORDER]('/integralShop/getOrderDetail', { id })
+export function getOrderIntegralDetail(orderNo) {
+  return post[API_SERVICE.ORDER]('/integralShop/getOrderDetail', { orderNo })
+}
+
+/**
+ * 查询订单兑换记录
+ * @param orderNo
+ */
+export function getPointMailOrderExchange(orderNo) {
+  return post[API_SERVICE.ORDER]('/integralShop/getOrderExchange', { orderNo })
 }

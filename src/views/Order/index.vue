@@ -9,8 +9,8 @@
         <div
           v-for="order of list"
           :key="order.orderId"
-          class="bg-white mb-3 mx-2 rounded-lg overflow-hidden"
-          @click="$router.to('OrderInfo', { orderId: order.orderId })"
+          class="bg-white mb-3 mx-3 rounded-lg overflow-hidden"
+          @click="$router.to('OrderInfo', { orderNo: order.orderNo })"
         >
           <div class="flex justify-between p-2 text-sm border-b border-line">
             <span>

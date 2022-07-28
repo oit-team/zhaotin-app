@@ -19,6 +19,7 @@ export default {
         width: convertToUnit(size ?? width),
         height: convertToUnit(size ?? height),
       },
+      on: this.$listeners,
       scopedSlots: this.$scopedSlots,
     })
   },

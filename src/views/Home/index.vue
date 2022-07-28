@@ -140,7 +140,7 @@ export default {
       },
       {
         name: '积分商城',
-        icon: '3d2c66892fa51710bdf675a9024a9540.png',
+        icon: '63a0f0f9c6dd343b6eb99db84a0cecdb.png',
         to: 'PointsMall',
       },
       {
