@@ -26,4 +26,5 @@ export {
   Checkbox,
   Sticky,
   Rate,
+  ImagePreview,
 } from 'vant'

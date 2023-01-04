@@ -66,7 +66,12 @@ import Tabbar from '@/components/business/Tabbar'
 
 export default {
   name: 'Account',
+
   components: { Tabbar },
+
+  activated() {
+    this.$store.dispatch('updateUserData')
+  },
 }
 </script>
 

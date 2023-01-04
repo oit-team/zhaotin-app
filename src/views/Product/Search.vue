@@ -9,13 +9,13 @@
     ></Search>
 
     <vc-list ref="list" class="flex-1 overflow-auto" :promise="loadData">
-      <ProductList :list="productList"></ProductList>
+      <ProductList :list="productList" @click="$router.to('ProductDetail', { styleId: $event.styleId })"></ProductList>
     </vc-list>
   </div>
 </template>
 
 <script>
-import Search from '../../components/business/Product/Search'
+import Search from '@/components/business/Product/Search'
 import ProductList from '@/components/business/Product/ProductList'
 import { getStyleList } from '@/api/product'
 

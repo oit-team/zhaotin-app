@@ -33,7 +33,7 @@ export default {
         isVideo: 'styleIsVideo',
         img: 'resUrl',
         title: 'styleNo',
-        price: 'tradePrice',
+        price: 'tagPrice',
       }),
     },
   },

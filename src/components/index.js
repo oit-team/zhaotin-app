@@ -44,7 +44,9 @@ function registryComponents(components) {
     .values(components)
     .forEach((component) => {
       component = component.default ?? component
-      Vue.component(component.name, component)
+      component.install
+        ? Vue.use(component)
+        : Vue.component(component.name, component)
     })
 }
 

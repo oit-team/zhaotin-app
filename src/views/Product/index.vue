@@ -165,8 +165,9 @@ export default {
 
 .category-tabs .van-tab {
   flex: initial;
-  padding-left: 8px;
-  padding-right: 8px;
+  padding-left: 0;
+  padding-right: 0;
+  margin-right: 24px;
   white-space: nowrap;
 }
 </style>

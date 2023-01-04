@@ -69,17 +69,52 @@
         </span>
       </div>
     </div>
+
+    <van-image-preview
+      v-model="showPreview"
+      :images="previewImageList"
+      :start-position="position"
+    >
+      <template v-if="tabIndex === TAB_TYPE.STYLE" #cover>
+        <div class="fixed bottom-10 left-1/2 transform -translate-x-1/2">
+          <van-button
+            class="px-2"
+            size="mini"
+            square
+            color="#cda46c"
+            :plain="styleDetailIndex !== STYLE_TYPE.STYLE"
+            @click="togglePreview(), styleDetailIndex = STYLE_TYPE.STYLE"
+          >
+            款式
+          </van-button>
+          <van-button
+            class="!ml-0 px-2"
+            size="mini"
+            square
+            color="#cda46c"
+            :plain="styleDetailIndex !== STYLE_TYPE.DETAIL"
+            @click="togglePreview(), styleDetailIndex = STYLE_TYPE.DETAIL"
+          >
+            细节
+          </van-button>
+        </div>
+      </template>
+    </van-image-preview>
   </div>
 </template>
 
 <script>
 import { size } from 'lodash'
-import { ImagePreview } from 'vant'
 import SwiperVideo from './SwiperVideo'
 
 const TAB_TYPE = {
   PRODUCT: 0,
   STYLE: 1,
+}
+
+const STYLE_TYPE = {
+  STYLE: 0,
+  DETAIL: 1,
 }
 
 export default {
@@ -95,9 +130,13 @@ export default {
 
   data: () => ({
     TAB_TYPE,
+    STYLE_TYPE,
     swiperIndex: 0,
+    position: 0,
+    showPreview: false,
     tabIndex: TAB_TYPE.PRODUCT,
     colorCategoryIndex: 0,
+    styleDetailIndex: 0,
   }),
 
   computed: {
@@ -115,9 +154,11 @@ export default {
     },
     previewImageList() {
       if (size(this.data)) {
+        const styleImgs = this.data.styleColorList[this.colorCategoryIndex]
+
         return ([
           this.data.imgUrlList,
-          this.data.styleColorList[this.colorCategoryIndex]?.styleImg,
+          [styleImgs?.styleImg, styleImgs?.styleImgDetail][this.styleDetailIndex],
         ][this.tabIndex] || []).map(item => item.resUrl)
       }
       return []
@@ -136,10 +177,12 @@ export default {
 
   methods: {
     openPreview(index) {
-      ImagePreview({
-        images: this.swiperImageList.map(item => item.resUrl),
-        startPosition: index,
-      })
+      this.position = index
+      this.showPreview = true
+    },
+    togglePreview() {
+      this.position = null
+      setTimeout(() => this.position = 0)
     },
   },
 }

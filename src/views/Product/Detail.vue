@@ -33,7 +33,7 @@
               </div>
             </div>
             <div class="flex flex-col items-end">
-              <vc-text mode="price" :text="data.tradePrice || 0"></vc-text>
+              <vc-text mode="price" :text="data.tagPrice || 0"></vc-text>
               <div v-if="pointsMall">
                 <span>积分：</span>
                 <vc-text class="text-primary" mode="price" text-symbol="" :text="data.goodsPtice || 0"></vc-text>
