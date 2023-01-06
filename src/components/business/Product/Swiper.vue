@@ -76,7 +76,7 @@
       :start-position="position"
     >
       <template v-if="tabIndex === TAB_TYPE.STYLE" #cover>
-        <div class="fixed bottom-10 left-1/2 transform -translate-x-1/2">
+        <div v-if="showStyleTab" class="fixed bottom-10 left-1/2 transform -translate-x-1/2">
           <van-button
             class="px-2"
             size="mini"
@@ -162,6 +162,9 @@ export default {
         ][this.tabIndex] || []).map(item => item.resUrl)
       }
       return []
+    },
+    showStyleTab() {
+      return !!this.data.styleColorList[this.colorCategoryIndex]?.styleImgDetail?.length
     },
   },
 
