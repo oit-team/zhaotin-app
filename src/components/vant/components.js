@@ -27,4 +27,5 @@ export {
   Sticky,
   Rate,
   ImagePreview,
+  Overlay,
 } from 'vant'

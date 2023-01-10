@@ -311,11 +311,6 @@ export default {
     sizeCount() {
       return this.data?.styleColorList?.reduce((prev, curr) => prev + curr.styleSize.length, 0)
     },
-    diffKeys() {
-      return this.pointsMall
-        ? {}
-        : {}
-    },
   },
 
   watch: {

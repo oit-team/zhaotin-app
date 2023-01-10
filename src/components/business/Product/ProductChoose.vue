@@ -32,7 +32,7 @@
                 <vc-text
                   class="text-lg font-bold pr-2"
                   mode="price"
-                  :text="data.tradePrice"
+                  :text="data.tagPrice"
                 ></vc-text>
               </div>
             </div>

@@ -74,6 +74,7 @@
       v-model="showPreview"
       :images="previewImageList"
       :start-position="position"
+      get-container="body"
     >
       <template v-if="tabIndex === TAB_TYPE.STYLE" #cover>
         <div v-if="showStyleTab" class="fixed bottom-10 left-1/2 transform -translate-x-1/2">
