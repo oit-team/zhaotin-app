@@ -189,7 +189,7 @@ export default {
 
       const sortKeys = ['shelfTimeSort', 'tradePriceSort']
       if (sortKeys.includes(this.sortType))
-        _params[this.sortType] = this.sortSwitch
+        _params[this.sortType] = String(this.sortSwitch)
 
       const res = await getStyleList(_params)
       this.$loadMoreData(this.productList, res.body.resultList, params)
